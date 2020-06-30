@@ -1,0 +1,676 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config> 
+
+  <form-beans>  
+
+    <!-- Login -->
+    <form-bean name="loginForm" type="rts.web.actionforms.loginout.LoginForm"/>
+
+    <!-- Scheduler Forms-->
+    <form-bean name="mailForm" type="rts.web.actionforms.mail.MailForm"/>
+    <form-bean name="faxForm" type="rts.web.actionforms.fax.FaxForm"/>
+    
+    <!-- Folder and Document -->
+    <form-bean name="advanceSearchForm" type="rts.web.actionforms.filesystem.AdvanceSearchForm"/>
+    <form-bean name="docHistoryListForm" type="rts.web.actionforms.filesystem.DocHistoryListForm"/>
+    <form-bean name="docEditForm" type="rts.web.actionforms.filesystem.DocEditForm"/> 
+    <form-bean name="folderDocCopyMoveForm" type="rts.web.actionforms.filesystem.FolderDocCopyMoveForm"/>
+    <form-bean name="folderDocPasteForm" type="rts.web.actionforms.filesystem.FolderDocPasteForm"/>    
+    <form-bean name="folderDocListForm" type="rts.web.actionforms.filesystem.FolderDocListForm"/>
+    <form-bean name="folderDocRenameForm" type="rts.web.actionforms.filesystem.FolderDocRenameForm"/>
+    <form-bean name="folderNewForm" type="rts.web.actionforms.filesystem.FolderNewForm"/>    
+    <form-bean name="folderDocSelectForm" type="rts.web.actionforms.filesystem.FolderDocSelectForm"/>
+    <form-bean name="docEncryptForm" type="rts.web.actionforms.filesystem.DocEncryptForm"/>
+    <form-bean name="docDecryptForm" type="rts.web.actionforms.filesystem.DocDecryptForm"/>
+    <form-bean name="docFaxForm" type="rts.web.actionforms.filesystem.DocFaxForm"/>
+    <form-bean name="docLogListForm" type="rts.web.actionforms.filesystem.DocLogListForm"/>
+    <form-bean name="docMailForm" type="rts.web.actionforms.filesystem.DocMailForm"/>
+    <form-bean name="docViewLogForm" type="rts.web.actionforms.filesystem.DocViewLogForm"/>
+    <form-bean name="docUploadForm" type="rts.web.actionforms.filesystem.DocUploadForm"/>
+    <form-bean name="newDocUploadForm" type="rts.web.actionforms.filesystem.NewDocUploadForm"/>
+    <form-bean name="showContentForm" type="rts.web.actionforms.filesystem.ShowContentForm"/>
+    <form-bean name="drawerListForm" type="rts.web.actionforms.filesystem.DrawerListForm"/>
+    <form-bean name="timesheetEditForm" type="rts.web.actionforms.filesystem.TimesheetEditForm"/>
+    <form-bean name="timesheetUploadForm" type="rts.web.actionforms.filesystem.TimesheetUploadForm"/>
+
+    <!-- Preferences Forms -->
+    <form-bean name="userPreferencesProfileForm" type="rts.web.actionforms.preferences.UserPreferencesProfileForm" />
+    <form-bean name="setEncryptionPasswordForm" type="rts.web.actionforms.preferences.SetEncryptionPasswordForm" />
+    <form-bean name="changePasswordForm" type="rts.web.actionforms.preferences.ChangePasswordForm" />
+    
+    <!-- Scheduler Forms-->
+    <form-bean name="schedulerListForm" type="rts.web.actionforms.scheduler.SchedulerListForm"/>
+    <form-bean name="rescheduleForm" type="rts.web.actionforms.scheduler.RescheduleForm"/>
+
+    <!-- User Forms-->
+    <form-bean name="userNewEditForm" type="rts.web.actionforms.user.UserNewEditForm"/>
+    <form-bean name="userListForm" type="rts.web.actionforms.user.UserListForm"/>
+    <form-bean name="userListSelectForm" type="rts.web.actionforms.user.UserListSelectForm" />
+    
+  </form-beans>
+
+   <!-- ========== Global Forward Definitions ============================== -->
+  <global-forwards>
+    <forward name="login" path="/login.jsp"/>  
+    <forward name="globalErrorHandler" path="/global_error_handler.jsp"/>  
+
+    <forward name="userNew" path="/user_new.jsp"/>
+    <forward name="userEdit" path="/user_edit.jsp"/>
+    <forward name="userB4New" path="/user_list.jsp"/>
+    <forward name="userB4Edit" path="/user_list.jsp"/>
+    <forward name="userDelete" path="/user_list.jsp"/>
+  
+   
+    <forward name="changePasswordB4" path="/login.jsp"/>
+    <forward name="setEncryptionPasswordB4" path="/login.jsp"/>
+    <forward name="setURLEncryptPasswordB4" path="/login.jsp"/>
+    <forward name="changeEncryptionPasswordB4" path="/login.jsp"/>
+    <forward name="changePassword" path="/change_password.jsp"/>
+   
+  
+    <forward name="mail" path="/mailing.jsp"/>    
+    <forward name="fax" path="/faxing.jsp"/>   
+    <forward name="jobRescheduleB4" path="/schedulerListAction.do"/>
+  </global-forwards>
+
+  <action-mappings>
+
+    <!-- Login Action -->
+    <action name="loginForm" path="/loginAction" scope="request" type="rts.web.actions.loginout.LoginAction" unknown="false">
+      <forward name="forwardToFlatNav" path="/webtop.jsp"/>
+      <forward name="forwardToTreeNav" path="/webtopForTreeNav.jsp"/>
+      <forward name="failure" path="/login.jsp"/>
+    </action>
+
+    <!-- LoginClient Action -->
+    <action name="loginForm" path="/loginClientAction" scope="request" type="rts.web.actions.loginout.LoginClientAction" unknown="false">
+      <forward name="success" path="/add_resume.jsp"/>
+      <forward name="failure" path="/error_handler_popup.jsp"/>
+    </action>
+
+    <!-- LoginClient Action -->
+    <action name="loginForm" path="/directoryHierarchyAction" scope="request" type="rts.web.actions.loginout.DirectoryHierarchyAction" unknown="false">
+      <forward name="success" path="/displayXMLString.jsp"/>
+      <forward name="failure" path="/error_handler_popup.jsp"/>
+    </action>
+
+    <!-- LogoutAction -->
+    <action path="/logoutAction" scope="request" type="rts.web.actions.loginout.LogoutAction" unknown="false">
+      <forward name="success" path="/logout.jsp"/>
+    </action>
+
+    <!--Mail Actions -->
+    <action name="docMailForm" path="/mailB4Action" scope="request" type="rts.web.actions.mail.MailB4Action" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/mailing.jsp"/>      
+    </action>
+
+    <action name="mailForm" path="/mailAction" scope="request" type="rts.web.actions.mail.MailAction" input="mail" unknown="false">
+      <forward name="success" path="/mailing.jsp"/>      
+    </action>
+
+    <!--Fax Actions -->
+    <action name="docFaxForm" path="/faxB4Action" scope="request" type="rts.web.actions.fax.FaxB4Action" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/faxing.jsp"/>      
+    </action>
+
+    <action name="faxForm" path="/faxAction" scope="request" type="rts.web.actions.fax.FaxAction" input="fax" unknown="false">
+      <forward name="success" path="/faxing.jsp"/>      
+    </action>
+
+    
+    <!-- ******************************************************************************** -->        
+    <!-- ****************************Folder Doc Starts Here****************************** -->    
+    <!-- ******************************************************************************** -->    
+
+    <action path="/toggleFolderSearchAction" name="advanceSearchForm" scope="request" type="rts.web.actions.filesystem.ToggleFolderSearchAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/b4ToggleFolderSearchAction" type="rts.web.actions.filesystem.B4ToggleFolderSearchAction" unknown="false">
+      <forward name="success" path="/toggleFolderSearchAction.do"/>
+    </action>
+    
+    <action path="/advanceSearchAction" name="advanceSearchForm" scope="request" type="rts.web.actions.filesystem.AdvanceSearchAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>    
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/folderDocB4RenameAction" name="drawerListForm" scope="request" type="rts.web.actions.filesystem.FolderDocB4RenameAction" unknown="false">
+      <forward name="success" path="/folder_doc_rename.jsp"/>
+      <forward name="failure" path="/error_handler_popup.jsp"/>
+    </action>
+
+    <action path="/folderDocBackAction" scope="request" type="rts.web.actions.filesystem.FolderDocBackAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>  
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+      <forward name="failure" path="/error_handler.jsp"/>
+    </action>
+
+    <action path="/folderDocMenuClickAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocMenuClickAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>      
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>            
+      <forward name="failure" path="/error_handler.jsp"/>
+    </action>
+
+    <action path="/folderDocTreeMenuClickAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocTreeMenuClickAction" unknown="false">
+      <forward name="resume" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet" path="/timesheetTreeListAction.do"/>
+      <forward name="personal" path="/personalTreeListAction.do"/>
+      <forward name="failure" path="/error_handler.jsp"/>
+    </action>
+
+    <action path="/folderDocTreeListAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocTreeListAction" unknown="false">
+      <forward name="success" path="/resumes_drawers_treeview.jsp"/>
+      <forward name="failure" path="/error_handler.jsp"/>      
+    </action>
+
+    <action path="/timesheetTreeListAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.TimesheetTreeListAction" unknown="false">
+      <forward name="success" path="/timesheets_drawers_treeview.jsp"/>
+      <forward name="failure" path="/error_handler.jsp"/>      
+    </action>
+
+    <action path="/personalTreeListAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.PersonalTreeListAction" unknown="false">
+      <forward name="success" path="/personal_drawers_treeview.jsp"/>
+      <forward name="failure" path="/error_handler.jsp"/>      
+    </action>
+
+    <action path="/folderDocListAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocListAction" unknown="false">
+      <forward name="success" path="/resume_drawer_list.jsp"/>
+      <forward name="failure" path="/error_handler.jsp"/>      
+    </action>
+
+    <action path="/timesheetListAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.TimesheetListAction" unknown="false">
+      <forward name="success" path="/timesheet_drawer_list.jsp"/>
+      <forward name="failure" path="/error_handler.jsp"/>
+    </action>
+
+    <action path="/personalListAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.PersonalListAction" unknown="false">
+      <forward name="success" path="/personal_drawer_list.jsp"/>
+      <forward name="failure" path="/error_handler.jsp"/>
+    </action>
+
+    <action path="/b4DrawerListingAction" name="showContentForm" scope="request" type="rts.web.actions.filesystem.B4DrawerListingAction" unknown="false">
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>
+    </action>
+
+    <action path="/drawerListingAction" name="drawerListForm" scope="request" type="rts.web.actions.filesystem.DrawerListingAction" unknown="false">
+      <forward name="success" path="/drawers_resume.jsp"/>
+      <forward name="failure" path="/error_handler.jsp"/>      
+    </action>
+
+    <action path="/drawerTimesheetListingAction" name="drawerListForm" scope="request" type="rts.web.actions.filesystem.DrawerTimesheetListingAction" unknown="false">
+      <forward name="success" path="/drawers_timesheet.jsp"/>
+      <forward name="failure" path="/error_handler.jsp"/>
+    </action>
+
+    <action path="/drawerPersonalListingAction" name="drawerListForm" scope="request" type="rts.web.actions.filesystem.DrawerPersonalListingAction" unknown="false">
+      <forward name="success" path="/drawers_personal.jsp"/>
+      <forward name="failure" path="/error_handler.jsp"/>
+    </action>
+
+    <action path="/folderDocDeleteAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocDeleteAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/folderDocForwardAction" scope="request" type="rts.web.actions.filesystem.FolderDocForwardAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="failure" path="/error_handler.jsp"/>
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>      
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/> 
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/folderDocGoToFolderAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocGoToFolderAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+    
+    <action path ="/b4DocDoNothingAction" name="docLogListForm" scope="request" type="rts.web.actions.filesystem.B4DocDoNothingAction" unknown="false" />
+    <action path="/docDoNothingAction" name="showContentForm" scope="request" type="rts.web.actions.filesystem.DocDoNothingAction" unknown="false" />
+
+    <action path="/folderDocParentAction" scope="request" type="rts.web.actions.filesystem.FolderDocParentAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+      <forward name="failure" path="/error_handler.jsp"/>
+    </action>
+
+    <action path="/folderDocFolderClickAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocFolderClickAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/folderDocRenameAction" name="folderDocRenameForm" scope="request" type="rts.web.actions.filesystem.FolderDocRenameAction" unknown="false">
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/folderDocTreeAppendAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocTreeAppendAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>
+      <forward name="resume4Tree" path="/treeview_for_resume.jsp"/>
+      <forward name="timesheet4Tree" path="/treeview_for_timesheet.jsp"/>
+      <forward name="personal4Tree" path="/treeview_for_personal.jsp"/>
+    </action>
+
+    <action path="/b4FolderNewAction" scope="request" type="rts.web.actions.filesystem.B4FolderNewAction" unknown="false">
+      <forward name="success" path="/folder_name.jsp"/>
+    </action>
+
+    <action path="/folderNewAction" name="folderNewForm" scope="request" type="rts.web.actions.filesystem.FolderNewAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/b4DocUploadAction" scope="request" validate="false" type="rts.web.actions.filesystem.B4DocUploadAction" unknown="false">
+      <forward name="success" path="/add_resume.jsp"/>
+      <forward name="failure" path="/error_handler_popup.jsp"/>
+    </action>
+
+    <action path="/b4TimesheetUploadAction" scope="request" validate="false" type="rts.web.actions.filesystem.B4TimesheetUploadAction" unknown="false">
+      <forward name="success" path="/add_timesheet.jsp"/>
+      <forward name="failure" path="/error_handler_popup.jsp"/>
+    </action>
+
+    <action path="/b4DocumentUploadAction" scope="request" validate="false" type="rts.web.actions.filesystem.B4DocumentUploadAction" unknown="false">
+      <forward name="success" path="/document_upload.jsp"/>
+      <forward name="failure" path="/error_handler_popup.jsp"/>
+    </action>
+
+    <action path="/newDocUploadAction" name="docUploadForm" scope="request" type="rts.web.actions.filesystem.NewDocUploadAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>      
+      <forward name="failure" path="/contentQuotaExceeded.jsp"/>
+    </action>
+
+    <action path="/newTimesheetUploadAction" name="timesheetUploadForm" scope="request" type="rts.web.actions.filesystem.NewTimesheetUploadAction" unknown="false" validate="true">
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>      
+      <forward name="failure" path="/contentQuotaExceeded.jsp"/>
+    </action>
+
+    <action path="/newDocumentUploadAction" name="newDocUploadForm" scope="request" type="rts.web.actions.filesystem.NewDocumentUploadAction" unknown="false">
+      <forward name="personal" path="/document_upload_result.jsp"/>
+      <forward name="personal4Tree" path="/document_upload_result.jsp"/>
+      <forward name="failure" path="/contentQuotaExceeded.jsp"/>
+    </action>
+
+    <action path="/docB4EditAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.DocB4EditAction" unknown="false" validate="false">
+      <forward name="success" path="/edit_resume.jsp"/>
+    </action>
+
+    <action path="/docEditAction" name="docEditForm" scope="request" type="rts.web.actions.filesystem.DocEditAction" unknown="false" validate="true">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>      
+    </action>
+
+    <action path="/timesheetB4EditAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.TimesheetB4EditAction" unknown="false" validate="false">
+      <forward name="success" path="/edit_timesheet.jsp"/>
+    </action>
+
+    <action path="/timesheetEditAction" name="timesheetEditForm" scope="request" type="rts.web.actions.filesystem.TimesheetEditAction" unknown="false" validate="true">
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>      
+    </action>
+
+    <action path="/docDownloadAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.DocDownloadAction" unknown="false">
+    </action>
+
+    <action path="/csvDownloadAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.CsvDownloadAction" unknown="false">
+    </action>
+
+    <action path="/docGenerateLinkAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.DocGenerateLinkAction" unknown="false">
+      <forward name="success" path="/doc_generate_url.jsp"/>
+      <forward name="failure" path="/link_generation_error.jsp"/>
+    </action>
+
+    <action path="/b4DocDownloadAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.B4DocDownloadAction" unknown="false">
+      <forward name="forNewWindow" path="/docDownloadAction.do"/>
+      <forward name="failure" path="/error_handler.jsp"/>
+    </action>
+
+    <action path="/drawerListAction" name="showContentForm" scope="request" type="rts.web.actions.filesystem.DrawerListAction" unknown="false">
+      <forward name="success" path="/drawer_listing.jsp" />
+    </action>
+
+    <action path="/drawersNextAction" name="showContentForm" scope="request" type="rts.web.actions.filesystem.DrawersNextAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+    </action>
+
+    <action path="/drawerNavigationAction" name="showContentForm" scope="request" type="rts.web.actions.filesystem.DrawerNavigationAction" unknown="false">
+      <forward name="success" path="/drawer_listing.jsp" />
+    </action>
+
+    <action path="/folderDocCopyMoveAction" name="folderDocCopyMoveForm" scope="request" type="rts.web.actions.filesystem.FolderDocCopyMoveAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/folderDocCutAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocCutAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/folderDocCopyAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocCopyAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/folderDocB4PasteAction" name="folderDocPasteForm" scope="request" type="rts.web.actions.filesystem.FolderDocB4PasteAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/folderDocPasteAction" name="folderDocPasteForm" scope="request" type="rts.web.actions.filesystem.FolderDocPasteAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+    </action>
+
+    <action path="/folderDocNavigateAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocNavigateAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+    
+    <action path="/drawerNavigateAction" name="drawerListForm" scope="request" type="rts.web.actions.filesystem.DrawerNavigateAction" unknown="false">
+      <forward name="resumeDrawer" path="/drawerListingAction.do"/>
+      <forward name="timesheetDrawer" path="/drawerTimesheetListingAction.do"/>
+      <forward name="personalDrawer" path="/drawerPersonalListingAction.do"/>
+     </action>
+
+    <action path="/folderDocMakeVersionableAction" name="folderDocListForm" scope="request" type="rts.web.actions.filesystem.FolderDocMakeVersionableAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+    </action>
+
+    <action path="/b4FolderDocSelectNewFolderAction" name="folderDocSelectForm" scope="request" type="rts.web.actions.filesystem.B4FolderDocSelectNewFolderAction" unknown="false">
+      <forward name="success" path="/folder_doc_select_folder_name.jsp"/>
+    </action>
+
+    <action path="/folderDocSelectB4Action" name="folderDocSelectForm" scope="request" type="rts.web.actions.filesystem.FolderDocSelectB4Action" unknown="false">
+      <forward name="resumes" path="/folder_doc_select.jsp"/>
+      <forward name="timesheet" path="/timesheet_drawer_select.jsp"/>
+      <forward name="personal" path="/personal_drawer_select.jsp"/>
+    </action>
+
+    <action path="/folderDocLinkB4Action" name="folderDocSelectForm" scope="request" type="rts.web.actions.filesystem.FolderDocSelectB4Action" unknown="false">
+      <forward name="resumes" path="/popup_for_links.jsp"/>
+      <forward name="timesheet" path="/popup_for_timesheet_links.jsp"/>
+      <forward name="personal" path="/popup_for_personal_links.jsp"/>
+    </action>
+
+    <action path="/folderDocLinkAction" name="folderDocCopyMoveForm" scope="request" type="rts.web.actions.filesystem.FolderDocLinkAction" unknown="false">
+      <forward name="resume" path="/folderDocListAction.do"/>
+      <forward name="timesheet" path="/timesheetListAction.do"/>
+      <forward name="personal" path="/personalListAction.do"/>
+      <forward name="resume4Tree" path="/folderDocTreeListAction.do"/>
+      <forward name="timesheet4Tree" path="/timesheetTreeListAction.do"/>
+      <forward name="personal4Tree" path="/personalTreeListAction.do"/>
+    </action>
+
+    <action path="/folderDocSelectNewFolderAction" name="folderDocSelectForm" scope="request" type="rts.web.actions.filesystem.FolderDocSelectNewFolderAction" unknown="false">
+      <forward name="success" path="/folderDocSelectB4Action.do"/>
+    </action>
+
+    <action path="/folderDocSelectGoAction" name="folderDocSelectForm" scope="request" type="rts.web.actions.filesystem.FolderDocSelectGoAction" unknown="false">
+      <forward name="popupforselect" path="/folderDocSelectB4Action.do"/>
+      <forward name="popupforlink" path="/folderDocLinkB4Action.do"/>
+    </action>
+
+    <action path="/docHistoryListAction" name="docHistoryListForm" scope="request" type="rts.web.actions.filesystem.DocHistoryListAction" unknown="false">
+      <forward name="success" path="/doc_history_list.jsp"/>
+      <forward name="failure" path="/error_handler_popup.jsp"/>
+    </action>
+
+    <action path="/docHistoryDeleteAction" name="docHistoryListForm" scope="request" type="rts.web.actions.filesystem.DocHistoryDeleteAction" unknown="false">
+      <forward name="success" path="/doc_history_b4_list.jsp"/>
+      <forward name="failure" path="/error_handler_popup.jsp"/>
+    </action>
+
+    <action path="/docHistoryDetailAction" name="docHistoryListForm" scope="request" type="rts.web.actions.filesystem.DocHistoryDetailAction" unknown="false">
+      <forward name="resume" path="/doc_history_detail.jsp"/>
+      <forward name="timesheet" path="/timesheet_history_detail.jsp"/>
+      <forward name="failure" path="/error_handler_popup.jsp"/>
+    </action>
+
+    <action path="/showContentAction" name="showContentForm" type="rts.web.actions.filesystem.ShowContentAction" unknown="false">
+      <forward name="failureInSession" path="/error_handler_popup.jsp"/>
+      <forward name="failureuserInfoNull" path="/error_show_content.jsp"/>
+    </action>
+    
+    <!-- ******************************************************************************** -->        
+    <!-- ****************************Folder Doc End Here********************************* -->    
+    <!-- ******************************************************************************** -->    
+
+ 
+
+    <!--Preferences Actions -->
+    <action name= "userPreferencesProfileForm" path="/userPreferenceProfileB4Action" scope = "request" type="rts.web.actions.preferences.UserPreferenceProfileB4Action" unknown="false" validate ="false" >
+      <forward name = "success" path="/user_preferences_profile.jsp" /> 
+    </action>
+
+    <action name= "userPreferencesProfileForm" path="/userPreferenceProfileAction" scope="request" type="rts.web.actions.preferences.UserPreferenceProfileAction" unknown="false" validate="true" >    
+      <forward name="forwardToFlatNav" path="/webtop.jsp"/>
+      <forward name="forwardToTreeNav" path="/webtopForTreeNav.jsp"/>
+    </action>
+    
+    <action path="/setURLEncryptPasswordB4Action" scope="request" type="rts.web.actions.preferences.SetURLEncryptPasswordB4Action" input="setURLEncryptPasswordB4" unknown="false">
+      <forward name="success" path="/set_url_encryption_pwd.jsp"/>
+      <forward name="failure" path="/url_encryption_pwd_failure.jsp"/>
+    </action>    
+
+    <action name="setEncryptionPasswordForm" path="/setURLEncryptPasswordAction" scope="request" type="rts.web.actions.preferences.SetURLEncryptPasswordAction" input="setUrlEncryptPassword" unknown="false">
+       <forward name="success" path="/userPreferenceProfileB4Action.do"/> 
+    </action>
+
+    <action path="/changePasswordB4Action" scope="request" type="rts.web.actions.preferences.ChangePasswordB4Action" input="changePasswordB4" unknown="false" >
+      <forward name="success" path="/change_password.jsp" />
+    </action>
+    
+    <action name="changePasswordForm" path="/changePasswordAction" scope="request" type="rts.web.actions.preferences.ChangePasswordAction" input="changePassword" unknown="false" >
+      <forward name="success" path="/userPreferenceProfileB4Action.do"/>
+    </action>
+    
+    <!--Scheduler Actions -->
+    <action name="schedulerListForm" path="/schedulerListAction" scope="request" type="rts.web.actions.scheduler.SchedulerListAction" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/scheduler_list.jsp"/>
+    </action>
+
+    <action name="schedulerListForm" path="/jobDeleteAdminAction" scope="request" type="rts.web.actions.scheduler.JobDeleteAction" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/schedulerListAction.do"/>
+    </action>
+
+    <action name="schedulerListForm" path="/jobRescheduleB4AdminAction" scope="request" type="rts.web.actions.scheduler.JobRescheduleB4Action" input="jobRescheduleB4" unknown="false">
+      <forward name="success" path="/re_schedule.jsp"/>
+    </action>
+
+    <action name="rescheduleForm" path="/jobRescheduleAdminAction" scope="request" type="rts.web.actions.scheduler.JobRescheduleAction" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/schedulerListAction.do"/>
+    </action>
+
+    <action name="schedulerListForm" path="/schedulerStartStopAdminAction" scope="request" type="rts.web.actions.scheduler.SchedulerStartStopAction" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/schedulerListAction.do"/>
+    </action>
+    <!--User Actions -->
+
+    <action name="showContentForm" path="/userB4NewAdminAction" scope="request" type="rts.web.actions.user.UserB4NewAction" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/user_new.jsp"/>
+    </action>
+
+    <action name="showContentForm" path="/userB4EditAction" scope="request" type="rts.web.actions.user.UserB4EditAction" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/user_list.jsp"/>
+    </action>
+
+    <action name="userNewEditForm" path="/userNewAdminAction" scope="request" type="rts.web.actions.user.UserNewAction" input="userNew" unknown="false">
+      <forward name="success" path="/userListAdminAction.do"/>
+      <forward name="failure" path="/error_handler_popup.jsp"/>
+    </action>
+    
+    <action name="userListForm" path="/userB4EditAdminAction" scope="request" type="rts.web.actions.user.UserB4EditAction" input="userB4Edit" unknown="false">
+      <forward name="success" path="/user_edit.jsp"/>
+      <forward name="failure" path="/userListAdminAction.do"/>
+    </action>
+
+    <action name="userNewEditForm" path="/userEditAdminAction" scope="request" type="rts.web.actions.user.UserEditAction" input="userEdit" unknown="false">
+      <forward name="success" path="/userListAdminAction.do"/>
+    </action>
+
+    <action name="userListForm" path="/userListAdminAction" scope="request" type="rts.web.actions.user.UserListAction" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/user_list.jsp"/>
+    </action>
+
+    <action name="userListSelectForm" path="/userListForLogAction" scope="request" type="rts.web.actions.user.UserListForLogAction" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/user_list_select.jsp"/>
+    </action>
+
+    <action name="userListForm" path="/userDeleteAdminAction" scope="request" type="rts.web.actions.user.UserDeleteAction" input="userDelete" unknown="false">
+      <forward name="success" path="/userListAdminAction.do"/>
+    </action>
+
+    <action name="userListSelectForm" path="/userListSelectAdminAction" scope="request" type="rts.web.actions.user.UserListSelectAction" input="globalErrorHandler" unknown="false">
+      <forward name="success" path="/user_list_select.jsp"/>
+    </action>
+    
+   
+    <!--Relay Action-->
+    <action path="/relayAction" scope="request" type="rts.web.actions.RelayAction" input="globalErrorHandler" unknown="false">
+      <forward name="user_new" path="/userB4NewAdminAction.do"/>
+      <forward name="user_edit" path="/userB4EditAdminAction.do"/>
+      <forward name="user_delete" path="/userDeleteAdminAction.do"/>
+      <forward name="user_list" path="/userListAdminAction.do"/>
+      <forward name="user_select_for_log" path="/userListForLogAction.do" />
+      <forward name="search_user" path="/userListAdminAction.do"/>
+      <forward name="search_user_select" path="/userListSelectAdminAction.do"/>
+      <forward name="page_user" path="/userListAdminAction.do"/>
+      <forward name="page_user_select" path="/userListSelectAdminAction.do"/>
+    </action>
+     
+
+    
+              
+    <action path="/schedulerRelayAction" scope="request" type="rts.web.actions.scheduler.SchedulerRelayAction" unknown="false">
+   
+      <forward name="job_reschedule" path="/jobRescheduleB4AdminAction.do"/>
+      <forward name="job_delete" path="/jobDeleteAdminAction.do"/>
+      <forward name="scheduler_start_stop" path="/schedulerStartStopAdminAction.do"/>      
+      <forward name="search_scheduler" path="/schedulerListAction.do"/>     
+      <forward name="page_scheduler" path="/schedulerListAction.do"/>      
+    </action>
+
+    
+  
+    
+  </action-mappings>
+
+  <controller>
+    <!-- The "input" parameter on "action" elements is the name of a
+         local or global "forward" rather than a module-relative path -->
+    <set-property property="inputForward" value="true"/>
+    <set-property property="maxFileSize" value="100M"/>
+  </controller>
+  <message-resources parameter="resources.ApplicationResources"/>
+
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+  </plug-in>
+ 
+</struts-config>

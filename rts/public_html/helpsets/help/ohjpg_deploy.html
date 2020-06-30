@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Deploying an OHJ Help System</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for Java Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_modal.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohwpg_toc.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+</tr>
+</table>
+
+<a name="start"></a>
+<h1>Deploying an OHJ Help System</h1>
+
+<p>The following sections describe how to deploy an OHJ help system with your product.</p>
+<ul>
+<li><a href="#Supported_Virtual_Machines">Supported Virtual Machines</a></li>
+<li><a href="#Which_OHJ_JAR_Files_Must_Be_Shipped">Which OHJ JAR Files Must Be Shipped</a></li>
+<li><a href="#Deploying_Compressed_Help_Content_in_JARs">Deploying Compressed Help Content in JARs</a></li>
+</ul>
+
+
+<a name="Supported_Virtual_Machines"></a>
+<h2>Supported Java Virtual Machines</h2>
+
+<p>Since OHJ is a Java application (or applet), it must run in a Java Virtual Machine (JVM). 
+That means that you must ensure that your users have an appropriate JVM installed. 
+If you are using OHJ as help for a Java application, 
+that application must also run in a virtual machine, 
+so it is likely that the JVM is already being distributed with your application. 
+Oracle Help for Java requires 
+<!-- internal: one of the following JVMs:</p>
+
+<ul>
+<li>Sun Microsystems JDK 1.1.7, 1.1.8</li>
+<li>Sun Microsystems JDK 1.2.2, 1.3 and later.</li>
+<li>Microsoft JVM version 5.00.3188 and later.</li>
+</ul> -->
+<!-- external --> Sun Microsystems JDK 1.3 and later.</p>
+
+<a name="Which_OHJ_JAR_Files_Must_Be_Shipped"></a>
+<h2>Which OHJ JAR Files Must Be Shipped</h2>
+
+<p>The following JAR (Java ARchive) files must be redistributed as part of your product install. 
+These files contain the OHJ engine implementation and its dependencies. 
+For more information about these files, see <a href="ohjpg_gs.html#Contents_of_an_OHJDK_Release">Contents of an OHJDK Release</a>.</p>
+
+<ul>
+<li><code>help-<var>version_num</var>.jar</code></li>
+<li><code>oracle_ice-<var>version_num</var>.jar</code></li>
+</ul>
+
+<!-- external: <p>If you are using OHJ 3.2.x, your installed product must have access to the EWT libraries. If you are using OHJ 4.1.x, your installed product must have access to the Java Foundation Classes (Swing) and the JEWT libraries. Swing 1.1.1 for JDK 1.1.8 is distributed with OHJ 4.1.x. JDK 1.2 and JDK 1.3 include the Swing classes already, so no extra library is needed if you are using those versions.</p> -->
+
+
+<a name="Deploying_Compressed_Help_Content_in_JARs"></a>
+<h2>Deploying Compressed Help Content in JARs</h2>
+
+<p>Java based applications are often distributed in JAR format. You may wish to include your Help content as a JAR file in your distribution, as HTML content files are significantly reduced in size by JAR compression.</p>
+
+<a name="Creating_JAR_files"></a>
+<h3>Creating JAR files</h3>
+
+<p>To create JAR files, use the JAR tool that is distributed with your Java Development Kit. If you are using a third party help authoring system that supports OHJ, it may also be able to perform this task.</p>
+
+<p>Special care should be given to the organization of files and their assigned paths within the JAR archives. The directory structure within your help JAR file must match the directory structure for your product implementation JAR files. Your help content should be &quot;below&quot; the location of the implementation class that you use as a reference point.</p>
+
+<p><strong>For Example:</strong></p>
+
+<p>If your product implementation JAR includes classes with this directory structure...</p>
+
+<pre><code>
+/com/yourCompany/yourProduct/SomeProduct.class 
+/com/yourCompany/yourProduct/SomeClass.class 
+</code></pre>
+
+<p>...then your help JAR(s) should contain the matching paths so that the help content is below the product implementation classes in the shared directory structure:</p>
+
+<pre><code>
+/com/yourCompany/yourProduct/help/ProductHelp.hs 
+/com/yourCompany/yourProduct/help/TableOfContents.xml 
+/com/yourCompany/yourProduct/help/SomeHelpTopic.html 
+</code></pre>
+
+<a name="Which_Book_Constructor_to_Use"></a>
+<h3>Which <code>Book</code> Constructor to Use</h3>
+
+<p>To create a <code>Book</code> object with help content loaded from a JAR file, 
+the help JAR file and implementation JAR file(s) must be on the system CLASSPATH. 
+If you have organized the JAR files as described above, 
+then you know the location of the help content <em>relative</em> to the location of your implementation classes 
+on the CLASSPATH.</p>
+
+<p>Thus, you will use the versions of the <code>HelpBook</code> or <code>HelpSet</code> constructors that accept a Java class and a relative path 
+from that class (see <a href="ohjpg_add.html#Adding_the_Help_Data">Adding the Help Data</a>).</p>
+
+<p><strong>For Example:</strong></p>
+
+<p>If you had the two JAR files described in the example above, you would construct the helpset object using the following:</p>
+
+<pre><code>import com.yourCompany.yourProduct.SomeProduct; 
+helpset myhelpset = new helpset(SomeProduct.class, &quot;help/ProductHelp.hs&quot;); 
+</code></pre>
+
+
+<p class="horizontal-rule">&nbsp;</p> 
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+<a href="ohjpg_modal.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohwpg_toc.html">Next</a>
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+</body>
+</html>

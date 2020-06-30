@@ -1,0 +1,1104 @@
+body {
+	background-color: #FFFFFF;
+	margin: 0px;
+}
+
+.bgColor_FFFFFF {
+	background-color:#FFFFFF;
+}
+.bgColor_e8e8e8 {
+	background-color:#e8e8e8;
+}
+.bgColor_FF8300 {
+	background-color:#FF8300;
+}
+.bgColor_669966 {
+	background-color:#669966;
+}
+.bgColor_999999 {
+	background-color:#999999;
+}
+
+.bdrColor_336633 {
+	border:1px solid #336633;
+	font-size: 11px;
+}
+
+.bdrColor_669966 {
+	border:1px solid #669966;
+	font-size: 11px;
+}
+.bdrBottomColor_336666 {
+	border-bottom:1px solid #336666;
+}
+.bdrLeftColor_336666 {
+	border-left:1px solid #336666;
+}
+.bdrTopColor_336666 {
+	border-top:1px solid #336666;
+}
+.bdrRightColor_336666 {
+	border-Right:1px solid #336666;
+}
+.bdrBottomColor_336633 {
+	border-bottom:1px solid #336633;
+}
+.bdrLeftColor_336633 {
+	border-left:1px solid #336633;
+}
+.bdrTopColor_336633 {
+	border-top:1px solid #336633;
+}
+.bdrRightColor_336633 {
+	border-Right:1px solid #336633;
+}
+.bdrTopColor_FFFFFF {
+	border-top:1px solid #FFFFFF;
+}
+.bgClrLvl_1{BACKGROUND-COLOR: #333333} 
+.bgClrLvl_2{BACKGROUND-COLOR: #828282}
+.bgClrLvl_3{BACKGROUND-COLOR: #E8E8E8} 
+.bgClrLvl_4{BACKGROUND-COLOR: #F2F2F2} 
+.bgClrLvl_F{BACKGROUND-COLOR: #FFFFFF}
+
+.borderClrLvl_1{BORDER: 1px solid #333333} 
+.borderClrLvl_2{BORDER: 1px solid #828282}
+.borderClrLvl_3{BORDER: 1px solid #E8E8E8} 
+.borderClrLvl_4{BORDER: 1px solid #F2F2F2} 
+.borderClrLvl_F{BORDER: 1px solid #FFFFFF}
+
+.bdrRightColor_828282{BORDER-RIGHT: 1px solid #828282}
+.bdrLeftColor_FFFFFF{BORDER-LEFT: 1px solid #FFFFFF}
+.componentStyle
+{
+	FONT-FAMILY: Verdana, Arial, Geneva, Helvetica, sans-serif;
+  COLOR: #000000;
+  font-size: 11px;
+  BACKGROUND-COLOR: #ffffff;  
+}
+
+.componentStyleDisable{
+	background-image: url("images/disable_1px.gif");
+}
+A:link {
+  FONT-SIZE: 11px; 
+  TEXT-DECORATION: none;
+}
+
+A:visited {
+  FONT-SIZE: 11px; 
+  TEXT-DECORATION: none;
+}
+
+A:hover {
+	FONT-SIZE: 11px;
+  TEXT-DECORATION: underline;
+}
+
+A:active {
+	FONT-SIZE: 11px; 
+  TEXT-DECORATION: none;
+}
+
+.tabText
+{
+  	FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #336633;
+}
+
+td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+}
+
+th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+	font-weight:bold;
+	background-color:#00A8AF;
+}
+.th669966 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #FFFFFF;
+	font-weight:bold;
+	background-color:#669966;
+}
+.trF7F7F7 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #FFFFFF;
+	font-weight:normal;
+	background-color:#F7F7F7;
+}
+.trD7EFD7 {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #FFFFFF;
+	font-weight:normal;
+	background-color:#D7EFD7;
+}
+
+.textCopyRight {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: normal;
+	color: #e8e8e8;
+}
+.textStorage {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: normal;
+	color: #666666;
+}
+.textStorageBold {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: bold;
+	color: #336633;
+}
+.textFF8300Bold {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FF8300;
+}
+.texte8e8e8 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #e8e8e8;
+}
+.textFF0000 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #FF0000;
+}
+.font13Bold {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+}
+.textRed {
+	color: #FF0000;
+}
+A.tree:link
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    TEXT-DECORATION: none;
+    cursor: pointer; 
+    cursor: hand;    
+
+}
+A.tree:visited
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    TEXT-DECORATION: none;
+    cursor: pointer; 
+    cursor: hand;    
+
+}
+A.tree:hover
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    TEXT-DECORATION: none;
+    cursor: pointer; 
+    cursor: hand;    
+    
+}
+A.tree:active
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    TEXT-DECORATION: none;
+    cursor: pointer; 
+    cursor: hand;    
+    
+}
+
+/*************************** Following classes are for tab images common to all pages ***************************/
+
+.imgToolBar {
+	background-image: url("images/toolbar_bg_tile28px.gif");
+  background-repeat:repeat-x;
+}
+
+.imgTabLeft {
+	background-image: url("images/tab_left.gif");
+	background-repeat:no-repeat;
+  height:22px;
+}
+.imgTabTile {
+	background-image: url("images/tab_tile.gif");
+	background-repeat:repeat-x;
+  height:22px;
+}
+.imgTabRight {
+	background-image: url("images/tab_right.gif");
+	background-repeat:no-repeat;
+  height:22px;
+}
+/******************************************************************************************************************/ 
+/*************************** Following classes are for images in Navigation Bar ***********************************/
+.imgNavFirst{
+	background-image: url("images/nav_bar_1st.gif");
+  width:17px; height:17px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+}
+.imgNavFirstDisable{
+	background-image: url("images/nav_bar_1st_disable.gif");
+  width:17px; height:17px;
+	float:left;
+}
+.imgNavPrev{
+	background-image: url("images/nav_bar_prev.gif");
+  width:17px; height:17px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+}
+.imgNavPrevDisable{
+	background-image: url("images/nav_bar_prev_disable.gif");
+  width:17px; height:17px;
+	float:left;
+}
+.imgNavNext{
+	background-image: url("images/nav_bar_next.gif");
+  width:17px; height:17px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+}
+.imgNavNextDisable{
+	background-image: url("images/nav_bar_next_disable.gif");
+  width:17px; height:17px;
+	float:left;
+}
+.imgNavLast{
+	background-image: url("images/nav_bar_last.gif");
+  width:17px; height:17px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+}
+.imgNavLastDisable{
+	background-image: url("images/nav_bar_last_disable.gif");
+  width:17px; height:17px;
+	float:left;
+}
+
+ 
+/*************************** Following classes are for images in Tool Bar ***********************************/
+
+.imgDrawer{
+  background-image: url("images/icon_drawer.gif");
+  width:26px; height:16px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+    
+}
+.imgBack{
+	background-image: url("images/tool_back.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+  
+}
+
+.imgBackDisable{
+	background-image: url("images/tool_back_disable.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+  
+}
+
+.imgForward{
+	background-image: url("images/tool_forward.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+  
+}
+
+
+.imgForwardDisable{
+	background-image: url("images/tool_forward_disable.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+  
+}
+
+.imgGoUp{
+	background-image: url("images/tool_goup.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+  
+}
+
+.imgGoUpDisable{
+	background-image: url("images/tool_goup_disable.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+  
+}
+
+.imgRefresh{
+	background-image: url("images/tool_refresh.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+  
+}
+
+.imgSearch{
+	background-image: url("images/tool_search.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;    
+  
+}
+
+.imgGo{
+  background-image: url("images/tool_go.gif");
+  width:24px; height: 20px;
+  float:left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgNewDrawer{
+  background-image: url("images/tool_drawer_new.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgNewDrawerDisable{
+  background-image: url("images/tool_drawer_new_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgCsvDownload{
+  background-image: url("images/tool_download.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+
+}
+
+.imgCsvDownloadDisable{
+  background-image: url("images/tool_download_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+
+}
+.imgDownload{
+  background-image: url("images/tool_download_doc.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+
+}
+
+.imgDownloadDisable{
+  background-image: url("images/tool_download_doc_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+
+}
+
+.imgUpload{
+  background-image: url("images/tool_upload.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+
+}
+
+.imgUploadDisable{
+  background-image: url("images/tool_upload_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+
+}
+
+.imgRename{
+  background-image: url("images/tool_doc_rename.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+
+}
+
+.imgRenameDisable{
+  background-image: url("images/tool_doc_rename_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+
+}
+
+.imgGenerateLink{
+  background-image: url("images/tool_generate_link.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgGenerateLinkDisable{
+  background-image: url("images/tool_generate_link_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgNewResume{
+  background-image: url("images/tool_resume_new.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgNewResumeDisable{
+  background-image: url("images/tool_resume_new_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgEditResume{
+  background-image: url("images/tool_resume_edit.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgEditResumeDisable{
+  background-image: url("images/tool_resume_edit_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+.imgCut{
+  background-image: url("images/tool_cut.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgCutDisable{
+  background-image: url("images/tool_cut_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgCopy{
+  background-image: url("images/tool_copy.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgCopyDisable{
+  background-image: url("images/tool_copy_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+
+.imgPaste{
+  background-image: url("images/tool_paste.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgPasteDisable{
+  background-image: url("images/tool_paste_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgDeleteFolder{
+  background-image: url("images/tool_delete.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgDeleteFolderDisable{
+  background-image: url("images/tool_delete_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgCopyTo{
+  background-image: url("images/tool_copy_to.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgCopyToDisable{
+  background-image: url("images/tool_copy_to_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgMoveTo{
+  background-image: url("images/tool_move_to.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgMoveToDisable{
+  background-image: url("images/tool_move_to_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgVersionable{
+  background-image: url("images/tool_make_version.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgVersionableDisable{
+  background-image: url("images/tool_make_version_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgChkOut{
+  background-image: url("images/tool_chk_out.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgChkOutDisable{
+  background-image: url("images/tool_chk_out_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgChkIn{
+  background-image: url("images/tool_chk_in.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgChkInDisable{
+  background-image: url("images/tool_chk_in_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgUndoChkOut{
+  background-image: url("images/tool_chk_out_undo.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgUndoChkOutDisable{
+  background-image: url("images/tool_chk_out_undo_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgHistory{
+  background-image: url("images/tool_version_hist.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgHistoryDisable{
+  background-image: url("images/tool_version_hist_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.imgVersionDelete {
+	background-image: url("images/butt_version_delete.gif");
+  width:34px; height:24px;
+	float:left;
+  cursor: pointer;
+  cursor: hand;
+}
+.imgVersionDetail {
+	background-image: url("images/butt_version_detail.gif");
+  width:34px; height:24px;
+	float:left;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.imgMailTo{
+  background-image: url("images/tool_mail.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.imgMailToDiasble{
+  background-image: url("images/tool_mail_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgFaxTo{
+  background-image: url("images/tool_fax.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgFaxToDiasble{
+  background-image: url("images/tool_fax_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgMoreLeftDrawers{
+  background-image: url("images/link_nav_left.gif");
+  width: 18px; height: 18px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgMoreRightDrawers{
+  background-image: url("images/link_nav_right.gif");
+  width: 18px; height: 18px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgRenameDrawer{
+  background-image: url("images/tool_drawer_rename.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+.imgRenameDrawerDisable{
+  background-image: url("images/tool_drawer_rename_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgDeleteDrawer{
+  background-image: url("images/tool_drawer_delete.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgShareDoc{
+  background-image: url("images/butt_share_doc.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.imgShareDocDisable{
+  background-image: url("images/butt_share_doc_disable.gif");
+  width: 32px; height: 24px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.imgDocIcon{
+  background-image: url("images/icon_document.gif");
+  width: 26px; height: 16px;border:0px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.imgDocIconFlat{
+  background-image: url("images/icon_document.gif");
+  width: 26px; height: 16px;
+  float: left;
+}
+
+
+/************************************************************************************************************/
+
+
+/***************************** Following classes are for other images  **************************************/
+
+.imgLogoSite{
+  background-image: url("images/logo_site.gif");
+  width: 200px; height: 75px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+.dataLink{
+  background-image: url("images/icon_download.gif");
+  width: 24px; height: 16px;
+  float: left;
+  cursor: pointer;
+  cursor: hand;
+  
+}
+
+.imgData{
+	background-image: url("images/data_bg_tile200px.gif");
+  background-repeat:repeat-x;
+  background-position:bottom;
+}
+
+/************************************************************************************************************/
+
+/*********** Following classes are for other images  ************/
+.imgDtPickerOk{
+	background-image: url("images/butt_dtpicker_ok.gif"); 
+  height: 17px; margin-left: 3px; width: 16px;
+	background-repeat:no-repeat;	
+  cursor: pointer; 
+  cursor: hand;    
+}
+.imgDtPickerCancel{
+	background-image: url("images/butt_dtpicker_cancel.gif"); 
+  height: 17px; margin-left: 3px; width: 16px;
+	background-repeat:no-repeat;	
+  cursor: pointer; 
+  cursor: hand;  
+}
+.imgDtPickerCal{
+	background-image: url("images/butt_dtpicker_cal.gif"); 
+  height: 15px; margin-left: 3px; width: 15px;
+	background-repeat:no-repeat;	
+  cursor: pointer; 
+  cursor: hand;    
+}
+
+.imgStatusMsg{
+	background-image: url("images/message_blink.gif");
+  width:20px; height:15px;
+  margin-left:3px;
+}
+/*********** Following classes are for images in scheduler_list.jsp  ************/
+
+.imgSchedulerDelete {
+	background-image: url("images/butt_scheduler_delete.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;  
+}
+.imgSchedulerRe {
+	background-image: url("images/butt_scheduler_re.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;  
+}
+
+.imgSchedulerStart{
+	background-image: url("images/butt_scheduler_start.gif");
+  	width:32px; height:24px;
+	float:left;
+ 	cursor: pointer; 
+  	cursor: hand;  
+}
+.imgSchedulerStop{
+	background-image: url("images/butt_scheduler_stop.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer; 
+  cursor: hand;  
+}
+
+
+
+/*****/
+/*********** Following classes are for main menu  ************/
+A.textMenuLink:link {
+	FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #FFFFFF;
+}
+A.textMenuLink:visited {
+		FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #FFFFFF;
+}
+A.textMenuLink:hover {
+		FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #006600; 
+		background-color:#e8e8e8
+}
+A.textMenuLink:active {
+		FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #FFFFFF;
+}
+/*****/
+/*********** Following classes are for Drawer List  ************/
+A.drawerListLink:link {
+	FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family:  Arial, Verdana, Helvetica, sans-serif;color: #336633;
+}
+A.drawerListLink:visited {
+		FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #336633;
+}
+A.drawerListLink:hover {
+		FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #993399; 
+}
+A.drawerListLink:active {
+		FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #336633;
+}
+/*****/
+/*********** Following classes are for Drawer Drops  ************/
+A.drawerDropLink:link {
+	FONT-WEIGHT: normal;FONT-SIZE: 10px;TEXT-DECORATION: none;font-family:   Verdana, Arial, Helvetica, sans-serif;color: #336633;
+}
+A.drawerDropLink:visited {
+		FONT-WEIGHT: normal;FONT-SIZE: 10px;TEXT-DECORATION: none;font-family:  Verdana, Arial, Helvetica, sans-serif;color: #336633;
+}
+A.drawerDropLink:hover {
+		FONT-WEIGHT: normal;FONT-SIZE: 10px;TEXT-DECORATION: underline;font-family:  Verdana, Arial, Helvetica, sans-serif;color: #993399; 
+}
+A.drawerDropLink:active {
+		FONT-WEIGHT: normal;FONT-SIZE: 10px;TEXT-DECORATION: none;font-family:  Verdana, Arial, Helvetica, sans-serif;color: #336633;
+}
+/*****/
+
+/*********** Following classes are for record links************/
+A.recordLink:link {
+	FONT-WEIGHT: normal;FONT-SIZE: 10px;TEXT-DECORATION: none;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;
+}
+A.recordLink:visited {
+		FONT-WEIGHT: normal;FONT-SIZE: 10px;TEXT-DECORATION: none;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;
+}
+A.recordLink:hover {
+		FONT-WEIGHT: normal;FONT-SIZE: 10px;TEXT-DECORATION: underline;font-family: Verdana, Arial, Helvetica, sans-serif;color: #993399;
+}
+A.recordLink:active {
+		FONT-WEIGHT: normal;FONT-SIZE: 10px;TEXT-DECORATION: none;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;
+}
+/*****/
+/*********** Following classes are for TabText Link  ************/
+A.tabTextLink:link {
+	FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #336633;
+}
+A.tabTextLink:visited {
+		FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #336633;
+}
+A.tabTextLink:hover {
+		FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #993399; 
+}
+A.tabTextLink:active {
+		FONT-WEIGHT: bold;FONT-SIZE: 11px;TEXT-DECORATION: none;font-family: Arial, Verdana, Helvetica, sans-serif;color: #336633;
+}
+/*****/
+
+.textMenuSeparator {
+		background-image:url(images/menu_separator.gif); 
+		height:12px; width:2px; 
+		float:right; margin-left:5px; margin-right:5px;
+}
+/*****/
+/*********** Following classes are for images in user_list.jsp ***********/
+.imgDefUser {
+	background-image: url("images/butt_def_user.gif");
+  width:26px; height:24px;
+	float:left;
+}
+.imgDefUserOver {
+	background-image: url("images/butt_def_user_over.gif");
+  width:26px; height:24px;
+	float:left;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.imgNewUser {
+	background-image: url("images/butt_new_user.gif");
+  width:32px; height:24px;
+	float:left;
+  cursor: pointer;margin-left:5px;
+  cursor: hand;
+}
+.imgNewUserOver {
+	background-image: url("images/butt_new_user_over.gif");
+  width:32px; height:24px;
+	float:left;margin-left:5px;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.imgEditUser {
+	background-image: url("images/butt_edit_user.gif");
+  width:32px; height:24px;
+	float:left;margin-left:2px;
+  cursor: pointer;
+  cursor: hand;
+}
+.imgEditUserOver {
+	background-image: url("images/butt_edit_user_over.gif");
+  width:32px; height:24px;
+	float:left;margin-left:2px;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.imgDeleteUser {
+	background-image: url("images/butt_delete_user.gif");
+  width:32px; height:24px;
+	float:left;margin-left:2px;
+  cursor: pointer;
+  cursor: hand;
+}
+.imgDeleteUserOver {
+	background-image: url("images/butt_delete_user_over.gif");
+  width:32px; height:24px;
+	float:left;margin-left:2px;
+  cursor: pointer;
+  cursor: hand;
+}
+.imgWarning{
+	background-image: url("images/warning.gif");
+  width:40px; height:40px;
+}
+/*********/
+
+.buttons {
+	BORDER-RIGHT: #669966 1px solid; BORDER-TOP: #669966 1px solid;
+	BORDER-LEFT: #669966 1px solid; BORDER-BOTTOM: #669966 1px solid;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; color: #333333; 
+	BACKGROUND-IMAGE: url(images/butt_tile.gif); BACKGROUND-REPEAT: repeat-x;
+}
+
+.drawerDrop {
+	background-color:#D7EFD7;
+	border:1px solid #336633;
+}
+
+

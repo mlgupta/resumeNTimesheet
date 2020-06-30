@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Deploying OHW</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for the Web Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohwpg_cs_help.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohwpg_deploy_oc4j_demo.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+</tr>
+</table>
+
+<a name="start"></a>
+<h1>Deploying OHW</h1>
+
+<p>Oracle Help for the Web (OHW) is a Java servlet and therefore requires a servlet engine. When OHW is used as the help system for a web application, OHW can use the same servlet engine as the application.</p>
+
+<p>This page contains the following sections:</p>
+<ul>
+  <li><a href="#Servlet_Engine_Requirements">Servlet Engine Requirements</a></li>
+  <li><a href="#Client_Requirements">Client Requirements</a></li>
+  <li><a href="#Other_Dependencies">Other Dependencies</a></li>
+  <li><a href="#Overview_of_Deployment_Tasks">Overview of Deployment Tasks</a></li>
+  <li><a href="#Configuring_the_Servlet_Engine">Configuring the Servlet Engine</a></li>
+  <li><a href="#Installing_the_OHW_Servlet">Installing the OHW Servlet</a></li>
+  <li><a href="#Configuring_OHW">Configuring OHW</a></li>
+  <li><a href="#Starting_the_Servlet_Engine">Starting the Servlet Engine</a></li>
+  <li><a href="#Upgrading_OHW_and_UIX">Upgrading OHW and UIX</a></li>
+</ul>
+
+<a name="Servlet_Engine_Requirements"></a>
+<h2>Servlet Engine Requirements</h2>
+
+<p>OHW requires a servlet engine that supports the Java Servlet API version 2.0 
+  or later, for example a recent version of the following:</p>
+
+<ul>
+  <li>Oracle9<em>i</em>AS Containers For J2EE (OC4J) </li>
+<li>Apache Tomcat </li>
+<li>Apache JServ </li>
+</ul>
+<p></p>
+<p>The Servlet API is defined by Sun Microsystems. More information on the Servlet 
+  API can be found on Sun's Java Servlet Technology site at the URL <code>http://java.sun.com/products/servlet/</code>.</p>
+<a name="Client_Requirements"></a>
+<h2>Client Requirements</h2>
+<p>None are required. The client receives only HTML, and all it requires is a 
+  web browser to display and view the OHW help content. The web browser must have 
+  JavaScript support enabled.</p>
+<a name="Other_Dependencies"></a>
+<h2>Other Dependencies</h2>
+<ul>
+  <li>OHW is a UIX application. For example, OHW 1.1.1 requires UIX 2.1.6 or higher 
+    and its dependencies.</li>
+  <li><strong>UNIX only:</strong> On Unix, the servlet engine must be configured 
+    to connect to an X server in order for dynamic image generation to succeed. 
+    For details, see the &quot;X Server Configuration for Image Generation&quot; chapter of the <em>UIX Developer's Guide</em>, which is available in the JDeveloper online help, with the UIX download bundles, and in the JDeveloper documentation on OTN at <code>http://otn.oracle.com/jdeveloper/help/</code>.</li>
+</ul>
+<a name="Overview_of_Deployment_Tasks"></a>
+<h2>Overview of Deployment Tasks</h2>
+<p>In general, help authors create the help content using the authoring tools 
+  of their choice. Help authors also create the Oracle Help control files that 
+  are needed for deploying the help content as OHW help systems. For information 
+  about the control files, see <a href="ohff_toc.html">Oracle Help File Formats</a>.</p>
+<p>OHW administrators set up the servlet engine and OHW on the server. The basic 
+  OHW administrative tasks are:</p>
+<ul>
+  <li>Set up the servlet engine (e.g., OC4J)</li>
+  <li>Set up the OHW servlet</li>
+  <li>Add product helpsets and configure OHW</li>
+  <li>Start the servlet engine</li>
+  <li>Upgrade OHW and UIX, when needed</li>
+</ul>
+ <a name="Configuring_the_Servlet_Engine"></a>
+<h2>Configuring the Servlet Engine</h2>
+<p>The servlet engine must be installed and configured to support OHW. This is 
+  handled differently for each servlet engine, so consult the documentation for 
+  the servlet engine for more information. </p>
+
+<p>Also see <a href="ohwpg_deploy_oc4j_demo.html">Deploying OHW on OC4J Using 
+  the Demo Bundle</a>, <a href="ohwpg_deploy_oc4j_deploy.html">Deploying OHW on 
+  OC4J Using the Deploy Bundle</a> and <a href="ohwpg_deploy_tomcat.html">Deploying 
+  OHW on Tomcat Using the Deploy Bundle</a>.</p>
+<p><a name="Installing_the_OHW_Servlet"></a> </p>
+<h2>Installing the OHW Servlet</h2>
+<p>The various files that constitute the OHW servlet--including Java class files, 
+  XML configuration files, and others--must be installed on the server, in the 
+  appropriate locations for the servlet engine. This is handled differently for 
+  each servlet engine, so consult the documentation for the servlet engine for 
+  more information. </p>
+<p>Also see <a href="ohwpg_deploy_oc4j_demo.html">Deploying OHW on OC4J Using 
+  the Demo Bundle</a>, <a href="ohwpg_deploy_oc4j_deploy.html">Deploying OHW on 
+  OC4J Using the Deploy Bundle</a> and <a href="ohwpg_deploy_tomcat.html">Deploying 
+  OHW on Tomcat Using the Deploy Bundle</a>.</p>
+
+<a name="Configuring_OHW"></a>
+<h2>Configuring OHW</h2>
+<p>Depending on the servlet engine, you would typically modify one to four XML 
+  configuration files to deploy OHW.</p>
+<p>On OC4J, you need to modify the following files:</p>
+ <ul><li>server.xml and http-web-site.xml, which configure the OC4J server</li>
+  <li>application.xml and web.xml, which configure individual web modules</li>
+ </ul>
+ 
+<p>On Tomcat, you need to modify the web.xml file to configure the web modules.</p>
+ <p>More information about the XML configuration 
+  files are provided below:</p>
+<ul>
+ <li>
+    <p><strong>server.xml</strong>: This file defines all OC4J applications. Two J2EE applications 
+      are typically required for OHW deployment: one for OHW (mandatory) and one 
+      for UIX (recommended, but optional). It also defines any *-web-site.xml 
+      files that are used for the web modules. There is only one server.xml for 
+      a running OC4J instance.</p>
+  </li>
+<li>
+    <p><strong>http-web-site.xml</strong>: This file maps URLs to the web modules and declares 
+      the port number that OC4J is using. A URL directed to this port number is 
+      routed to the appropriate Web site for the web module. Oracle recommends 
+      using a single *-web-site.xml file named http-web-site.xml, which contains 
+      many web module definitions. The location of http-web-site.xml is determined 
+      by server.xml, which is typically in the same directory as server.xml. The 
+      file http-web-site.xml changes frequently as web modules (product helpsets) 
+      are added or reconfigured.</p>
+  </li>
+<li>
+    <p><strong>application.xml</strong>: This file is a manifest of all web modules 
+      that run under a given J2EE application. It points to each web module of 
+      each product that is deployed. Oracle recommends using two instances of 
+      application.xml: 1) a relatively stable version for the UIX application 
+      (optional) and 2) a version for the OHW application that changes frequently 
+      as web modules are added or reconfigured. The name and location of the application.xml 
+      file is fixed by the J2EE standard.</p>
+  </li>
+<li>
+    <p><strong>web.xml</strong>: This file sets the initialization parameters for the servlet, 
+      including the location of the OHW configuration file. There is one instance 
+      for each web module. If OHW configuration files are located and named in 
+      a uniform manner, then this file should be the same for all OHW web modules.</p>
+  </li>
+  </ul>
+<p>Only one OHW configuration file is required to configure OHW itself (default 
+  file name is <strong>ohwconfig.xml</strong>). For example, you must specify 
+  which helpsets to display and how to present them. You can also specify locales, 
+  branding information, and various other settings. For information about this 
+  configuration file, see <a href="ohff_ohwconfig.html">OHW Configuration File</a>. 
+  The name and location of this file is set as a servlet initialization parameter, 
+  which is handled differently for each servlet engine. Consult the documentation 
+  for the servlet engine for more information. </p>
+
+<p>Also see <a href="ohwpg_deploy_oc4j_demo.html">Deploying OHW on OC4J Using 
+  the Demo Bundle</a>, <a href="ohwpg_deploy_oc4j_deploy.html">Deploying OHW on 
+  OC4J Using the Deploy Bundle</a> and <a href="ohwpg_deploy_tomcat.html">Deploying 
+  OHW on Tomcat Using the Deploy Bundle</a>.</p>
+
+
+<a name="Starting_the_Servlet_Engine"></a>
+<h2>Starting the Servlet Engine</h2>
+<p>The servlet engine must be started to be available to users via the web. This is handled differently for each servlet engine, so consult the documentation for the servlet engine for more information. </p>
+
+<p>If you modify a helpset in an OHW installation, the servlet engine must be restarted for users to see the changes.</p>
+
+<p>Also see <a href="ohwpg_deploy_oc4j_demo.html">Deploying OHW on OC4J Using 
+  the Demo Bundle</a>, <a href="ohwpg_deploy_oc4j_deploy.html">Deploying OHW on 
+  OC4J Using the Deploy Bundle</a> and <a href="ohwpg_deploy_tomcat.html">Deploying 
+  OHW on Tomcat Using the Deploy Bundle</a>.</p>
+<a name="Upgrading_OHW_and_UIX"></a>
+<h2>Upgrading OHW and UIX</h2>
+<p>When new versions of OHW and UIX are released, be sure to check the OHW and 
+  UIX download pages for the latest download and install instructions before upgrading 
+  your OHW/OC4J or OHW/Tomcat installation.</p>
+<p>To upgrade OHW to a newer version, you need to replace the OHW and UIX JAR 
+  files, and the OHW JavaScript files (distributed in ohw-install.zip).</p>
+<p>To upgrade UIX to a newer version, you need to replace the UIX installable 
+  resource files (distributed in uix2-install.zip).</p>
+<p>Also see <a href="ohwpg_deploy_oc4j_deploy.html">Deploying OHW on OC4J Using 
+  the Deploy Bundle</a> and <a href="ohwpg_deploy_tomcat.html">Deploying OHW on 
+  Tomcat Using the Deploy Bundle</a>.</p>
+
+<p class="horizontal-rule">&nbsp;</p>
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+<a href="ohwpg_cs_help.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohwpg_deploy_oc4j_demo.html">Next</a>
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+</body>
+</html>

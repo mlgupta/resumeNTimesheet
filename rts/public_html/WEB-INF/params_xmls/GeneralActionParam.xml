@@ -1,0 +1,32 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<Configuration>
+  <CMSDK>
+    <Domain>ifs://192.168.0.1:1521:cmsdk:CMSDK</Domain>
+    <Domain1>ifs://user4.dbsentry.com:1521:ora9i.user4.dbsentry.com:CMSDK</Domain1>
+    <IfsSchemaPassword>cmsdk</IfsSchemaPassword>
+    <IfsService>IfsDefaultService</IfsService>
+    <ServiceConfiguration>SmallServiceConfiguration</ServiceConfiguration>
+    <log4j-init-file>/WEB-INF/log4j.properties</log4j-init-file>
+    <nonadminsecurity>1</nonadminsecurity>
+    <redirector>http://192.168.0.7:8988</redirector>
+    <faxtempdir>FaxTempDir</faxtempdir>
+    <jobRetrialInterval>1</jobRetrialInterval>
+    <jobRetrialCount>6</jobRetrialCount>
+    <DocLogUser>logger</DocLogUser>
+    <DocLogPassword>logger</DocLogPassword>
+    <sysaduser>system</sysaduser>
+    <sysadpwd>system</sysadpwd>    
+    <dbsysaduser>system</dbsysaduser>
+    <dbsysadpwd>system</dbsysadpwd>
+    <DriverType>thin</DriverType>
+    <ServerName>192.168.0.1</ServerName>
+    <DatabaseName>cmsdk</DatabaseName>
+    <PortNumber>1521</PortNumber>
+    <User>owf_mgr</User>
+    <Password>dbs9901</Password>
+    <iType>WF_SAM</iType>
+    <pr>SAM_PROCESS</pr>
+    <DavPath>http://192.168.0.1:7778/cmsdk/content</DavPath>
+    <requisitionDescription>Requisition for approval</requisitionDescription>  
+  </CMSDK>
+</Configuration>

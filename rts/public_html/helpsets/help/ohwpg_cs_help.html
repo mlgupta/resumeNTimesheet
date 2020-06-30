@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Implementing Context-Sensitive Help in a Web Application</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for the Web Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohwpg_toc.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohwpg_deploy.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+</tr>
+</table>
+
+<a name="start"></a>
+<h1>Implementing Context-Sensitive Help in a Web Application</h1>
+
+<p>Oracle Help for the Web (OHW) provides a context-sensitive help mechanism that launches  help topics that are associated with some context in the web application user interface. Typically, help topics are written to describe the function of a particular page, table, or input field in a web application. When a user requests help for a user interface control--for example by selecting a Help button--the appropriate topic for that context (control) is displayed.</p> 
+
+<p>To provide context-sensitive help for a web application, the help system must 
+  include one or more map files and the appropriate help code must be added to 
+  the application code.</p>
+<p>The following sections describe how to implement context-sensitive help using 
+  OHW:</p>
+<ul>
+  <li><a href="#Mapping_Topic_IDs_to_Help_Topics">Mapping Topic IDs to Help Topics</a></li>
+  <li><a href="#Creating_Context_Sensitive_Links_to_the_Help_System">Creating 
+    Context-Sensitive Links to the Help System</a></li>
+  <li><a href="#Implementing_Context_Sensitive_Help_in_Oracle_UIX_based_Applications">Implementing Context-Sensitive Help in Oracle UIX-based Applications</a></li>
+</ul>
+<a name="Mapping_Topic_IDs_to_Help_Topics"></a>
+<h2>Mapping Topic IDs to Help Topics</h2>
+<p>OHW context-sensitive help systems rely on one or more map files that map topic 
+  IDs to help topic HTML files. In a helpbook, the map file is in the OHT file 
+  format; in a helpset, the map file is in an XML file format.</p>
+<p>The map file is usually created by the help author. As a web application developer, 
+  when associating web application controls with context-sensitive topics you 
+  must use the topic IDs specified in the author's map file. Thus, you will have 
+  to coordinate your efforts with the help author.</p>
+<p><em>Sample map file in XML format:</em></p>
+<pre><code> &lt;?xml version='1.0' ?&gt;
+
+ &lt;map version=&quot;1.0&quot;&gt;   <br>   &lt;mapID target=&quot;topic_1&quot; url=&quot;file_1.html&quot; /&gt;        <br>   &lt;mapID target=&quot;topic_2&quot; url=&quot;file_2.html#a1&quot; /&gt;     <br>   &lt;mapID target=&quot;topic_3&quot; url=&quot;file_3.html&quot; wintype=&quot;intro&quot; /&gt;
+ &lt;/map&gt;</code></pre>
+<p>The attribute <code>target</code> specifies a unique ID for the 
+  associated HTML file within a helpset. The attribute <code>url</code> 
+  specifies the location of the file to associate with the ID. The <code>wintype</code> 
+  attribute is optional; it specifies the name of a window type that the topic 
+  will be displayed in. See <a href="ohff_about_files.html">Oracle Help File Formats</a> 
+  for more information about the elements used in the map file.</p>
+<a name="Creating_Context_Sensitive_Links_to_the_Help_System"></a> 
+<h2>Creating Context-Sensitive Links to the Help System</h2>
+
+<p>Applications that rely on OHW for context-sensitive help request the context-sensitive 
+  topics via specially formulated URLs to the OHW servlet. Any user interface 
+  control with a URL destination (links, images, etc.) can be associated with 
+  a context-sensitive topic.</p>
+<p>When creating a link to OHW for context-sensitive help, you can either use 
+  the URL destination for the front page (with the Contents, Index, and Search 
+  navigators), or you can create a URL destination for a topic using the topic 
+  ID.</p>
+
+<h3>Linking to the Front Page</h3>
+
+<p>The URL to the front page is simply the URL to the OHW servlet:</p>
+  
+<pre><code>
+ http://&lt;server&gt;:&lt;port&gt;/&lt;servlet mapping&gt;
+</code></pre>
+     
+<p>where <code>&lt;server&gt;</code> is the name of your server running 
+  the servlet engine, <code>&lt;port&gt;</code> is the port used 
+  by the servlet engine, and <code>&lt;servlet&nbsp;mapping&gt;</code> 
+  is the servlet mapping set up in the web.xml file for the OHW servlet (by default 
+  this is &quot;ohw/help/&quot;). For example:</p>
+
+<pre><code>
+ http://www.yourcompany.com:8888/ohw/help/
+</code></pre>
+<p>When a user requests help for a user interface control that is linked to the 
+  front page, OHW will be displayed in the user's browser, showing the first page 
+  of the help system (usually a table of contents).</p>
+<h3>Linking to a Topic</h3>
+
+<p>To create the URL for linking to a topic, add a <code>topic</code> parameter to the URL of the OHW servlet.  The value of the <code>topic</code> parameter is the topic ID of the help topic:</p>
+     
+<pre><code>
+ http://&lt;server&gt;:&lt;port&gt;/&lt;servlet mapping&gt;/?topic=&lt;topic-id&gt;
+</code></pre>
+     
+<p>For example, the following URL requests the topic associated with the topic 
+  ID <code>topic_1</code>:</p>
+
+<pre><code>
+ http://www.yourcompany.com:8888/ohw/help/?topic=topic_1
+</code></pre>
+<p>When implementing context-sensitive links to OHW, you may also wish to use 
+  JavaScript to open the link in a secondary window rather than replace the main 
+  application page.</p>
+<p>When a user requests help for a user interface control that is linked to a 
+  topic ID, OHW displays the file associated with the topic ID in a window page 
+  that does not include the OHW navigators (tabs). However, the topic page has 
+  a link to the front page of the help system should the user wish to access the 
+  main help.</p>
+<a name="Implementing_Context_Sensitive_Help_in_Oracle_UIX_based_Applications"></a>
+<h2>Implementing Context-Sensitive Help in Oracle UIX-based Applications</h2>
+<p>UIX (available in Oracle JDeveloper) is an Oracle technology for creating web 
+  applications. UIX provides mechanisms that make it easy to provide context-sensitive 
+  help via OHW. With UIX, you can implement context-sensitive help programmatically 
+  using the UIX Java API, or declaratively using the UIX language (an XML language).</p>
+<p>The <code>HelpProvider</code> architecture in UIX provides a generic 
+  context-sensitive help mechanism. OHW provides context-sensitive help for UIX 
+  applications through a specific implementation of <code>HelpProvider</code> 
+  called the <code>OracleHelpProvider</code>.</p>
+<p>To use the OracleHelpProvider, you have to register OHW with the application, 
+  then specify the context-sensitive help links via databinding.</p>
+  
+
+  
+<h3>Registering OHW in the OracleHelpProvider</h3>
+
+<p>The first step in using the <code>OracleHelpProvider</code> is 
+  to register your <code>OracleHelpProvider</code> instance (i.e., 
+  OHW) with the UIX <code>Configuration</code> object. In UIX, the 
+  <code>HelpProvider</code> appears as a special UIX <code>DataProvider</code> 
+  that can be used for databinding. It is special in that you don't need to declare 
+  it in your UIX page, it is available in all pages once you register your <code>HelpProvider</code> 
+  with the <code>Configuration</code> object. </p>
+
+<p>In UIX versions prior to 2.1.6, the way you typically modify the UIX <code>Configuration</code> 
+  is to write a <code>PageBroker</code> subclass and override the 
+  <code>createDefaultConfiguration</code> method. From UIX 2.1.6 
+  onwards, you can use the <code>uix-config.xml</code> file and ApplicationConfiguration API 
+  to create a set of <code>Configuration</code> objects without writing 
+  a line of code, and update configuration properties in the field without recompiling 
+  code. (However, this feature is only available to developers using Servlet 2.1 
+  or later, so applications deployed on Apache JServ must continue using Java 
+  code.) More information about the <code>uix-config.xml</code> file is available in the &quot;Configuration&quot; chapter of the <em>UIX Developer's Guide</em>, which is available in the JDeveloper online help, with the UIX download bundles, and in the JDeveloper documentation on OTN at <code>http://otn.oracle.com/jdeveloper/help/</code>.</p>
+
+<p>To register OHW with your application, you simply modify the uix-config.xml 
+  file to point UIX to an instance of the OHW servlet.</p>
+<p><em>Sample uix-config.xml file</em></p>
+<pre><code> &lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+
+ &lt;configurations xmlns=&quot;http://xmlns.oracle.com/uix/config&quot;&gt;
+   ... 
+
+   &lt;default-configuration&gt;
+
+     &lt;help-provider&gt;
+       &lt;ohw-servlet-url&gt;http://www.yourcompany.com:8888/ohw&lt;/ohw-servlet-url&gt;
+     &lt;/help-provider&gt;
+
+   &lt;/default-configuration&gt;
+
+   ...
+ &lt;/configurations&gt;</code></pre>
+<p>The <code>&lt;help-provider&gt;</code> element allows configuration 
+  of a help provider. The only supported syntax at this time is a contained <code>&lt;ohw-servlet-url&gt;</code> 
+  element. The <code>ohw-servlet-url</code> must contain an URL that 
+  points to an installation of OHW. Once you've set this property, all uiXML and 
+  UIX Java pages have access to two data providers: <code>ui:helpTopics</code> 
+  and <code>ui:helpSystem</code>. See <a href="#Databinding_a_Destination">Databinding 
+  a Destination</a> for instructions on how to specify context-sensitive help 
+  declaratively.</p>
+<p>In UIX 2.1.6 and later, if you still need to use Java code to create your <code>Configuration</code> 
+  object but want to use the default properties defined in the uix-config.xml 
+  file, you would use the following code:</p>
+<pre><code>
+ ApplicationConfiguration appConfig = 
+   ApplicationConfiguration.getInstance(servletContext);
+ configurationImpl impl = 
+   new ConfigurationImpl (&quot;someName&quot;, appConfig.getDefault());
+ impl.register(servletContext);</code></pre>
+<p>To register OHW with your application programmatically in pre-2.1.6 versions 
+  of UIX, see the following sample code. </p>
+<p><em>Sample code for the <code>createDefaultConfiguration()</code> 
+  method in pre-2.1.6 versions of UIX:</em></p>
+<pre><code>
+ protected ConfigurationImpl createDefaultConfiguration()
+ {
+   ConfigurationImpl cfg = super.createDefaultConfiguration();
+   //For your application you'd likely pull the location of the
+   //OHW servlet out of a servlet init parameter
+
+   OracleHelpProvider provider = new OracleHelpProvider(&quot;http://www.yourcompany.com:8888/ohw/help/&quot;)
+   cfg.setProperty(Configuration.HELP_PROVIDER, provider);
+   return cfg;
+ }</code></pre>
+<p>The <code>HelpProvider</code> sets up two special data objects 
+  (<code>helpTopics</code> and <code>helpSystem</code> 
+  in the UIX UI Components namespace). See <a href="#Databinding_a_Destination">Databinding 
+  a Destination</a> for instructions on how to specify context-sensitive help 
+  declaratively.</p>
+<a name="Databinding_a_Destination"></a>
+<h3>Databinding a Destination</h3>
+<p>The <code>HelpProvider</code> sets up two data providers--<code>ui:helpTopics</code> 
+  and <code>ui:helpSystem</code>. (Here, <code>ui</code> 
+  is used as the prefix for the UIX UI namespace.) They are used for databinding 
+  the destination attribute of links or buttons (or any control that has a destination) 
+  from which you want to connect to the help system.</p>
+<p>After registering OHW with your UIX-based application, you can then specify 
+  context-sensitive help declaratively using the data objects <code>ui:helpTopics</code> 
+  and <code>ui:helpSystem</code>. </p>
+<h4>Databinding a Destination to the Front Page</h4>
+<p>Using declarative UIX, a destination can be created for the front page by using 
+  the special <code>frontPage</code> key for the <code>ui:helpSystem</code> 
+  data object. For example:</p>
+<pre><code>
+ &lt;globalButton icon=&quot;globalhelp.gif&quot; text=&quot;Help&quot; data:destination=&quot;frontPage@ui:helpSystem&quot;/&gt;
+</code></pre>
+<p>When a user requests help for a user interface control that is linked to the 
+  front page, OHW will be displayed in the user's browser, showing the first page 
+  of the help system (usually a table of contents).</p>
+<h4>Databinding a Destination to a Topic</h4>
+<p>To show a topic, use the unique topic ID as the key for the <code>ui:helpTopics</code> 
+  data object. For example:</p>
+<pre><code>
+ &lt;button text=&quot;Button To Help&quot; data:destination=&quot;myTopicID@ui:helpTopics&quot; /&gt;
+ &lt;link text=&quot;Link To Help&quot; data:destination=&quot;someOtherTopicID@ui:helpTopics&quot; /&gt;
+</code></pre>
+<p>
+  <!-- 
+<p>In both of these cases, the <code>OracleHelpProvider</code> automatically returns a destination that includes JavaScript to launch help in a separate, smaller browser window.</p>  If you -->
+</p>
+<p>At runtime, UIX uses the <code>OracleHelpProvider</code> instance 
+  to resolve the value of these destinations. The <code>OracleHelpProvider</code> 
+  automatically returns a destination that includes JavaScript to launch help 
+  in a separate, smaller browser window. This window has a link to the front page 
+  of the help system should the user wish to access the main help. </p>
+<p class="horizontal-rule">&nbsp;</p> 
+
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+<a href="ohwpg_toc.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohwpg_deploy.html">Next</a>
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Deploying OHW on OC4J Using the Demo Bundle</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for the Web Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohwpg_deploy.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohwpg_deploy_oc4j_deploy.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+</tr>
+</table>
+
+<a name="start"></a>
+<h1>Deploying OHW on OC4J Using the Demo Bundle</h1>
+
+<p>One of the Oracle Help for the Web (OHW) release files available for downloading 
+  from the Oracle Technology Network (OTN) includes a preconfigured version of 
+  OHW installed in the Oracle9<em>i</em>AS Containers for J2EE (OC4J) Java servlet 
+  engine. OC4J is a development environment for Java 2 Enterprise Edition (J2EE), 
+  and it includes a servlet engine that supports the Java Servlet 2.2 and 2.3 
+  specification.</p>  
+
+<p>The OHW demo bundle contains all the debug class libraries that you need to 
+  view the demo and try out the release. It includes a preconfigured Oracle OC4J 
+  9.0.x servlet engine, sample helpsets plus batch and script files for starting 
+  and stopping the OC4J servlet engine and the OHW servlet. You can install and 
+  run this version without modification, just to see how OHW works, or you can 
+  replace the sample helpsets with your own. </p>
+
+<p>This page contains the following sections:</p>
+
+<ul>
+  <li><a href="#Installing_and_Running_the_OHW_Demo_Bundle">Installing and Running 
+    the OHW Demo Bundle</a></li>
+  <li><a href="#Understanding_OHW_demo_files">Understanding the OHW Demo Bundle 
+    Files</a></li>
+  <li><a href="#Configuring_OHW_on_OC4J_to_Display_User_Helpsets">Configuring 
+    OHW on OC4J to Display User Helpsets</a></li>
+  <li><a href="#Adding_a_Web_Module">Adding a Web Module</a></li>
+  <li><a href="#Changing_the_OHW_Access_URL">Changing the OHW Access URL</a></li>
+</ul>
+
+
+<a name="Installing_and_Running_the_OHW_Demo_Bundle"></a>
+<h2>Installing and Running the OHW Demo Bundle</h2>
+
+<p>For the latest information, check any download and install instructions that may be available on the OHW download page. However, installing the demo bundle is generally quite simple:</p>
+
+<ol>
+  <li> 
+    <p>Download the OHW demo bundle from OTN at <code>http://otn.oracle.com/tech/java/help/content.html</code>. 
+      The name of the demo bundle file is <code>ohw-demo-<var>nnn</var>.zip</code>, where <code><var>nnn</var></code> 
+      is the OHW release number. For example, <code>ohw-demo-1_1_1.zip</code>. This file includes 
+      OHW, sample helpsets, and the OC4J servlet engine.</p>
+  </li>
+  <li> 
+    <p>Unzip ohw-demo-<em>nnn</em>.zip in the location you wish to install the 
+      demo on the host computer.</p>
+  <p>This unzips files into the <code>ohw</code> directory. For details 
+    about the demo bundle files, see <a href="#Understanding_OHW_demo_files">Understanding 
+    the OHW Demo Bundle Files</a>.</p>
+  </li>
+  <li> 
+    <p>Make sure you have the JAVA_HOME environment variable set to a directory 
+      on the host computer where a version of JDK 1.2.2 or later resides (JDK 
+      1.3.1 is recommended).</p>
+  </li>
+  <li> 
+    <p><strong>To start the server</strong>, run the OHW/OC4J startup batch file 
+      or script from the <code>ohw/bin</code> directory: </p>
+  <ul>
+    <li>For Windows installations type <code>startup</code> at a 
+      command prompt.</li>
+    <li>For UNIX installations type <code>./startup.sh</code>. If 
+      the UNIX scripts do not have executable privileges, you may need to provide 
+      these privileges using the UNIX chmod command. 
+      <p></p>
+    </li>
+  </ul>
+  <p>You should see some output that indicates OC4J has started, such as &quot;Oracle9iAS 
+    &lt;version&gt; Containers for J2EE initialized.&quot;</p>
+  </li>
+  <li> 
+    <p>To view the OHW demo, direct your browser to <code>http://&lt;hostname&gt;:8888/ohw/help/</code>, 
+      where <code>&lt;hostname&gt;</code> is the name of the host 
+      machine on which OHW and OC4J are installed.</p>
+  <p><strong>Note:</strong> The last slash (&quot;/&quot;) is required.</p>
+  <p>OHW will be displayed in your browser, showing the first page of the help 
+    system (usually a table of contents). If you are connected to a network, browsers 
+    on remote computers will be able to see the same content by going to the same 
+    URL.</p>
+  <p>If you are viewing OHW from the same computer on which it is installed, you 
+    may be able to use the URL <code>http://localhost:8888/ohw/help/</code>, 
+    depending on your browser configuration. However, anyone trying to see this 
+    help from a remote computer must use the name of the host to see the content.</p>
+  </li>
+</ol>
+
+<p><strong>To stop the server,</strong> run the OHW/OC4J shutdown batch file or script from the <code>ohw/bin</code> directory: </p>
+
+<ul>
+  <li>For Windows installations type <code>shutdown</code> at a command 
+    prompt.</li>
+  <li>For UNIX installations type <code>./shutdown.sh</code>.</li>
+</ul>
+
+<a name="Understanding_OHW_demo_files"></a>
+<h2>Understanding the OHW Demo Bundle Files</h2>
+<p>OC4J is capable of handling multiple J2EE applications, each of which consists 
+  of one or more application modules. Application modules can be: 1) a web module 
+  that runs under the control of a servlet that may employ JSPs as well, 2) an 
+  EJB application, or 3) a Java client application module. OHW application modules 
+  are web modules.</p>
+<p>The OHW demo bundle unzips files into the <code>ohw</code> directory. 
+  It creates the <code>ohw/oc4j/j2ee/home</code> directory, which 
+  contains all the files necessary for running OC4J with a default configuration. 
+</p>
+<p>The OC4J configuration used in the OHW demo bundle consists of two J2EE applications, 
+  one for OHW and one for UIX. The OHW application (<code>ohw-eapp</code>) 
+  provides one web module for each product and its single helpset or multiple 
+  helpsets. The UIX application (<code>uixresources-eapp</code>) 
+  enables multiple web modules to share a single set of UIX installable resource 
+  files.</p>
+<p>The OHW and UIX JAR files are installed in the directory <code>ohw/oc4j/j2ee/home/lib</code>. 
+  OHW JavaScript files are installed in <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/jsLibs</code>. 
+  Each web module must have a private copy of the OHW JavaScript files.</p>
+<p>One web module containing two helpsets is provided in the demo bundle. The 
+  demo helpset files are installed in <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/helpsets</code>. 
+  Two helpset subdirectories are included: <code>fileformats</code> 
+  and <code>shakespeare</code>.</p>
+<p>The UIX installable resource files are installed in the <code>ohw/oc4j/j2ee/home/applications/uixresources-eapp/cabo</code> 
+  directory and its subdirectories. During runtime, the <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/cabo</code> 
+  directory is automatically created. (For instructions on how to create the UIX 
+  Resources application, see <a href="ohwpg_deploy_oc4j_deploy.html">Deploying 
+  OHW on OC4J Using the Deploy Bundle</a>.</p>
+<p><strong>Note:</strong> In OHW releases prior to 1.0.8 and 1.1.x, the OHW demo 
+  bundle was not configured for shared UIX installable resources. Each web module 
+  had a private copy of the UIX resource files.</p>
+<p>The OC4J configuration files that are of interest with respect to OHW deployment 
+  are:</p>
+<pre><code>  ohw/oc4j/j2ee/home/config/server.xml
+  ohw/oc4j/j2ee/home/config/http-web-site.xml
+  ohw/oc4j/j2ee/home/applications/ohw-eapp/META-INF/application.xml
+  ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/WEB-INF/web.xml
+  ohw/oc4j/j2ee/home/applications/uixresources-eapp/META-INF/application.xml
+  ohw/oc4j/j2ee/home/applications/uixresources-eapp/cabo/WEB-INF/web.xml</code></pre>
+<p>The only OHW configuration file, ohwconfig.xml, is located in <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/helpsets</code>.</p>
+<a name="Configuring_OHW_on_OC4J_to_Display_User_Helpsets"></a>
+<h2>Configuring OHW on OC4J to Display User Helpsets</h2>
+
+<p>The instructions in this section assume you have installed the OHW demo bundle. 
+  If you have not installed the demo, see <a href="#Installing_and_Running_the_OHW_Demo_Bundle">Installing 
+  and Running the OHW Demo Bundle</a>.</p>
+<p>While the OHW demo bundle includes sample helpsets, you will probably want 
+  to use OHW to display your own helpsets. You can easily substitute your own 
+  helpsets for the demo helpsets by copying them into the <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/helpsets</code> 
+  directory, and then modifying the ohwconfig.xml file. To do so, follow these 
+  steps:</p>
+
+<ol>
+  <li> 
+    <p><strong>Install the control and content files for your help system.</strong> 
+      Ordinarily--and for convenience--helpsets are installed in or under the 
+      OHW <code>helpsets</code> directory. (The directory structure 
+      <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/helpsets</code> 
+      is installed by default wherever you installed the OHW demo bundle.) For 
+      example, for a product called myProduct, you might create a directory such 
+      as:</p>
+    <pre><code> ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/helpsets/myProduct
+</code></pre>
+    <p>Place all your help files in or under this directory, including the helpset 
+      file, topic (HTML) files, and the other control files (index, table of contents, 
+      etc.). For more information about these files, see <a href="ohff_about_files.html">Oracle 
+      Help File Formats</a>. Also, place any JAR files here, if you are using 
+      jar files for your helpset. (You can use JARred and unJARred helpsets together 
+      in the same deployment.)</p>
+  </li>
+  <li> 
+    <p><strong>Edit the configuration file.</strong> In an editor, open the ohwconfig.xml 
+      file, which is by default in the <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/helpsets</code> 
+      directory. Modify the <code>&lt;books&gt;&lt;/books&gt;</code> 
+      section to direct it to your helpset. For example:</p>
+    <pre><code> &lt;books combineBooks=&quot;true&quot; useLabelInfo=&quot;true&quot;&gt;
+  &lt;helpSet location=&quot;myProduct/myProductHelp.hs&quot; /&gt;
+  &lt;helpSet jar=&quot;otherProduct/otherProduct.jar&quot; location=&quot;otherProduct.hs&quot; /&gt;
+ &lt;/books&gt;
+</code></pre>
+    <p>Among other things, the ohwconfig.xml file tells OHW where to find your 
+      helpsets and help topic HTML files. The <code>&lt;books&gt;</code> 
+      element can contain any number of helpsets or helpbooks, or a combination 
+      of both. Helpsets can be merged at runtime, so multiple authors can create 
+      multiple helpsets that will be seamlessly merged. The merging behavior is 
+      specified by the attributes <code>combineBooks</code> and <code>useLabelInfo</code>. 
+      The <code>&lt;helpSet&gt;</code> element can contain zero or 
+      more <code>&lt;contentLocation&gt;</code> elements. The <code>&lt;contentLocation&gt;</code> 
+      element is used to specify the root location of a set of Oracle Help help 
+      topic HTML files. For more information about the ohwconfig.xml file, see 
+      <a href="ohff_ohwconfig.html">OHW Configuration File</a>.</p>
+  </li>
+  <li> 
+    <p><strong>Start the servlet engine.</strong> Start the servlet engine, as 
+      described in Step 4 of the section <a href="#Installing_and_Running_the_OHW_Demo_Bundle">Installing 
+      and Running the OHW Demo Bundle</a>, above . If OC4J is already running, 
+      you must shut it down and then restart it before you can see the changes 
+      made since you last started the servlet.</p>
+  </li>
+  <li> 
+    <p><strong>Direct the browser</strong> to <code>http://&lt;hostname&gt;:8888/ohw/help/</code>, 
+      where <code>&lt;hostname&gt;</code> is the name of the machine 
+      on which OHW and OC4J are installed.</p>
+  <p>The first page of the demo help system displays in the browser. If there 
+    is more than one helpset, use the drop down list in the toolbar to select 
+    a helpset, then click the helpset switcher to display the table of contents 
+    and index from the selected helpset only. The text search will search only 
+    for items in the selected helpset.</p>
+  </li>
+</ol>
+<a name="Adding_a_Web_Module"></a>
+<h2>Adding a Web Module</h2>
+<p>The instructions in this section assume you have installed the OHW demo bundle. 
+  If you have not installed the demo, see <a href="#Installing_and_Running_the_OHW_Demo_Bundle">Installing 
+  and Running the OHW Demo Bundle</a>.</p>
+<p>While the OHW demo bundle includes a sample web module (ohw), you will probably 
+  want to create your own web module to display other helpsets. You can easily 
+  do this by copying files from the directory <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw</code>, 
+  and then modifying the files ohwconfig.xml, application.xml, and web.xml. To 
+  do so, follow these steps:</p>
+<ol>
+  <li> 
+    <p><strong>Create a web module directory.</strong> Create the new directory 
+      under <code>ohw/oc4j/j2ee/home/applications/ohw-eapp</code>. 
+      For example, you might create the directory for a new web module called 
+      mymodule as:</p>
+  <pre><code> ohw/oc4j/j2ee/home/applications/ohw-eapp/mymodule</code></pre>
+  </li>
+  <li> 
+    <p><strong>Copy the web.xml file and OHW Javascript files.</strong> Each web 
+      module must have a web.xml file and a private copy of the OHW JavaSCript 
+      files. Copy the directories <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/jsLibs</code> 
+      and <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/WEB-INF</code> 
+      and place them in <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/mymodule</code>. 
+      You should now have the following structure for your new web module:</p>
+  <pre><code> ohw/oc4j/j2ee/home/applications/ohw-eapp/mymodule/jsLibs/<em>&lt;files&gt;</em>
+ ohw/oc4j/j2ee/home/applications/ohw-eapp/mymodule/WEB-INF/web.xml</code></pre>
+  </li>
+  <li> 
+    <p><strong>Install the control and content files for your help system.</strong> 
+      Create the <code>helpsets</code> directory in your web module 
+      directory and install your help files in or under the <code>helpsets</code> 
+      directory. For example, for a product called myProduct, you might create 
+      a directory such as:</p>
+  <pre><code> ohw/oc4j/j2ee/home/applications/ohw-eapp/mymodule/helpsets/myProduct</code></pre>
+  <p>Place all your help files in or under this directory, including the helpset 
+    file, topic (HTML) files, and the other control files (index, table of contents, 
+    etc.). For more information about these files, see <a href="ohff_about_files.html">Oracle 
+    Help File Formats</a>. Also, place any JAR files here, if you are using jar 
+    files for your helpset. (You can use JARred and unJARred helpsets together 
+    in the same deployment.)</p>
+  </li>
+  <li> 
+    <p><strong>Edit the configuration file.</strong> Copy ohwconfig.xml from <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/ohw/helpsets</code> 
+      and place it in <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/mymodule/helpsets</code>.</p>
+  <p>In an editor, open the ohwconfig.xml file in <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/mymodule/helpsets</code> 
+    and modify the <code>&lt;books&gt;&lt;/books&gt;</code> section 
+    to direct it to your helpset. For example:</p>
+  <pre><code> &lt;books combineBooks=&quot;true&quot; useLabelInfo=&quot;true&quot;&gt;
+  &lt;helpSet location=&quot;myProduct/myProductHelp.hs&quot; /&gt;
+  &lt;helpSet jar=&quot;otherProduct/otherProduct.jar&quot; location=&quot;otherProduct.hs&quot; /&gt;
+ &lt;/books&gt;</code></pre>
+  <p>Among other things, the ohwconfig.xml file tells OHW where to find your helpsets 
+    and help topic HTML files. The <code>&lt;books&gt;</code> element 
+    can contain any number of helpsets or helpbooks, or a combination of both. 
+    Helpsets can be merged at runtime, so multiple authors can create multiple 
+    helpsets that will be seamlessly merged. The merging behavior is specified 
+    by the attributes <code>combineBooks</code> and <code>useLabelInfo</code>. 
+    The <code>&lt;helpSet&gt;</code> element can contain zero or 
+    more <code>&lt;contentLocation&gt;</code> elements. The <code>&lt;contentLocation&gt;</code> 
+    element is used to specify the root location of a set of Oracle Help help 
+    topic HTML files. For more information about the ohwconfig.xml file, see <a href="ohff_ohwconfig.html">OHW 
+    Configuration File</a>.</p>
+  </li>
+  <li> 
+    <p><strong>Add the new web module information to the application.xml file.</strong> 
+      In an editor, open the file <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/META-INF/application.xml</code> 
+      and add the following lines within the <code>&lt;application&gt;&lt;/application&gt;</code> 
+      section:</p>
+  <pre><code> &lt;module&gt;
+   &lt;web&gt;
+     &lt;web-uri&gt;mymodule&lt;/web-uri&gt;
+     &lt;context-root&gt;/&lt;/context-root&gt;
+   &lt;/web&gt;
+ &lt;/module&gt;</code></pre>
+  <p>Your final application.xml file should be similar to the following sample 
+    XML file.</p>
+  <p><em>Sample application.xml file:</em></p>
+  <pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;!DOCTYPE web-app PUBLIC &quot;-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN&quot;
+ &quot;http://java.sun.com/aplication_1_3.dtd&quot;&gt;
+  
+ &lt;application&gt;
+ 
+   &lt;display-name&gt;ohw-eapp&lt;/display-name&gt;
+   &lt;module&gt;
+     &lt;web&gt;
+       &lt;web-uri&gt;ohw&lt;/web-uri&gt;
+       &lt;context-root&gt;/&lt;/context-root&gt;
+     &lt;/web&gt;
+   &lt;/module&gt;
+
+   <strong>&lt;module&gt;
+     &lt;web&gt;
+       &lt;web-uri&gt;mymodule&lt;/web-uri&gt;
+       &lt;context-root&gt;/&lt;/context-root&gt;
+     &lt;/web&gt;
+   &lt;/module&gt;</strong>
+    
+ &lt;/application&gt;</code></pre>
+  </li>
+  <li> 
+    <p><strong>Bind the new web module access location to the OHW application.</strong> 
+      In an editor, open the file <code>ohw/oc4j/j2ee/home/config/http-web-site.xml</code> 
+      and add the following line:</p>
+  <pre><code> &lt;web-app application=&quot;ohw-eapp&quot; name=&quot;mymodule&quot; root=&quot;/mymodule&quot; /&gt;</code></pre>
+  <p>Your final http-web-site.xml file should be similar to the following sample 
+    XML file.</p>
+  <p><em>Sample http-web-site.xml file:</em></p>
+  <pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;!DOCTYPE web-site PUBLIC &quot;Orion Web-site&quot; &quot;http://xmlns.oracle.com/ias/dtds/web-site.dtd&quot;&gt;
+ 
+ &lt;web-site port=&quot;8888&quot; display-name=&quot;Default Oracle9iAS Containers for J2EE Web Site&quot;&gt;
+   &lt;default-web-app application=&quot;default&quot; name=&quot;defaultWebApp&quot; /&gt;
+   &lt;web-app application=&quot;ohw-eapp&quot; name=&quot;ohw&quot; root=&quot;/ohw&quot; /&gt;
+   <strong>&lt;web-app application=&quot;ohw-eapp&quot; name=&quot;mymodule&quot; root=&quot;/mymodule&quot; /&gt;</strong>
+   &lt;web-app application=&quot;uixresources-eapp&quot; name=&quot;cabo&quot; root=&quot;/cabo&quot; /&gt;
+   &lt;access-log path=&quot;../log/http-web-access.log&quot; /&gt;
+ &lt;/web-site&gt;</code></pre>
+ 
+  <p><strong>Note:</strong> <code>name=&quot;mymodule&quot;</code> 
+    and the <code>&lt;web-uri&gt;&lt;/web-uri&gt;</code> name in 
+    Step 5 above should use the same name.</p>
+  </li>
+  <li> 
+    <p><strong>Start the servlet engine</strong>, as described in Step 4 of the 
+      section <a href="#Installing_and_Running_the_OHW_Demo_Bundle">Installing 
+      and Running the OHW Demo Bundle</a>, above . If OC4J is already running, 
+      you must shut it down and then restart it before you can see the changes 
+      made since you last started the servlet.</p>
+  </li>
+  <li><strong>To view the help system,</strong> direct the browser to <code>http://&lt;hostname&gt;:8888/mymodule/help/</code>, 
+    where <code>&lt;hostname&gt;</code> is the name of the machine 
+    on which OHW and OC4J are installed.
+  <p>The first page of the help system displays in the browser. If there is more 
+    than one helpset, use the drop down list in the toolbar to select a helpset, 
+    then click the helpset switcher to display the table of contents and index 
+    from the selected helpset only. The text search will search only for items 
+    in the selected helpset.</p>
+</li></ol>
+<a name="Changing_the_OHW_Access_URL"></a>
+<h2>Changing the OHW Access URL</h2>
+<p>As seen in the section <a href="#Adding_a_Web_Module">Adding a Web Module</a> 
+  above, the URL to access OHW is <code>http://&lt;hostname&gt;:8888/mymodule/help/</code>, 
+  where <code>&lt;hostname&gt;</code> is the name of the machine 
+  on which OHW and OC4J are installed. </p>
+<p>You can change this URL in the following ways:</p>
+<ul>
+  <li>Change the &quot;help&quot; at the end of the URL</li>
+  <li>Change the &quot;mymodule&quot; name to another name</li>
+</ul>
+<h3>Changing the &quot;help&quot; at the end of the URL</h3>
+<p>Edit the web.xml file to change the &quot;help&quot; at the end of the URL. 
+  The web.xml file in Step 2 of the section <a href="#Adding_a_Web_Module">Adding 
+  a Web Module</a> should be similar to the following sample XML file, which can 
+  be used as long as the ohwconfig.xml file is in the <code>ohw/oc4j/j2ee/home/applications/ohw-eapp/mymodule/helpsets</code> 
+  directory.</p>
+<p><em>Sample web.xml file:</em></p>
+<pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;!DOCTYPE web-app PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+ &quot;http://java.sun.com/j2ee/dtds/web-app_2_3.dtd&quot;&gt;
+
+ &lt;web-app&gt;
+
+    &lt;servlet&gt;
+
+       &lt;servlet-name&gt;OHW&lt;/servlet-name&gt;
+       &lt;servlet-class&gt;oracle.help.OHW&lt;/servlet-class&gt;
+
+       &lt;init-param&gt;
+          &lt;param-name&gt;configFileName&lt;/param-name&gt;
+          &lt;param-value&gt;/helpsets/ohwconfig.xml&lt;/param-value&gt;
+       &lt;/init-param&gt;
+
+    &lt;/servlet&gt;
+   
+    &lt;servlet-mapping&gt;
+       &lt;servlet-name&gt;OHW&lt;/servlet-name&gt;
+       <strong>&lt;url-pattern&gt;/help/*&lt;/url-pattern&gt;</strong>
+    &lt;/servlet-mapping&gt;
+
+ &lt;/web-app&gt;</code></pre>
+<p>The <code>&lt;servlet-mapping&gt;</code> parameter <code>&lt;url-pattern&gt;</code> 
+  specifies the URL used to access OHW. For example, if you change <code>&lt;url-pattern&gt;</code> 
+  from the default <code>/help/*</code> to <code>/onlinereference/*</code>, 
+  the URL used to access OHW would become <code>http://&lt;hostname&gt;:8888/mymodule/onlinereference/</code>. 
+</p>
+<p>The following parameter specifies the location of the OHW configuration file 
+  (ohwconfig.xml): </p>
+<pre><code>
+ &lt;init-param&gt;
+   &lt;param-name>configFileName&lt;/param-name&gt;
+   &lt;param-value>/helpsets/ohwconfig.xml&lt;/param-value&gt;
+ &lt;/init-param&gt;</code></pre>
+<p>The path of the configuration file is specified relative to location of the 
+  servlet context path. For most users we recommend that you do not modify this 
+  parameter.</p>
+<h3>Changing &quot;mymodule&quot; to another name</h3>
+<p>Edit the http-web-site.xml file to change the &quot;mymodule&quot; name to 
+  another name.</p>
+<p>Step 6 of the section <a href="#Adding_a_Web_Module">Adding a Web Module</a> 
+  above, shows a sample http-web-site.xml file.</p>
+<p> <code>root=&quot;/mymodule&quot;</code> specifies the name you 
+  would use in the URL, e.g., <code>http://&lt;hostname&gt;:8888/mymodule/help/</code>. 
+</p>
+<p>If you want the OHW access URL to be <code>http://&lt;hostname&gt;:8888/jdeveloper/help/</code>, 
+  you would modify <code>root=&quot;/mymodule&quot;</code> to <code>root=&quot;/jdeveloper&quot;</code>.</p>
+<p class="horizontal-rule">&nbsp;</p> 
+
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+<a href="ohwpg_deploy.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohwpg_deploy_oc4j_deploy.html">Next</a>
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+
+</body>
+</html>

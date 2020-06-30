@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<fonts>
+  <locale name="en">
+    <font name="Verdana" value="Verdana"/>
+    <font name="Arial" value="Arial"/>
+    <font name="Helvetica" value="Helvetica"/>
+    <font name="Sans-serif" value="Sans-serif"/>
+  </locale>
+</fonts>

@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"></meta>
+    <title>Using Workflow</title>
+    <link href="blafdoc.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+<table width="850" border="0">
+  <tr>
+    <td height="30"><span class="heading14bold">How to use Workflow?</span>
+      <div align="center"></div></td>
+  </tr>
+  <tr>
+    <td><ul>
+      <li>Following are the necessary steps for using workflow</li>
+    </ul></td>
+  </tr>
+  <tr><br><br><br></tr>
+  <tr>
+    <td align="left"><ul>
+        1) First create an ACL for the list of approvers:
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Create a permission bundle named "approver" with GetContent and
+                  Discover permissions.Create an ACL with list of users which will act
+                  as approvers in the same hierarchy as the organizational structure
+                  with grant on "approver" permission bundle(if there is only one
+                  approver then only one entry will be there in this acl).The last
+                  person/user in this ACL is the highest in the hierarchy.This
+                  particular ACL's name should start with "wf".
+      </ul>
+    </td></tr>
+    <tr><td><div align="center"><img src="images/workflow_acl.gif"></div></td></tr>
+  <tr><br><br><br></tr>    
+     <tr><td align="left">
+      <ul>
+      2) Edit the user who will act as requestor and select the workflow ACL for
+         him.Save the settings.
+        <br>
+      </ul>
+      </td></tr>
+  <tr><td><div align="center"><img src="images/user_edit.gif"></div></td></tr>
+  <tr><br><br><br></tr>
+      <tr><td>
+      <ul>
+      3) Now the user is workflow enabled and he can submit docs for approval.      
+        <br>
+      </ul>
+      </td></tr>
+      <tr><td>
+      <ul>
+      4) Go to the document page with requestor logged in and select one
+         document and click on "Submit to workflow icon"[ <img src="images/icons/butt_workflow_submit.gif" width="30" height="24" align="absmiddle"> ] or select from menu File-&gt;Submit To Workflow.      
+        <br>
+      </ul>
+      </td></tr>
+      <tr><td>
+      <ul>
+      5) Now the requestor can go to his notifications page and view the document status and movement.He shall also get the final result as notification ie(approved or rejected).
+         All the notifications for the requestor will be of type FYI.
+        <br>
+      </ul>
+      </td></tr>
+    <tr><td><div align="center"><img src="images/workflow.gif"></div></td></tr>
+    <tr><br><br><br></tr>
+      <tr><td>
+      <ul>
+      6) Meanwhile the first person in the list of approvers gets the notification on which he can respond by clicking approve or reject
+         button.
+      </ul></td>
+  </tr>
+  <tr><td><div align="center"><img src="images/notification_detail_approve.gif"></div></td></tr>
+  <tr><br><br><br></tr>
+      <tr><td>
+      <ul>  
+      7) If it is approved the requisition goes to the next approver and the cycle continues until the document is either rejected by anyone of them or
+         it is approved by all of them, after which the doc is considered approved.
+      </ul></td>
+  </tr>
+  <tr><td><div align="center"><img src="images/notification_detail_approved.gif"></div></td></tr>
+  <tr><br><br><br></tr>
+       
+</table>
+  
+  
+  
+  </body>
+</html>

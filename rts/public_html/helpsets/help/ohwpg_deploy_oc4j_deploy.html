@@ -1,0 +1,1194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Deploying OHW on OC4J Using the Deploy Bundle</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for the Web Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohwpg_deploy_oc4j_demo.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohwpg_deploy_tomcat.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+</tr>
+</table>
+
+<a name="start"></a>
+<h1>Deploying OHW on OC4J Using the Deploy Bundle</h1>
+
+<p>One of the Oracle Help for the Web (OHW) release files available for downloading
+  from the Oracle Technology Network (OTN) is the OHW deploy bundle. Unlike the
+  demo bundle, the deploy bundle is not preconfigured for any Java servlet. The
+  OHW deploy bundle contains only the optimized files for UIX and OHW that you
+  need to deploy OHW help systems. Read this page if you want to configure OHW
+  on Oracle9<em>i</em>AS Containers for J2EE (OC4J) using the deploy bundle. If
+  you are deploying on Apache Tomcat, read <a href="ohwpg_deploy_tomcat.html">Deploying
+  OHW on Tomcat Using the Deploy Bundle</a>.</p>
+<p>This page contains the following sections:</p>
+<ul>
+  <li><a href="#Sample Server and Application Directory Structure">Sample Server and Application Directory Structure</a></li>
+  <li><a href="#Installing and Testing OC4J">Installing and Testing OC4J</a></li>
+  <li><a href="#Downloading the OHW Deploy Bundle">Downloading the OHW Deploy
+    Bundle</a></li>
+  <li><a href="#Installing the OHW Servlet">Installing the OHW Servlet</a></li>
+  <li><a href="#Setting Up the J2EE Application for OHW">Setting Up the J2EE Application
+    for OHW</a></li>
+  <li><a href="#Setting Up the UIX Resources Application for OHW">Setting Up the
+    UIX Resources Application for OHW</a></li>
+  <li><a href="#Preparing the Directory Structure for the OHW Helpsets">Preparing
+    the Directory Structure for the OHW Helpsets</a></li>
+  <li><a href="#Adding One or More Helpsets to the OHW Configuration File">Adding
+    One or More Helpsets to the OHW Configuration File</a></li>
+  <li><a href="#Setting Up One or More Web Modules for OHW">Setting Up One or
+    More Web Modules for OHW</a></li>
+  <li><a href="#Binding One or More Web Modules to the OHW Application">Binding
+    One or More Web Modules to the OHW Application</a></li>
+  <li><a href="#Viewing the OHW Help System on OC4J">Viewing the OHW Help System
+    on OC4J</a></li>
+  <li><a href="#Upgrading OHW and UIX">Upgrading OHW and UIX</a></li>
+  <li><a href="#Deploying OHW Help Systems Using WAR/EAR Files">Deploying OHW Help Systems Using WAR/EAR Files</a></li>
+</ul>
+<a name="Sample Server and Application Directory Structure"></a>
+<h2>Sample Server and Application Directory Structure</h2>
+<p>The following demonstrates a typical directory structure that is consistent
+  with a basic OC4J and OHW installation. Use this sample directory as a guide
+  when following the instructions in the rest of this page.</p>
+<p><strong>Server configuration:</strong></p>
+<pre><code>  +---&lt;mypath&gt;
+  |+----j2ee
+  ||+-----home
+  |||+------config
+  ||||--------<strong>server.xml</strong>
+  ||||--------<strong>http-web-site.xml</strong>
+  |.....
+  |||+------lib
+  ||||--------<strong>ohw.jar</strong>
+  ||||--------<strong>uix2.jar</strong>
+  ||||--------<strong>regexp.jar</strong>
+  ||||--------<strong>share.jar</strong>
+  |.....
+  |+----lib
+  ||------<strong>xmlparserv2.jar</strong>
+  |.....
+</code></pre>
+<p><strong>Application configuration:</strong></p>
+<pre><code>  +---&lt;mypath&gt;/j2ee/home/applications
+  |
+  |+----ohw-eapp
+  ||+-----META-INF
+  |||+------<strong>application.xml</strong>
+  ||+-----project_one
+  |||+------cabo (automatically generated at runtime)
+  |||+------helpsets
+  ||||--------<strong>ohwconfig.xml</strong>
+  ||||+-------Tutorial
+  |||||---------OHW help content/images and control files
+  ||||+-------UserGuide
+  |||||---------OHW help content/images and control files
+  |||+------jsLibs
+  ||||--------OHW JavaScript files
+  |||+------WEB-INF
+  ||||--------<strong>web.xml</strong>
+  ||+-----project_two
+  |||+------cabo (automaticallygenerated at runtime)
+  |||+------helpsets
+  ||||--------<strong>ohwconfig.xml</strong>
+  ||||+-------GettingStarted
+  |||||---------OHW help content/images and control files
+  |||+------jsLibs
+  ||||--------OHW JavaScript files
+  |||+------WEB-INF
+  ||||--------<strong>web.xml</strong>
+  |
+  |+----uixresources-eapp
+  ||+-----META-INF
+  |||+------<strong>application.xml</strong>
+  ||+-----cabo
+  |||+------images
+  |||+------jsLibs
+  |||+------jsps
+  |||+------styles
+  ||||+-------cache
+  |||+------WEB-INF
+  ||||--------<strong>web.xml</strong>
+  |.....
+</code></pre>
+<a name="Installing and Testing OC4J"></a>
+<h2>Installing and Testing OC4J</h2>
+<p>OC4J can be run in either standalone mode or in combination with an HTTP server.
+  In standalone mode, URLs are sent directly to OC4J. In combination with an HTTP
+  server, the URLs are sent to the HTTP server, which is configured to forward
+  HTTP requests from certain URLs to OC4J. This section discusses OC4J standalone
+  mode only. Additional information for configuring OC4J with the Oracle HTTP
+  Server can be found in the <em>Oracle9iAS Containers for J2EE User's Guide</em>.</p>
+<p>You can download the latest version of OC4J standalone from OTN at the URL
+  <code>http://otn.oracle.com/tech/java/oc4j/content.html</code>.</p>
+<p><strong>Note:</strong> The commands listed below assume that you have the Java2
+  SDK binaries in your path setting for your system. If you are not able to run
+  the java and jar executable from the command line then please follow the documentation
+  provided by the Java2 SDK to resolve this. (JDK 1.3.1 is recommended).</p>
+<p>After downloading the OC4J zip file (oc4j_extended.zip), install OC4J by following
+  these steps:</p>
+<ol>
+  <li>
+    <p>Unzip oc4j_extended.zip in any directory on the server.</p>
+  <p> This creates the OC4J directory structure and files under the <code>&lt;mypath&gt;/j2ee/home</code>
+    directory (e.g., <code>&lt;mypath&gt;/j2ee/home/applications</code>,
+    <code>&lt;mypath&gt;/j2ee/home/config</code>, etc.). </p>
+  </li>
+  <li>
+    <p>Run the OC4J install command from a console window.</p>
+  <p>Using a DOS shell or UNIX terminal, change the current directory to the <code>&lt;mypath&gt;/j2ee/home</code>
+    directory and run the following command:</p>
+  <pre><code>java -jar oc4j.jar -install</code></pre>
+  <p>Enter a password for the admin user when prompted. You will need this password
+    later for administrative tasks.</p>
+  </li>
+  <li>
+    <p>Test the installation.</p>
+  <p>From the <code>&lt;mypath&gt;/j2ee/home</code> directory, run
+    the following command to start OC4J:</p>
+  <pre><code>java -jar oc4j.jar</code></pre>
+  <p>You should see some output that indicates OC4J has started, such as &quot;Oracle9iAS
+    &lt;version&gt; Containers for J2EE initialized.&quot;</p>
+  </li>
+  <li>
+    <p>To verify that the OC4J installation is working correctly, point your browser
+      to:</p>
+    <p><code>http://localhost:8888/</code></p>
+    <p>Depending on your browser proxy configuration settings, you might have
+      to specify the complete domain name of the machine that is hosting OC4J,
+      for example:</p>
+    <p><code>http://&lt;yourhost.domain.com&gt;:8888/</code></p>
+    <p>If the OC4J installation is successful, you should see a welcome page in
+      the browser, such as &quot;Oracle9iAS Containers for J2EE &lt;version&gt;
+      - Up and running.&quot;</p>
+  </li>
+</ol>
+
+<p><strong>To stop OC4J,</strong> run the following command from the <code>&lt;mypath&gt;/j2ee/home</code>
+  directory:</p>
+<p><code> java -jar admin.jar ormi://localhost:23791 admin &lt;password&gt; &lt;your admin password&gt; -shutdown</code></p>
+<p>The password entered here must be the same pasword you entered when installing
+  OC4J. </p>
+<p><strong>To start OC4J,</strong> run the following command from the <code>&lt;mypath&gt;/j2ee/home</code>
+  directory:</p>
+<p><code> java -jar oc4j.jar</code></p>
+<p>For information on administering the server using the admin.jar command-line
+  tool, see the <em>Oracle9iAS Containers for J2EE User's Guide</em>.</p>
+<a name="Downloading the OHW Deploy Bundle"></a>
+<h2>Downloading the OHW Deploy Bundle</h2>
+<p>For the latest information, check any download and install instructions that
+  may be available on the OHW download page.</p>
+<ol>
+  <li>
+    <p>Download the OHW deploy bundle from OTN at <code>http://otn.oracle.com/tech/java/help/content.html</code>.
+      The name of the the deploy bundle file is ohw-deploy-<em>nnn</em>.zip, where
+      <em>nnn</em> is the OHW release number (e.g., ohw-deploy-1_1_1.zip). This
+      file includes OHW, sample helpsets, and the OC4J servlet engine.</p>
+  </li>
+  <li>Unzip the ohw-deploy-<em>nnn.</em>zip file in a temporary directory. This
+    unzips the following files:
+  <pre><code>   ohw.jar
+   regexp.jar
+   share.jar
+   uix2.jar
+   xmlparserv2.jar
+   ohw-install.zip
+   uix2-install.zip
+   ohwconfig.xml
+   web.xml</code></pre>
+</li>
+</ol>
+<p><a name="Installing the OHW Servlet"></a> </p>
+<h2>Installing the OHW Servlet</h2>
+<p>The instructions in this section assume you have installed OC4J and downloaded
+  the ohw-deploy-<em>nnn</em>.zip file from OTN. If you have not done so, see
+  <a href="#Installing and Testing OC4J">Installing and Testing OC4J</a> and <a href="#Downloading the OHW Deploy Bundle">Downloading
+  the OHW Deploy Bundle</a>. </p>
+<ol>
+  <li>
+    <p>Copy the following JAR files from ohw-deploy-<em>nnn</em>.zip into <code>&lt;mypath&gt;/j2ee/home/lib</code>.</p>
+  <pre><code>   ohw.jar
+   regexp.jar
+   share.jar
+   uix2.jar</code></pre>
+  </li>
+  <li>
+    <p>If the JAR file xmlparserv2.jar does not exist in <code>&lt;mypath&gt;/lib</code>,
+      copy the file from ohw-deploy-<em>nnn</em>.zip into the directory.</p>
+  <p>When you installed OC4J, xmlparserv2.xml should have already been created
+    in <code>&lt;mypath&gt;/lib</code>.</p>
+  </li>
+</ol>
+<a name="Setting Up the J2EE Application for OHW"></a>
+<h2>Setting Up the J2EE Application for OHW</h2>
+<p>This section describes how to set up the J2EE application for OHW on OC4J.
+  The instructions here assume you have installed OC4J. If you have not done so,
+  see <a href="#Installing and Testing OC4J">Installing and Testing OC4J</a>.</p>
+<ol>
+  <li>
+    <p>Create the following directories for the OHW application under <code>&lt;mypath&gt;j2ee/home/applications</code>.</p>
+  <pre><code> &lt;mypath&gt;/j2ee/home/applications/ohw-eapp
+ &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/META-INF
+</code></pre>
+  </li>
+  <li>
+    <p>Add the OHW application to the OC4J server configuration file, <strong>server.xml</strong>.
+      This defines the name and location of the OHW application. The server.xml
+      file also defines any *-web-site.xml files for the web modules.</p>
+  <p>In an editor, open the server.xml file in <code>&lt;mypath&gt;/j2ee/home/config</code>
+    and modify the <code>&lt;application-server&gt;&lt;/application-server&gt;</code>
+    section to add the OHW application information.</p>
+  <p><em>File location:</em> <code>&lt;mypath&gt;/j2ee/home/config/server.xml</code></p>
+  <p><em>Sample edit and usage:</em></p>
+  <p><code> &lt;application name=&quot;ohw-eapp&quot; path=&quot;../applications/ohw-eapp&quot; auto-start=&quot;true&quot; /&gt;</code></p>
+  <table class="table-border" width="95%" align="center" border="1" cellpadding="6" cellspacing="0" summary="TOC tags supported by Oracle Help">
+    <tr>
+      <th class="table-header-border-left" width="20%" scope="col">Attribute</th>
+      <th class="table-header-border-right" width="80%" scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><code><strong>application name</strong></code></td>
+      <td>
+        <p>Any name.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>path</strong></code></td>
+      <td>
+        <p>Path to J2EE application, relative to server.xml (or path and name
+          of .war file).</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>auto-start</strong></code></td>
+      <td>
+        <p>Starts automatically when OC4J starts. Should be set to &quot;true&quot;.</p>
+      </td>
+    </tr>
+  </table>
+  <p><strong>Note:</strong> For WAR/EAR file-based deployment, see <a href="#Deploying OHW Help Systems Using WAR/EAR Files">Deploying OHW Help Systems Using WAR/EAR
+    Files</a>.</p>
+  <p><em>Sample server.xml file</em></p>
+  <pre><code>
+ &lt;?xml ... &gt;
+ &lt;!DOCTYPE ... &gt;
+
+ &lt;application-server application-directory=&quot;../applications&quot;
+  deployment-directory=&quot;../application-deployments&quot;&gt;
+   &lt;library path=&quot;../tools.jar&quot; /&gt;
+   &lt;rmi-config path=&quot;./rmi.xml&quot; /&gt;
+   ...
+   &lt;global-application name=&quot;default&quot; path=&quot;application.xml&quot; /&gt;
+   <strong>&lt;application name=&quot;ohw-eapp&quot; path=&quot;../applications/ohw-eapp&quot; auto-start=&quot;true&quot; /&gt;</strong>
+   &lt;global-web-app-config path=&quot;global-web-application.xml&quot; /&gt;
+   &lt;web-site path=&quot;./http-web-site.xml&quot; /&gt;
+   ...
+ &lt;/application-server&gt;</code></pre>
+  </li>
+</ol>
+<a name="Setting Up the UIX Resources Application for OHW"></a>
+<h2>Setting Up the UIX Resources Application for OHW</h2>
+<p>OHW includes a set of UIX installable resource files that can be shared by
+  multiple web modules. These are the image, stylesheet, JSP, and JavaScript library
+  files used by UIX to create the OHW UI. This section describes how to set up
+  the UIX resources application for OHW on OC4J, so that multiple web modules
+  in the same OC4J container can share a single copy of the UIX installable resource
+  files.</p>
+<p><strong>Note:</strong> In OHW releases prior to 1.0.8 and 1.1.x, each web module
+  had a private copy of the UIX installable resource files.</p>
+<p>By creating a separate UIX resources application with its own URL that can
+  be used by other applications in the same <code>&lt;mypath&gt;/j2ee/home</code>
+  directory, you can avoid duplicating the UIX installable resources for each
+  web module. This not only reduces disk space usage and simplifies the UIX upgrade
+  process, but it can actually reduce the number of HTTP requests that are made
+  to the server. </p>
+<p>Sharing a single set of UIX installable resource files enables browsers and
+  caching technologies to avoid downloading and caching different copies of the
+  UIX image, stylesheet, JSP, and JavaScript library files. When each web module
+  has a private copy of the UIX installable resource files, the files are accessed
+  by different URLs depending on the application module being used. By sharing
+  the resource files across multiple web modules, the browsers only need to download
+  each resource file once for all applications that reference the shared resource.</p>
+<p>More information about sharing UIX installable resource files is found in the
+  &quot;Installation&quot; chapter of the <em>UIX Developer's Guide</em>, which is available in the JDeveloper online help, with the UIX download bundles, and in the JDeveloper documentation on OTN at <code>http://otn.oracle.com/jdeveloper/help/</code>.</p>
+  
+  
+<p>The following steps describe how to deploy the UIX installable resource files
+  to a web application on OC4J.</p>
+<p><strong>Note:</strong> If you are copying the sample XML file contents from your browser into
+  your XML file, be sure to remove any white space at the start of the file.</p>
+<ol>
+  <li>
+    <p>Create the following directories for the UIX Resources application under
+      <code>&lt;mypath&gt;j2ee/home/applications</code>.</p>
+  <pre><code> &lt;mypath&gt;/j2ee/home/applications/uixresources-eapp
+ &lt;mypath&gt;/j2ee/home/applications/uixresources-eapp/META-INF</code></pre>
+  </li>
+  <li>
+    <p>Install the <strong>application.xml</strong> file in the directory <code>&lt;mypath&gt;/j2ee/home/applications/uixresources-eapp/META-INF</code>
+      to define the UIX web module.</p>
+  <p>In an editor, copy the following contents in the application.xml file.</p>
+  <p><em>File location:</em> <code>&lt;mypath&gt;/j2ee/home/applications/uixresources-eapp/META-INF/application.xml</code></p>
+  <p><em>Sample application.xml file for UIX Resources:</em></p>
+  <pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;!DOCTYPE application PUBLIC &quot;-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN&quot;
+ &quot;http://java.sun.com/dtd/application_1_3.dtd&quot;&gt;
+
+ &lt;application&gt;
+
+   &lt;display-name&gt;uixresources-eapp&lt;/display-name&gt;
+   &lt;module&gt;
+     &lt;web&gt;
+       &lt;web-uri&gt;cabo&lt;/web-uri&gt;
+       &lt;context-root&gt;/&lt;/context-root&gt;
+     &lt;/web&gt;
+   &lt;/module&gt;
+
+ &lt;/application&gt;</code></pre>
+  <p><strong>Note:</strong> <code>&lt;web-uri&gt;</code> is set to
+    &quot;cabo&quot;, as this is the URI/directory name for the web module that
+    contains the UIX installable resource files. <code>&lt;context-root&gt;</code>
+    is the root of the web module. It is usually &quot;/&quot; when the web module
+    files are deployed in a directory.</p>
+  </li>
+  <li>
+    <p>Unzip uix2-install.zip (from ohw-deploy-<em>nnn</em>.zip) into the <code>&lt;mypath&gt;/j2ee/home/applications/uixresources-eapp</code>
+      directory.</p>
+  <p>This should create the <code>cabo</code> directory and install
+    the <code>images</code>, <code>styles</code>, <code>jsps</code>,
+    and <code>jsLibs</code> subdirectories under <code>&lt;mypath&gt;/j2ee/home/applications/uixresources-eapp</code>,
+    for example:</p>
+  <pre><code>  &lt;mypath&gt;/j2ee/home/applications/uixresources-eapp/cabo/images/&lt;files&gt;
+  &lt;mypath&gt;/j2ee/home/applications/uixresources-eapp/cabo/jsLibs/&lt;files&gt;
+  &lt;mypath&gt;/j2ee/home/applications/uixresources-eapp/cabo/jsps/&lt;files&gt;
+  &lt;mypath&gt;/j2ee/home/applications/uixresources-eapp/cabo/styles/&lt;files&gt;</code></pre>
+  </li>
+  <li>
+    <p>Install the <strong>web.xml</strong> file for the UIX web module.</p>
+  <p>Create the <code>&lt;mypath&gt;/j2ee/home/applications/uixresources-eapp/cabo/WEB-INF</code>
+    directory and copy the following contents into the web.xml file: </p>
+  <p><em>Sample web.xml file for UIX web module:</em></p>
+  <pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;!DOCTYPE web-app PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+ &quot;http://java.sun.com/j2ee/dtds/web-app_2_3.dtd&quot;&gt;
+
+ &lt;web-app&gt;
+
+ &lt;/web-app&gt;</code></pre>
+  <p>Note that the web.xml file is basically empty, but it is required to deploy
+    the UIX web module. </p>
+  </li>
+  <li>
+    <p>Add the UIX resources application to the OC4J server configuration file,
+      <strong>server.xml</strong>.</p>
+    <p>In an editor, open the server.xml file in <code>&lt;mypath&gt;/j2ee/home/config</code>
+      and modify the <code>&lt;application-server&gt;&lt;/application-server&gt;</code>
+      section to add the UIX resources application information.</p>
+    <p><em>File location:</em> <code>&lt;mypath&gt;/j2ee/home/config/server.xml</code></p>
+    <p><em>Sample edit:</em></p>
+    <pre><code> &lt;application name=&quot;uixresources-eapp&quot; path=&quot;../applications/uixresources-eapp&quot; auto-start=&quot;true&quot; /&gt;</code></pre>
+    <p><em>Sample server.xml file</em></p>
+  <pre><code>
+ &lt;?xml ... &gt;
+ &lt;!DOCTYPE ... &gt;
+
+ &lt;application-server application-directory=&quot;../applications&quot;
+  deployment-directory=&quot;../application-deployments&quot;&gt;
+   &lt;library path=&quot;../tools.jar&quot; /&gt;
+   &lt;rmi-config path=&quot;./rmi.xml&quot; /&gt;
+   ...
+   &lt;global-application name=&quot;default&quot; path=&quot;application.xml&quot; /&gt;
+   &lt;application name=&quot;ohw-eapp&quot; path=&quot;../applications/ohw-eapp&quot; auto-start=&quot;true&quot; /&gt;
+<strong>   &lt;application name=&quot;uixresources-eapp&quot; path=&quot;../applications/uixresources-eapp&quot; auto-start=&quot;true&quot; /&gt;</strong>
+   &lt;global-web-app-config path=&quot;global-web-application.xml&quot; /&gt;
+   &lt;web-site path=&quot;./http-web-site.xml&quot; /&gt;
+   ...
+ &lt;/application-server&gt;</code></pre>
+  </li>
+  <li>
+    <p>Bind the web module access location to the UIX resources application in
+      the <strong>http-web-site.xml</strong> configuration file.</p>
+  <p>In and editor, open the http-web-site.xml file and add the UIX web module
+    access location as a child of the <code>&lt;web-site&gt;</code>
+    root element.</p>
+  <p><em>File location:</em> <code>&lt;mypath&gt;/j2ee/home/config/http-web-site.xml</code></p>
+  <p><em>Sample edit and usage:</em></p>
+  <pre><code> &lt;web-app application=&quot;uixresources-eapp&quot; name=&quot;cabo&quot; root=&quot;/cabo&quot; /&gt;</code></pre>
+  <table class="table-border" width="95%" align="center" border="1" cellpadding="6" cellspacing="0" summary="TOC tags supported by Oracle Help">
+    <tr>
+      <th class="table-header-border-left" width="20%" scope="col">Attribute</th>
+      <th class="table-header-border-right" width="80%" scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><code><strong>application</strong></code></td>
+      <td>
+        <p>J2EE application name for UIX installable resources to which the web
+          module will be bound. Should match the application name in server.xml
+          (see Step 5).</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>name</strong></code></td>
+      <td>
+        <p>Name of UIX web module. Indicates the path to the directory containing
+          the <code>cabo</code> files. Should match the web-uri name in Step 2.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>root</strong></code></td>
+      <td>Name to be used in the URL. The root URL can be different from name.</td>
+    </tr>
+  </table>
+  <p><em>Sample http-web-site.xml file</em></p>
+  <pre><code>
+ &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;!DOCTYPE web-site PUBLIC &quot;Orion Web-site&quot; &quot;http://xmlns.oracle.com/ias/dtds/web-site.dtd&quot;&gt;
+
+ &lt;web-site port=&quot;8888&quot; display-name=&quot;Default Oracle9iAS Containers for J2EE Web Site&quot;&gt;
+   &lt;default-web-app application=&quot;default&quot; name=&quot;defaultWebApp&quot; /&gt;
+   ...
+   ...
+   <strong>&lt;web-app application=&quot;uixresources-eapp&quot; name=&quot;cabo&quot; root=&quot;/cabo&quot; /&gt;</strong>
+   &lt;access-log path=&quot;../log/http-web-access.log&quot; /&gt;
+ &lt;/web-site&gt;</code></pre>
+  </li>
+  <li>
+    <p>Remove all private copies of the UIX installable resource files, if they
+      have been installed.</p>
+  <p>Any web modules that are deployed to the same servlet engine instance can
+    use the shared UIX installable resource files simply by not installing a private
+    copy of these files. <br>
+  </p>
+  </li>
+</ol>
+<a name="Preparing the Directory Structure for the OHW Helpsets"></a>
+<h2>Preparing the Directory Structure for the OHW Helpsets</h2>
+<p>The instructions here assume you have set up the OHW application. If you have
+  not done so, see <a href="#Setting Up the J2EE Application for OHW">Setting
+  Up the J2EE Application for OHW</a>.</p>
+<p>Follow these steps to prepare the directory structure for deploying one or
+  more OHW help systems:</p>
+<ol>
+  <li> For each help system, create the following web module directories under
+    <code>&lt;mypath&gt;j2ee/home/applications/ohw-eapp</code>.
+  <pre><code> &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/helpsets
+ &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/WEB-INF
+</code></pre>
+  <p>Ordinarily--and for convenience--your project helpsets are installed in or
+    under the <code>helpsets</code> directory.</p>
+  <p>If you have two large help systems, each with several helpsets, you may want
+    to create a web module directory for each help system. For example, if you
+    have two help systems, project_one and project_two, you could create the following:</p>
+  <pre><code> &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/helpsets
+ &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/WEB-INF
+ &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_two/helpsets
+ &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_two/WEB-INF</code></pre>
+  </li>
+  <li>
+    <p>For each web module, place the help content files and control files that
+      make up your OHW help system in the <code>helpsets</code> directory
+      or, if you prefer, create subdirectories in <code>helpsets</code>
+      for the files.</p>
+  <p>For example, if you have two helpsets--Tutorial and UserGuide--for a web
+    module, you might create the following: </p>
+  <pre><code>  &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/helpsets/Tutorial
+  &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/helpsets/UserGuide
+</code></pre>
+  <p>Helpsets in a web module can be merged at runtime, so multiple authors can
+    create multiple helpsets that will be seamlessly merged. The merging behavior
+    is specified by attributes in the OHW configuration file (by default, ohwconfig.xml).</p>
+  <p>Regardless of your setup, place all the help files in the helpsets directory,
+    including the helpset file, help topic (HTML) files, and the other control
+    files (index, table of contents, etc.). For more information about control
+    files, see <a href="ohff_about_files.html">Oracle Help File Formats</a>. Also,
+    place any JAR files, if you are using jar files for your helpset. (You can
+    use JARred and unJARred helpsets together in the same deployment.)</p>
+  <p><strong>Note:</strong> By default OHW automatically processes help topic
+    HTML files that are located in the same locations as the helpset files. See
+    <a href="ohff_ohwconfig.html">OHW Configuration File</a> to learn more about
+    using remote locations for help topic HTML files.</p>
+  </li>
+  <li>
+    <p>For each web module (i.e., <code>project_one</code>), unzip
+      ohw-install.zip (from ohw-deploy-<em>nnn</em>.zip) into the <code>&lt;mypath&gt;j2ee/home/applications/ohw-eapp/project_one</code>
+      web module directory.</p>
+  <p>This creates a subdirectory called <code>jsLibs</code> and places
+    OHW JavaScript files into the subdirectory, e.g., </p>
+  <pre><code>  &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/jsLibs/&lt;files&gt;</code></pre>
+  </li>
+  <li>
+    <p>(Optional) For each web module (i.e., <code>project_one</code>),
+      unzip uix2-install.zip (from ohw-deploy-<em>nnn</em>.zip) into the <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one</code>
+      web module directory.</p>
+  <p>This creates the <code>cabo</code> subdirectory structure and
+    places sharable UIX installable resource files such as images, JavaScripts,
+    JSPs, and style sheets into these directories: </p>
+  <pre><code>  &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/cabo/images/&lt;files&gt;
+  &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/cabo/jsLibs/&lt;files&gt;
+  &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/cabo/jsps/&lt;files&gt;
+  &lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/cabo/styles/&lt;files&gt;
+  </code></pre>
+  <p><strong>Note:</strong> This is the simplest directory setup, in which each
+    web module owns a private copy of the UIX installable resource files. For
+    a more optimized solution, where multiple web modules share a single copy
+    of the UIX files, see <a href="#Setting Up the UIX Resources Application for OHW">Setting
+    Up the UIX Resources Application for OHW</a>.</p>
+  </li>
+</ol>
+<a name="Adding One or More Helpsets to the OHW Configuration File"></a>
+<h2>Adding One or More Helpsets to the OHW Configuration File</h2>
+<p>The instructions here assume you have installed the OHW help content files
+  and control files in the <code>helpsets</code> directory. If you have not done so, see <a href="#Preparing the Directory Structure for the OHW Helpsets">Preparing
+  the Directory Structure for the OHW Helpsets</a>.</p>
+<p>The ohwconfig.xml is the only non-OC4J configuration file. Among other things,
+  this file tells OHW where to find your helpsets. Once set up, the ohwconfig.xml
+  file will usually not need editing. Sometimes a refresh of help content will
+  include additional helpsets, which you will then have to specify.</p>
+<p>Follow these steps to add one or more helpsets to the OHW configuration file:</p>
+<ol>
+  <li>
+    <p>Place the <strong>ohwconfig.xml</strong> file (from ohw-deploy-<em>nnn</em>.zip
+      file) into the <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/helpsets</code>
+      directory.</p>
+  </li>
+  <li>In an editor, open the ohwconfig.xml file and specify the location of your
+    helpsets and help topic HTML files in the <code>&lt;books&gt;&lt;/books&gt;</code>
+    section.
+  <p>The <code>&lt;books&gt;</code> element can contain any number
+    of helpsets or helpbooks, or a combination of both. Helpsets can be merged
+    at runtime, so multiple authors can create multiple helpsets that will be
+    seamlessly merged. The merging behavior is specified by the attributes <code>combineBooks</code>
+    and <code>useLabelInfo</code>. The <code>&lt;helpSet&gt;</code>
+    element can contain zero or more <code>&lt;contentLocation&gt;</code>
+    elements, when Oracle Help help topic HTML files are located in locations
+    other than those expected by Oracle Help. The <code>&lt;contentLocation&gt;</code>
+    element is then used to specify the root location of a set of help topic HTML
+    files. For more information about the elements in the ohwconfig.xml file,
+    see <a href="ohff_ohwconfig.html">OHW Configuration File</a>.</p>
+  <p><em>File location:</em> <code>j2ee/home/applications/ohw-eapp/project_one/helpsets/ohwconfig.xml</code></p>
+  <p><em>Sample edit and usage:</em></p>
+  <pre><code> &lt;books combineBooks=&quot;true&quot; useLabelInfo=&quot;true&quot;&gt;
+   &lt;helpSet jar=&quot;UserGuide/project_one.jar&quot; location=&quot;project_one.hs&quot; /&gt;
+   &lt;helpSet location=&quot;Tutorial/overview.hs&quot; /&gt;
+     &lt;contentLocation baseURI=&quot;http://www.myCompany.com/help/&quot; /&gt;
+   &lt;/helpSet&gt;
+ &lt;/books&gt;</code></pre>
+
+  <table class="table-border" width="95%" align="center" border="1" cellpadding="6" cellspacing="0" summary="TOC tags supported by Oracle Help">
+    <tr>
+      <th class="table-header-border-left" width="20%" scope="col">Attribute</th>
+      <th class="table-header-border-right" width="80%" scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><code><strong>combineBooks</strong></code></td>
+      <td>
+        <p>&quot;true&quot; means to combine helpsets in one set of navigators
+          (tabs), including Table of Contents and Index, at runtime.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>useLabelInfo</strong></code></td>
+      <td>
+        <p>&quot;true&quot; means author-defined labels are used for the navigators
+          (tabs) of merged helpsets/helpbooks.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>jar</strong></code></td>
+      <td>
+        <p>Path to .jar file relative to ohwconfig.xml. OHW does not require that
+          its contents be stored in .jar files, but most products do this to simplify
+          file management.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>location</strong></code></td>
+      <td>
+        <p>Location of the .hs helpset definition file. Location is relative to
+          the top of the .jar file if a .jar file is used. Otherwise, it is relative
+          to the ohwconfig.xml file.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>baseURI</strong></code></td>
+      <td>
+        <p>An absolute URI to the root location of a set of help content. This
+          can be files in another location or even on another web server.</p>
+      </td>
+    </tr>
+  </table>
+  <p><em>Sample ohwconfig.xml file</em></p>
+  <pre><code> &lt;helpConfiguration&gt;
+
+   &lt;branding&gt;
+     ...
+   &lt;/branding&gt;
+
+   &lt;localeSettings&gt;
+     ...
+   &lt;/localeSettings&gt;
+
+   &lt;books combineBooks=&quot;false&quot; useLabelInfo=&quot;true&quot;&gt;
+     <strong>&lt;helpSet jar=&quot;UserGuide/project_one.jar&quot; location=&quot;project_one.hs&quot; /&gt;
+     &lt;helpSet location=&quot;Tutorial/overview.hs&quot; /&gt;
+       &lt;contentLocation baseURI=&quot;http://www.myCompany.com/help/&quot; /&gt;
+     &lt;/helpSet&gt;</strong>
+   &lt;/books&gt;
+
+   &lt;parameters&gt;
+    ...
+   &lt;/parameters&gt;
+
+ &lt;/helpConfiguration&gt;</code></pre>
+</li>
+</ol>
+<a name="Setting Up One or More Web Modules for OHW"></a>
+<h2>Setting Up One or More Web Modules for OHW</h2>
+<p>The instructions in this section assume you have created a web module directory
+  for your OHW help system. If you have not done so, see <a href="#Preparing the Directory Structure for the OHW Helpsets">Preparing
+  the Directory Structure for the OHW Helpsets</a> and <a href="#Adding One or More Helpsets to the OHW Configuration File">Adding One or More Helpsets to the OHW Configuration File</a>.</p>
+<p>Do the following to set up one or more web modules for deployment on OC4J:</p>
+<ol>
+  <li>
+    <p>For each web module, add the web module information to the OC4J configuration
+      file, <strong>application.xml</strong>. This defines the path to where the
+      web module files are deployed.</p>
+  <p>A sample application.xml file is included in ohw-demo-<em>nnn</em>.zip. You
+    could copy and modify this file or create your own (see sample file below).</p>
+  <p>In an editor, create or open the application.xml file in <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/META-INF</code>
+    and add a <code>&lt;module&gt;&lt;/module&gt;</code> section
+    for each web module.</p>
+  <p><em>File location:</em> <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/META-INF/application.xml</code></p>
+  <p><em>Sample edit and usage:</em></p>
+  <pre><code> &lt;module&gt;<br>   &lt;web&gt;<br>     &lt;web-uri&gt;project_one&lt;/web-uri&gt;<br>     &lt;context-root&gt;/&lt;/context-root&gt;<br>   &lt;/web&gt;<br> &lt;/module&gt;</code></pre>
+  
+  <table class="table-border" width="95%" align="center" border="1" cellpadding="6" cellspacing="0" summary="TOC tags supported by Oracle Help">
+    <tr>
+      <th class="table-header-border-left" width="20%" scope="col">Attribute</th>
+      <th class="table-header-border-right" width="80%" scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><code><strong>web-uri</strong></code></td>
+      <td>
+        <p>Path to web module from J2EE application (or name of .war file).</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>context-root</strong></code></td>
+      <td>
+        <p>Root of the web module. Usually &quot;/&quot; when web module files
+          are deployed in a directory.</p>
+      </td>
+    </tr>
+  </table>
+  <p><strong>Note:</strong> For WAR/EAR file-based deployment, see <a href="#Deploying OHW Help Systems Using WAR/EAR Files">Deploying OHW Help Systems Using WAR/EAR
+    Files</a>.</p>
+  <p><em>Sample application.xml file</em></p>
+
+  <pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;<br> &lt;!DOCTYPE application PUBLIC &quot;-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN&quot; &quot;http://java.sun.com/dtd/application_1_3.dtd&quot;&gt;
+
+ &lt;application&gt;
+
+   &lt;display-name&gt;ohw-eapp&lt;/display-name&gt;
+
+   <strong>&lt;module&gt;
+     &lt;web&gt;
+       &lt;web-uri&gt;project_one&lt;/web-uri&gt;
+       &lt;context-root&gt;/&lt;/context-root&gt;
+     &lt;/web&gt;
+   &lt;/module&gt;
+
+   &lt;module&gt;
+     &lt;web&gt;
+       &lt;web-uri&gt;project_two&lt;/web-uri&gt;
+       &lt;context-root&gt;/&lt;/context-root&gt;
+     &lt;/web&gt;
+   &lt;/module&gt;</strong>
+
+ &lt;/application&gt;</code></pre>
+  </li>
+  <li>
+    <p>For each web module, place the <strong>web.xml</strong> file (from ohw-deploy-<em>nnn</em>.zip)
+      into the <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/WEB-INF</code>
+      directory.</p>
+    <p>This sample servlet configuration file can be used without modification,
+      as long as the ohwconfig.xml file is in the <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/helpsets</code>
+      directory. Optionally, you can create the web.xml file yourself.</p>
+    <p><em>File location:</em> <code>j2ee/home/applications/ohw-eapp/project_one/WEB-INF/web.xml</code></p>
+    <p><em>Sample usage:</em></p>
+    <pre><code> &lt;init-param&gt;
+   &lt;param-name&gt;configFileName&lt;/param-name&gt;
+   &lt;param-value&gt;/helpsets/ohwconfig.xml&lt;/param-value&gt;
+ &lt;/init-param&gt;</code></pre>
+    
+    <table class="table-border" width="95%" align="center" border="1" cellpadding="6" cellspacing="0" summary="TOC tags supported by Oracle Help">
+      <tr>
+        <th class="table-header-border-left" width="20%" scope="col">Attribute</th>
+        <th class="table-header-border-right" width="80%" scope="col">Description</th>
+      </tr>
+      <tr>
+        <td><code><strong>param-name</strong></code></td>
+        <td>
+          <p>configFileName is a parameter name used by OHW. Do not change.</p>
+        </td>
+      </tr>
+      <tr>
+        <td><code><strong>param-value</strong></code></td>
+        <td>
+          <p>Path from the web module to the ohwconfig.xml file, relative to the
+            servlet context path. For most users, Oracle recommends that you do
+            not modify this parameter.</p>
+        </td>
+      </tr>
+    </table>
+    <p><em>Sample usage:</em></p>
+    <pre><code> &lt;servlet-mapping&gt;
+   &lt;servlet-name&gt;OHW&lt;/servlet-name&gt;
+   &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+ &lt;/servlet-mapping&gt;</code></pre>
+    
+    <table class="table-border" width="95%" align="center" border="1" cellpadding="6" cellspacing="0" summary="TOC tags supported by Oracle Help">
+      <tr>
+        <th class="table-header-border-left" width="20%" scope="col">Attribute</th>
+        <th class="table-header-border-right" width="80%" scope="col">Description</th>
+      </tr>
+      <tr>
+        <td><code><strong>servlet-name</strong></code></td>
+        <td>
+          <p>The OHW servlet to which the url-pattern applies. Do not change.</p>
+        </td>
+      </tr>
+      <tr>
+        <td><code><strong>url-pattern</strong></code></td>
+        <td>
+          <p>The URLs that are directed to the OHW servlet. For example, if the
+            web module name = project_one and the url-pattern = /help/*, then
+            the URL that accesses OHW would be http://myname.oracle.com:8888/project_one/help/</p>
+        </td>
+      </tr>
+    </table>
+    <p><em>Sample web.xml file</em></p>
+    <pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;<br> &lt;!DOCTYPE web-app PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+ &quot;http://java.sun.com/j2ee/dtds/web-app_2_3.dtd&quot;&gt;
+
+ &lt;web-app&gt;
+
+   &lt;login-config&gt;<br>     &lt;auth-method&gt;BASIC&lt;/auth-method&gt;<br>   &lt;/login-config&gt;
+<br>   &lt;servlet&gt;
+
+     &lt;servlet-name&gt;OHW&lt;/servlet-name&gt;
+     &lt;servlet-class&gt;oracle.help.OHW&lt;/servlet-class&gt;
+
+     &lt;init-param&gt;
+       &lt;param-name&gt;configFileName&lt;/param-name&gt;
+       &lt;param-value&gt;/helpsets/ohwconfig.xml&lt;/param-value&gt;
+     &lt;/init-param&gt;
+
+   &lt;/servlet&gt;
+
+   &lt;servlet-mapping&gt;
+     &lt;servlet-name&gt;OHW&lt;/servlet-name&gt;
+     &lt;url-pattern&gt;/help/*&lt;/url-pattern&gt;
+   &lt;/servlet-mapping&gt;
+
+ &lt;/web-app&gt;</code></pre>
+  </li>
+  <li>
+    <p>Repeat Steps 1 and 2 for additional web modules</p>
+  </li>
+</ol>
+<a name="Binding One or More Web Modules to the OHW Application"></a>
+<h2>Binding One or More Web Modules to the OHW Application</h2>
+<p>The instructions in this section assume you have defined one or more web modules
+  for your OHW help system. If you have not done so, see <a href="#Preparing the Directory Structure for the OHW Helpsets">Preparing the Directory Structure
+  for OHW Helpsets</a>, <a href="#Adding One or More Helpsets to the OHW Configuration File">Adding
+  One or More Helpsets to the OHW Configuration File</a> and <a href="#Setting Up One or More Web Modules for OHW">Setting Up One or More Web Modules for OHW</a>.</p>
+<p>Follow these steps to bind one or more web modules to the OHW application:</p>
+<ol>
+  <li>
+    <p>For each web module, bind the web module access location to the OHW application
+      in the <strong>http-web-site.xml</strong> file.</p>
+  <p>In an editor, open http-web-site.xml located in <code>&lt;mypath&gt;/j2ee/home/config</code>
+    and add the following line for each web module:</p>
+  <pre><code>
+ &lt;web-app application=&quot;ohw-eapp&quot; name=&quot;project_one&quot; root=&quot;/project_one&quot; /&gt;</code></pre>
+  <p></p>
+  <p><em>File location:</em> <code>j2ee/home/config/http-web-site.xml</code></p>
+  <p><em>Sample edit and usage:</em></p>
+  <pre><code> &lt;web-app application=&quot;ohw-eapp&quot; name=&quot;project_one&quot; root=&quot;/project_one&quot; /&gt;</code></pre>
+  
+  <table class="table-border" width="95%" align="center" border="1" cellpadding="6" cellspacing="0" summary="TOC tags supported by Oracle Help">
+    <tr>
+      <th class="table-header-border-left" width="20%" scope="col">Attribute</th>
+      <th class="table-header-border-right" width="80%" scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><code><strong>application</strong></code></td>
+      <td>
+        <p>J2EE application name for OHW to which the web module will be bound.
+          Should match the application name in server.xml (see Step 2 of <a href="#Setting Up the J2EE Application for OHW">Setting Up the J2EE Application for
+          OHW</a>).</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>name</strong></code></td>
+      <td>
+        <p>Name of web module (or name of .war file). Indicates the path to the
+          directory containing the web module files. Should match the web-uri
+          name in Step 1 of <a href="#Setting Up One or More Web Modules for OHW">Setting Up One or More Web Modules
+          for OHW</a>. </p>
+      </td>
+    </tr>
+    <tr>
+      <td><code><strong>root</strong></code></td>
+      <td>Name to be used in the URL. The root URL can be different from name.</td>
+    </tr>
+  </table>
+  <p><strong>Note:</strong> For WAR/EAR file-based deployment, see <a href="#Deploying OHW Help Systems Using WAR/EAR Files">Deploying OHW Help Systems Using WAR/EAR
+    Files</a>.</p>
+  <p><em>Sample http-web-site.xml file</em></p>
+  <pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;!DOCTYPE web-site PUBLIC &quot;Orion Web-site&quot; &quot;http://xmlns.oracle.com/ias/dtds/web-site.dtd&quot;&gt;
+
+ &lt;web-site port=&quot;8888&quot; display-name=&quot;Default Oracle9iAS Containers for J2EE Web Site&quot;&gt;
+   &lt;default-web-app application=&quot;default&quot; name=&quot;defaultWebApp&quot; /&gt;
+   <strong>&lt;web-app application=&quot;ohw-eapp&quot; name=&quot;project_one&quot; root=&quot;/project_one&quot; /&gt;</strong>
+   <strong>&lt;web-app application=&quot;ohw-eapp&quot; name=&quot;project_two&quot; root=&quot;/project_two&quot; /&gt;</strong>
+   &lt;web-app application=&quot;uixresources-eapp&quot; name=&quot;cabo&quot; root=&quot;/cabo&quot; /&gt;<br>   &lt;access-log path=&quot;../log/http-web-access.log&quot; /&gt;
+ &lt;/web-site&gt;</code></pre>
+  </li>
+</ol>
+<a name="Viewing the OHW Help System on OC4J"></a>
+<h2>Viewing the OHW Help System on OC4J</h2>
+<p><strong>Note:</strong> Make sure you have the JAVA_HOME environment variable set to a directory
+  on the host where a version of JDK 1.2.2 or later resides (JDK 1.3.1 is recommended).</p>
+<p>To see your help system in OHW, do the following:</p>
+<ol>
+  <li>
+    <p>Start the servlet engine, as described in <a href="#Installing and Testing OC4J">Installing
+      and Testing OC4J</a>. If OC4J is already running, you must shut it down
+      and then restart it before you can see the changes made since you last started
+      the servlet.</p>
+  </li>
+  <li>
+    <p>Direct your browser to <code>http://&lt;hostname&gt;:8888/project_one/help/</code>
+      or <code>http://&lt;hostname&gt;:8888/project_two/help/</code>
+      where <code>&lt;hostname&gt;</code> is the name of the machine
+      on which OC4J and OHW are installed.</p>
+  <p>If you are viewing OC4J from the same computer on which it is installed,
+    you may be able to use the URL <code>http://localhost:8888/project_one/help/</code>,
+    depending on your browser configuration.</p>
+  <p>The first page of the help system displays in the browser. If there is more
+    than one helpset, use the drop down list in the toolbar to select a helpset,
+    then click the helpset switcher to display the table of contents and index
+    from the selected helpset only. The text search will search only for items
+    in the selected helpset.</p>
+  <p>If you don't see the page as expected, check the console window for any error
+    messages logged by OC4J. OC4J also logs error messages to the log files under
+    <code>&lt;mypath&gt;/j2ee/home/log</code>.</p>
+  </li>
+</ol>
+<a name="Changing the OHW Access URL"></a>
+<h2>Changing the OHW Access URL</h2>
+<p>As seen in the section <a href="#Viewing the OHW Help System on OC4J">Viewing
+  the OHW Help System on OC4J</a> above, the URL to access the OHW help system
+  is <code>http://&lt;hostname&gt;:8888/project_one/help/</code>,
+  where <code>&lt;hostname&gt;</code> is the name of the machine
+  on which OHW and OC4J are installed. </p>
+<p>You can change this URL in the following ways:</p>
+<ul>
+  <li>Change the &quot;help&quot; at the end of the URL</li>
+  <li>Change the &quot;project_one&quot; name to another name</li>
+</ul>
+<h3>Changing the &quot;help&quot; at the end of the URL</h3>
+<p>Edit the web.xml file in <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/WEB-INF</code>
+  to change the &quot;help&quot; at the end of the URL.</p>
+<p><em>Sample web.xml file:</em></p>
+<pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;!DOCTYPE web-app PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+ &quot;http://java.sun.com/j2ee/dtds/web-app_2_3.dtd&quot;&gt;
+
+ &lt;web-app&gt;
+
+    &lt;servlet&gt;
+
+       &lt;servlet-name&gt;OHW&lt;/servlet-name&gt;
+       &lt;servlet-class&gt;oracle.help.OHW&lt;/servlet-class&gt;
+
+       &lt;init-param&gt;
+          &lt;param-name&gt;configFileName&lt;/param-name&gt;
+          &lt;param-value&gt;/helpsets/ohwconfig.xml&lt;/param-value&gt;
+       &lt;/init-param&gt;
+
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+       &lt;servlet-name&gt;OHW&lt;/servlet-name&gt;
+       <strong>&lt;url-pattern&gt;/help/*&lt;/url-pattern&gt;</strong>
+    &lt;/servlet-mapping&gt;
+
+ &lt;/web-app&gt;</code></pre>
+<p>The <code>&lt;servlet-mapping&gt;</code> parameter <code>&lt;url-pattern&gt;</code>
+  specifies the URL used to access OHW. For example, if you change <code>&lt;url-pattern&gt;</code>
+  from the default <code>/help/*</code> to <code>/onlinereference/*</code>,
+  the URL used to access OHW would be <code>http://&lt;hostname&gt;:8888/project_one/onlinereference/</code>.
+</p>
+<h3>Changing &quot;project_one&quot; to another name</h3>
+<p>Edit the http-web-site.xml file in <code>&lt;mypath&gt;/j2ee/home/config</code>
+  to change the &quot;project_one&quot; name to another name.</p>
+<p><em>Sample http-web-site.xml file</em></p>
+<pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;!DOCTYPE web-site PUBLIC &quot;Orion Web-site&quot; &quot;http://xmlns.oracle.com/ias/dtds/web-site.dtd&quot;&gt;
+
+ &lt;web-site port=&quot;8888&quot; display-name=&quot;Default Oracle9iAS Containers for J2EE Web Site&quot;&gt;
+   &lt;default-web-app application=&quot;default&quot; name=&quot;defaultWebApp&quot; /&gt;
+   &lt;web-app application=&quot;ohw-eapp&quot; name=&quot;project_one&quot; <strong>root=&quot;/project_one&quot;</strong> /&gt;
+   &lt;web-app application=&quot;ohw-eapp&quot; name=&quot;project_two&quot; root=&quot;/project_two&quot; /&gt;
+   &lt;access-log path=&quot;../log/http-web-access.log&quot; /&gt;
+ &lt;/web-site&gt;</code></pre>
+<p><code>root=&quot;/project_one&quot;</code> specifies the name
+  you would use in the URL, e.g., <code>http://&lt;hostname&gt;:8888/project_one/help/</code>.
+</p>
+<p>If you want the OHW access URL to be <code>http://&lt;hostname&gt;:8888/developer/help/</code>,
+  you would modify <code>root=&quot;/project_one&quot;</code> to
+  <code>root=&quot;/developer&quot;</code>.</p>
+<p><a name="Upgrading OHW and UIX"></a> </p>
+<h2>Upgrading OHW and UIX</h2>
+<p>Check the OHW download page for the latest download and install instructions
+  before upgrading your OHW/OC4J installation.</p>
+<p><strong>Note:</strong> Stop the OC4J/OHW instance before upgrading. Restart
+  OC4J/OHW after upgrading OHW and UIX.</p>
+<p>To upgrade OHW to a newer version, you need to replace the OHW and UIX JAR
+  files, and the OHW JavaScript files (distributed in ohw-install.zip). Do the
+  following to upgrade OHW:</p>
+<ol>
+ <li>
+    <p>Repeat the steps in <a href="#Installing the OHW Servlet">Installing the
+      OHW Servlet</a>, above. This updates the OHW and UIX JAR files.</p>
+  </li>
+  <li>
+    <p>Repeat Step 3 in <a href="#Preparing the Directory Structure for the OHW Helpsets">Preparing
+      the Directory Structure for the OHW Helpsets</a>, above. This unzips files
+      from ohw-install.zip and updates the files in the <code>jsLibs</code>
+      directory of the web module, e.g., <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/jsLibs</code>.</p>
+  </li>
+</ol>
+<p>To upgrade UIX, you need to replace the UIX installable resource files (distributed
+  in uix2-install.zip). To upgrade the UIX installable resource files to a newer
+  version, do one of the following:</p>
+<ul>
+  <li>
+    <p>If the OHW/OC4J server installation is using shared UIX installable resource
+      files, repeat Step 3 in <a href="#Setting Up the UIX Resources Application for OHW">Setting
+      Up the UIX Resources Application for OHW</a>, above. This unzips files from
+      uix2-install.zip into the <code>cabo</code> directory of the UIX resources
+      application, e.g., <code>&lt;mypath&gt;/j2ee/home/applications/uixresources-eapp/cabo</code>.</p>
+    <p><strong>Note:</strong> Remember to delete the runtime cache directory,
+      e.g., <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/cabo</code>.</p>
+  </li>
+  <li>
+    <p>If each web module has a private copy of the UIX installable resource files,
+      repeat Step 4 in <a href="#Preparing the Directory Structure for the OHW Helpsets">Preparing
+      the Directory Structure for the OHW Helpsets</a>, above. This unzips files
+      from uix2-install.zip into the <code>cabo</code> directory
+      of the web module, e.g., <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/project_one/cabo</code>.</p>
+  </li>
+</ul>
+
+<a name="Deploying OHW Help Systems Using WAR/EAR Files"></a>
+<h2>Deploying OHW Help Systems Using WAR/EAR Files</h2>
+<p>OC4J allows OHW web modules to be compressed as WAR (Web ARchive) files. The
+  entire OHW application is then deployed as an EAR (Enterprise ARchive) file,
+  which wraps any WAR and JAR files. You create WAR and EAR files using the standard
+  Java JAR utility. The instructions in this section assume you have installed
+  OC4J, OHW, and your OHW help files, tested your installation, and are ready
+  to create the WAR/EAR files.</p>
+<p><strong>Note:</strong> In OC4J standalone, you can use the admin.jar command-line
+  tool to deploy applications archived in the EAR format. See the <em>Oracle9iAS
+  Containers for J2EE User's Guide</em> for details. For users of Oracle9<em>i</em>AS
+  9.0.x in a production environment, you must use Oracle Enterprise Management
+  (OEM) for deployment. Refer to the <em>Oracle9i Application Server Administrator's
+  Guide</em> and <em>Oracle Enterprise Manager Administrator's Guide</em> for
+  information.</p>
+<p>The following shows the directory structure for archiving OHW web modules into
+  an EAR file for deployment to OC4J.</p>
+<p><em>Directory Structure</em></p>
+<pre><code>  +---&lt;mypath&gt;
+  |+----j2ee
+  ||+-----home
+  |||+------config
+  ||||--------<strong>server.xml</strong>
+  ||||--------<strong>http-web-site.xml</strong>
+  |.....
+  |.....
+  |.....
+
+  +---&lt;mypath&gt;/j2ee/home/applications
+  |+----ohw-eapp
+  ||+-----META-INF
+  |||+------<strong>application.xml</strong>
+  |||-----project_one.war
+  |||-----project_two.war
+  ||+-----project_one
+  |||+------cabo (generated at runtime)
+  |||+------helpsets
+  ||||--------ohwconfig.xml
+  ||||+-------Tutorial
+  |||||---------OHW help content/images and control files
+  ||||+-------UserGuide
+  |||||---------OHW help content/images and control files
+  |||+------jsLibs
+  ||||--------OHW JavaScript files
+  |||+------WEB-INF
+  ||||--------web.xml
+  ||+-----project_two
+  |||+------cabo (generated at runtime)
+  |||+------helpsets
+  ||||--------ohwconfig.xml
+  ||||+-------GettingStarted
+  |||||---------OHW help content/images and control files
+  |||+------jsLibs
+  ||||--------OHW JavaScript files
+  |||+------WEB-INF
+  ||||--------web.xml
+  |.....</code></pre>
+<p>Follow these instructions to deploy your OHW help system using WAR/EAR files.</p>
+<ol>
+  <li>
+    <p>Make sure you delete any files that are not required for deployment, especially
+      the <code>cabo/images/cache</code> subdirectories that are
+      automatically created for each web module during runtime testing.</p>
+  </li>
+  <li>
+    <p>Create a WAR file for each web module. The .war file should be created
+      at the top of the web module. In the web module root, issue the command:</p>
+    <pre><code> % jar cvfM ../project_one.war *</code></pre>
+    <p>The M option suppresses the creation of a manifest (.MF) file. The manifest
+      file is not required because the OC4J configuration file (application.xml)
+      serves as the manifest file. The .war file will include the entire contents
+      of the web module, e.g., all files and all subdirectories under the <code>project_one</code>
+      directory.</p>
+  </li>
+  <li>
+    <p>Repeat Step 2 for all other web modules under the <code>ohw-eapp</code>
+      directory.</p>
+  </li>
+  <li>
+    <p>Place the .war files in the OHW application root (ohw-eapp).</p>
+  
+  <p>The following shows the directory structure for archiving the OHW application
+    into an EAR file for deployment to OC4J.</p>
+  <p><em>Archive Directory Format</em></p>
+  <pre><code>    +---ohw-eapp
+    &brvbar; +---META-INF
+    &brvbar; &brvbar; +--application.xml
+    &brvbar; +---project_one.WAR
+    &brvbar; +---project_two.WAR</code></pre>
+  </li>
+  <li>
+    <p>Modify the file application.xml. Add the .war file names to the application.xml
+      file located in <code>&lt;mypath&gt;/j2ee/home/applications/ohw-eapp/META-INF</code>.</p>
+
+  <p>Typically, the .war file is placed at the top level of the application (not
+    the web module) with a <code>&lt;context-root&gt;</code> that
+    points to the top of the web module.</p>
+  <p><em>Sample edit:</em></p>
+  <pre><code> &lt;application&gt;
+   &lt;display-name&gt;ohw-eapp&lt;/display-name&gt;
+   &lt;module&gt;
+     &lt;web&gt;
+       <strong>&lt;web-uri&gt;project_one.war&lt;/web-uri&gt;
+      &lt;context-root&gt;/project_one&lt;/context-root&gt;</strong>
+     &lt;/web&gt;
+   &lt;/module&gt;
+   &lt;module&gt;
+     &lt;web&gt;
+       <strong>&lt;web-uri&gt;project_two.war&lt;/web-uri&gt;
+      &lt;context-root&gt;/project_two&lt;/context-root&gt;</strong>
+     &lt;/web&gt;
+   &lt;/module&gt;
+ &lt;/application&gt;</code></pre>
+
+  </li>
+    <li>
+    <p>Create an .ear file for the entire OHW application. In the OHW application
+      root, issue the following command:</p>
+  <pre><code> % jar cvfM ../ohw.ear *.war META-INF/application.xml</code></pre>
+  <p>The M option suppresses the creation of a manifest (.MF) file. The manifest
+    file is not required because the OC4J configuration file (application.xml)
+    serves as the manifest file. Typically, the .ear file will be placed at the
+    entry point for all web applications, as determined in the server.xml file.</p>
+  <p>The application .ear file (ohw.ear) will contain the .war files for all of
+    the web modules as well as the META-INF directory and its application.xml
+    file. </p>
+  </li>
+  <li>
+    <p>Modify the http-web-site.xml file. Add the .war file names to the http-web-site.xml
+      file located in <code>&lt;mypath&gt;/j2ee/home/config</code>.</p>
+  <p><em>Sample edit:</em></p>
+  <pre><code> &lt;?xml version=&quot;1.0&quot;?&gt;
+ &lt;!DOCTYPE web-site PUBLIC &quot;Orion Web-site&quot; &quot;http://xmlns.oracle.com/ias/dtds/web-site.dtd&quot;&gt;
+
+ &lt;web-site port=&quot;8888&quot; display-name=&quot;Default Oracle9iAS Containers for J2EE Web Site&quot;&gt;
+   &lt;default-web-app application=&quot;default&quot; name=&quot;defaultWebApp&quot; /&gt;
+   <strong>&lt;web-app application=&quot;ohw-eapp&quot; name=&quot;project_one&quot; root=&quot;/project_one&quot; /&gt;</strong>
+   <strong>&lt;web-app application=&quot;ohw-eapp&quot; name=&quot;project_two&quot; root=&quot;/project_two&quot; /&gt;</strong>
+   &lt;web-app application=&quot;uixresources-eapp&quot; name=&quot;cabo&quot; root=&quot;/cabo&quot; /&gt;<br>   &lt;access-log path=&quot;../log/http-web-access.log&quot; /&gt;
+ &lt;/web-site&gt;</code></pre>
+  </li>
+  <li>
+    <p>Modify the file server.xml. Add the following application entry to the
+      server.xml file located in <code>&lt;mypath&gt;j2ee/home/config</code>.</p>
+  <p><em>Sample edit:</em></p>
+  <pre><code>
+ &lt;?xml ... &gt;
+ &lt;!DOCTYPE ... &gt;
+
+ &lt;application-server application-directory=&quot;../applications&quot;
+  deployment-directory=&quot;../application-deployments&quot;&gt;
+   &lt;library path=&quot;../tools.jar&quot; /&gt;
+   &lt;rmi-config path=&quot;./rmi.xml&quot; /&gt;
+   ...
+   &lt;global-application name=&quot;default&quot; path=&quot;application.xml&quot; /&gt;
+   <strong>&lt;application name=&quot;ohw-eapp&quot; path=&quot;../applications/ohw.ear&quot; auto-start=&quot;true&quot; /&gt;</strong>
+   &lt;application name=&quot;uixresources-eapp&quot; path=&quot;../applications/uixresources-eapp&quot; auto-start=&quot;true&quot; /&gt;<br>   &lt;global-web-app-config path=&quot;global-web-application.xml&quot; /&gt;
+   &lt;web-site path=&quot;./http-web-site.xml&quot; /&gt;
+   ...
+ &lt;/application-server&gt;
+</code></pre>
+  </li>
+</ol>
+<p>At runtime, OC4J will detect a new or changed .ear file and uncompress it.
+  It will then uncompress all of the .war files into their correct web module
+  directories. More information on the use of .war and .ear files in OC4J is available
+  in the <em>Oracle9iAS Containers for J2EE User's Guide</em>.</p>
+<p class="horizontal-rule">&nbsp;</p>
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+<a href="ohwpg_deploy_oc4j_demo.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohwpg_deploy_tomcat.html">Next</a>
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+</body>
+</html>

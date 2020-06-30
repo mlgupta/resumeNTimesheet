@@ -1,0 +1,220 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN" "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<form-validation>
+  <global>
+  </global>
+    <formset>
+        <form name="userNewEditForm">
+            <field property="txtUserName"
+                   depends="required, mask,minlength,maxlength">
+                <msg name="mask" key="errors.Name.MaskMessage">
+                </msg>
+                <arg0 key="txt.UserName">
+                </arg0>
+                <msg name="minlength" key="errors.minlength">
+                </msg>
+                <msg name="maxlength" key="errors.maxlength">
+                </msg>
+                <arg1 name="minlength" key="${var:minlength}" resource="false">
+                </arg1>
+                <arg2 name="maxlength" key="${var:maxlength}" resource="false">
+                </arg2>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>^[a-zA-Z0-9]*$</var-value>
+                </var>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>5</var-value>
+                </var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>20</var-value>
+                </var>
+            </field>
+            <field property="txtPassword" depends="required,minlength,twofields">
+                <msg name="minlength" key="errors.minlength">
+                </msg>
+                <arg0 key="txt.Password">
+                </arg0>
+                <arg1 key="${var:minlength}" name="minlength" resource="false">
+                </arg1>
+                <arg1 name="twofields" key="txt.ConfirmPassword">
+                </arg1>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>5</var-value>
+                </var>
+                <var>
+                    <var-name>secondProperty</var-name>
+                    <var-value>txtConfirmPassword</var-value>
+                </var>
+            </field>
+            <field property="txtConfirmPassword" depends="required,minlength">
+                <msg name="minlength" key="errors.minlength">
+                </msg>
+                <arg0 key="txt.ConfirmPassword">
+                </arg0>
+                <arg1 key="${var:minlength}" name="minlength" resource="false">
+                </arg1>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>5</var-value>
+                </var>
+            </field>
+            <field property="txtEmailAddress" depends="required,email">
+                <arg0 key="txt.EmailReq"/>
+            </field>
+        </form>
+    </formset>
+  
+  <formset>
+      <form name="loginForm">
+        <field property="userID" depends="required">
+          <arg0 key="txt.UserID">
+          </arg0>          
+        </field>
+        <field property="userPassword" depends="required">
+          <arg0 key="txt.Password">
+          </arg0>          
+        </field>
+    </form>
+  </formset>
+  
+  <formset>
+    
+    <form name="docUploadForm">
+      <field property="txtName" depends="required">
+        <arg0 key="txt.Name"></arg0>
+      </field>
+      <field property="txaAddress" depends="required">
+        <arg0 key="txt.address"></arg0>
+      </field>
+      <field property="txtPhone1" depends="required">
+        <arg0 key="txt.Phone1"></arg0>
+      </field>
+      <field property="txtEmail" depends="required,email">
+        <arg0 key="txt.Email"></arg0>
+      </field>
+      <field property="txtBillingRate" depends="required">
+        <arg0 key="txt.BillingRate"></arg0>
+      </field>
+    </form>
+  
+    <form name="docEditForm">
+      <field property="txtName" depends="required">
+        <arg0 key="txt.Name"></arg0>
+      </field>
+      <field property="txaAddress" depends="required">
+        <arg0 key="txt.address"></arg0>
+      </field>
+      <field property="txtPhone1" depends="required">
+        <arg0 key="txt.Phone1"></arg0>
+      </field>
+      <field property="txtEmail" depends="required,email">
+        <arg0 key="txt.Email"></arg0>
+      </field>
+      <field property="txtBillingRate" depends="required">
+        <arg0 key="txt.BillingRate"></arg0>
+      </field>
+    </form>
+    
+    <form name="timesheetUploadForm">
+      <field property="txtName" depends="required">
+        <arg0 key="txt.Name"></arg0>
+      </field>
+      <field property="fileOne" depends="required">
+        <arg0 key="txt.Timesheet"></arg0>
+      </field>
+    </form>
+
+    <form name="timesheetEditForm">
+      <field property="txtName" depends="required">
+        <arg0 key="txt.Name"></arg0>
+      </field>
+    </form>
+    
+  </formset>
+  
+  <formset>
+    <form name="userPreferencesProfileForm">
+     <field property="txtPermittedTreeAccessLevel" depends="required,integer">
+        <msg name="integer" key="errors.Number.MaskMessage" />              
+          <arg0  key="txt.PermittedTreeAccessLevel"/>
+        </field>
+        <field property="txtItemsToBeDisplayedPerPage"
+               depends="required, integer">
+            <msg name="integer" key="errors.Number.MaskMessage" />              
+          <arg0  key="txt.ItemsToBeDisplayedPerPage"/>
+        </field>
+    </form>
+        <form name="setEncryptionPasswordForm">
+            <field property="txtPassword" depends="required,minlength,twofields">
+                <msg name="minlength" key="errors.minlength">
+                </msg>
+                <arg0 key="txt.Password">
+                </arg0>
+                <arg1 key="${var:minlength}" name="minlength" resource="false">
+                </arg1>
+                <arg1 name="twofields" key="txt.ConfirmPassword">
+                </arg1>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>5</var-value>
+                </var>
+                <var>
+                    <var-name>secondProperty</var-name>
+                    <var-value>txtConfirmPassword</var-value>
+                </var>
+            </field>
+            <field property="txtConfirmPassword" depends="required,minlength">
+                <msg name="minlength" key="errors.minlength">
+                </msg>
+                <arg0 key="txt.ConfirmPassword">
+                </arg0>
+                <arg1 key="${var:minlength}" name="minlength" resource="false">
+                </arg1>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>5</var-value>
+                </var>
+            </field>
+        </form>
+
+        <form name="changePasswordForm">
+            <field property="txtPassword" depends="required,minlength,twofields">
+                <msg name="minlength" key="errors.minlength">
+                </msg>
+                <arg0 key="txt.Password">
+                </arg0>
+                <arg1 key="${var:minlength}" name="minlength" resource="false">
+                </arg1>
+                <arg1 name="twofields" key="txt.ConfirmPassword">
+                </arg1>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>5</var-value>
+                </var>
+                <var>
+                    <var-name>secondProperty</var-name>
+                    <var-value>txtConfirmPassword</var-value>
+                </var>
+            </field>
+            <field property="txtConfirmPassword" depends="required,minlength">
+                <msg name="minlength" key="errors.minlength">
+                </msg>
+                <arg0 key="txt.ConfirmPassword">
+                </arg0>
+                <arg1 key="${var:minlength}" name="minlength" resource="false">
+                </arg1>
+                <var>
+                    <var-name>minlength</var-name>
+                    <var-value>5</var-value>
+                </var>
+            </field>
+        </form>
+        
+    
+  </formset>     
+
+</form-validation>

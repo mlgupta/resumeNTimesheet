@@ -1,0 +1,39 @@
+<?xml version='1.0' ?>
+<map version="1.0">
+    <mapID target="user_introduction_html" url="user_introduction.html"/>
+    <mapID target="user_search_html" url="user_search.html"/>
+    <mapID target="user_new_html" url="user_new.html"/>
+    <mapID target="user_edit_html" url="user_edit.html"/>
+    <mapID target="user_delete_html" url="user_delete.html"/>
+    <mapID target="user_preferences_html" url="user_preferences.html"/>
+    <mapID target="scheduler_introduction_html"  url="scheduler_introduction.html"/>
+    <mapID target="scheduler_start_stop_html" url="scheduler_start_stop.html"/>
+    <mapID target="job_search_html" url="job_search.html"/>
+    <mapID target="job_new_html" url="job_new.html"/>
+    <mapID target="job_reschedule_html" url="job_reschedule.html"/>
+    <mapID target="job_delete_html" url="job_delete.html"/>
+    <mapID target="mail_new_html" url="mail_new.html"/>
+    <mapID target="fax_new_html" url="fax_new.html"/>
+    <mapID target="folder_doc_introduction_html"  url="folder_doc_introduction.html"/>
+    <mapID target="folder_doc_search_html" url="folder_doc_search.html"/>
+    <mapID target="folder_doc_copy_move_html" url="folder_doc_copy_move.html"/>
+    <mapID target="folder_doc_cut_copy_paste_html" url="folder_doc_cut_copy_paste.html"/>
+    <mapID target="folder_doc_delete_html" url="folder_doc_delete.html"/>    
+    <mapID target="folder_doc_rename_html" url="folder_doc_rename.html"/>    
+    <mapID target="folder_new_html" url="folder_new.html"/>
+    <mapID target="document_download_html" url="document_download.html"/>
+    <mapID target="document_generate_links_html" url="document_generate_links.html"/>
+    <mapID target="document_share_html" url="document_share.html"/>
+    <mapID target="document_upload_html" url="document_upload.html"/>
+    <mapID target="document_versioned_html" url="document_versioned.html"/>
+    <mapID target="resume_introduction_html" url="resume_introduction.html"/>
+    <mapID target="new_resume_html" url="new_resume.html"/>
+    <mapID target="edit_resume_html" url="edit_resume.html"/>
+    <mapID target="timesheet_introduction_html" url="timesheet_introduction.html"/>
+    <mapID target="new_timesheet_html" url="new_timesheet.html"/>
+    <mapID target="edit_timesheet_html" url="edit_timesheet.html"/>
+    <mapID target="download_csv_html" url="download_csv.html"/>
+    <mapID target="drawers_introduction_html" url="drawers_introduction.html"/>
+    <mapID target="drawer_operations_html" url="drawer_operations.html"/>
+
+</map>

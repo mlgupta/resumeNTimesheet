@@ -1,0 +1,498 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Adding OHJ to Your Application</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for Java Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_gs.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_csh.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+</tr>
+</table>
+
+<a name="start"></a>
+<h1>Adding OHJ to Your Application</h1>
+
+
+<p>This section tells how to integrate OHJ with your product application. It contains the following sections:</p>
+<ul>
+<li><a href="#Overview_of_Adding_OHJ_to_an_Applicaton">Overview of Adding OHJ to an Application</a></li>
+<li><a href="#Constructing_the_Help_object">Constructing the <code>Help</code> object</a></li>
+<li><a href="#Adding_the_Help_Data">Adding the Help Data</a></li>
+<li><a href="#When_to_Create_the_Help_object">When to Create the <code>Help</code> object</a></li>
+<li><a href="#Showing_the_Navigator_Window">Showing the Navigator Window</a></li>
+<li><a href="#Showing_a_Topic">Showing a Topic</a></li>
+<li><a href="#Disposing_of_the_Help_object">Disposing of the <code>Help</code> object</a></li>
+</ul>
+<p>These steps are explained in more detail in the following sections.</p>
+
+<a name="Overview_of_Adding_OHJ_to_an_Applicaton"></a>
+<h2>Overview of Adding OHJ to an Application</h2>
+<p>The basic steps for adding OHJ to an application are:</p>
+<ol>
+<li>Construct the <code>Help</code> object.</li>
+<li>Populate the <code>Help</code> object with help content, as follows:
+  <ul>
+  <li>Create <code>Book</code> objects that represent your help data.</li>
+  <li>Add the <code>Book</code> objects to the <code>Help</code> object.</li>
+  </ul>
+</li>
+<li>Implement methods for showing the OHJ navigator window and for showing help topics.</li>
+<li>Dispose of the <code>Help</code> object at the end of your product's lifecycle.</li>
+</ol>
+
+
+<a name="Constructing_the_Help_object"></a>
+<h2>Constructing the <code>Help</code> object</h2>
+
+<p>The <code>Help</code> object is the main entry point for Oracle Help for Java. It includes methods for adding help content, showing the OHJ navigator window, and displaying specific topics. There are several options that can only be set at the time the <code>Help</code> object is constructed.</p>
+
+<p>The <code>boolean <var>combineBooks</var></code> parameter in the <code>Help</code> object constructor determines how OHJ displays multiple <code>Books</code> (<code>HelpBooks</code>, <code>HelpSets</code>, or both). If the <code>boolean <var>combineBooks</var></code> parameter is set to <code>true</code>, OHJ merges all the author-defined views that have the same type and label. For example, if multiple books include a Keyword Index view with the same label, OHJ displays one keyword index navigator tab with a merged, sorted list of keywords. If the <code><var>combineBooks</var></code> parameter is set to <code>false</code>, the views from each book are displayed separately, and the end user can select which book to display using a drop-down list in the OHJ navigator window. (Ordinarily, the help author specifies which behavior should be implemented.)</p>
+
+<p>The versions of the <code>Help</code> object constructor are summarized below. For more information, see the <a href="ohjpg_gs.html#documentation">API documentation</a> for <code>oracle.help.Help</code></p>
+
+
+
+
+<!-- 
+<pre><code>setDefaultBook(Book <var>book</var>)</code></pre>
+<dl>
+  </dt>
+<dd>Sets the specified Book as the default Book.</dd>
+    <dl>
+      <dt><strong>Parameters:</strong></dt>
+        </dt>
+<dd><code><var>book</var> - Book to be set.</dd>
+        </dt>
+<dd><code><var>book</var> - Book to be set.</dd>
+    </dl>
+  </dd>
+</dl>
+-->
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+
+<tr><th class="table-header-border-all">Help() Constructors</th></tr>
+
+<tr>
+<td>
+
+<dl>
+<dt><strong><code>Help()</code></strong>
+
+  </dt>
+<dd><p>Creates an instance of the <code>Help</code> object with the ICEBrowser as the <code>HTMLBrowser</code> component used for topic display. This constructor will instruct the help system to show all of the views from the added books in one tab panel, and to ignore author defined tab labels in favor of standard tab labels.</p>
+  </dd>
+</dl>
+</td>
+</tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+
+<code><strong>Help(boolean <var>combineBooks</var>, boolean <var>useLabelInfo</var>)</strong></code>
+ 
+
+</dt>
+<dd>
+<p>Creates an instance of the <code>Help</code> object with the ICEBrowser as the <code>HTMLBrowser</code> component used for topic display.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<p><strong><code><var>combineBooks</var></code></strong> - If <code>true</code>, the help system shows all of the views from the books added to the help system in one tab panel. If <code>false</code>, the help system creates a different tab panel for each book and allows the end user to choose which book is displayed.</p>
+
+<p><strong><code><var>useLabelInfo</var></code></strong> - If <code>true</code>, the help system uses the author-defined label information for display and view merging. If <code>false</code>, the help system uses default labels.</p>
+
+</dd>
+</dl>
+
+</td></tr>
+
+<tr>
+<td>
+
+<dl>
+<dt>
+<strong>
+<code>Help(Class <var>htmlBrowserClass</var>, boolean <var>combineBooks</var>, boolean <var>useLabelInfo</var>)</code> 
+</strong>
+
+</dt>
+<dd>
+<p>Creates an instance of the <code>Help</code> object using the specified <code>HTMLBrowser</code> component for topic display (Note: The ICEBrowser is the only <code>HTMLBrowser</code> subclass currently distributed with OHJ).</p>
+
+<p><strong>Parameters:</strong></p>
+
+<p>
+<strong><code><var>htmlBrowserClass</var></code></strong> - The <code>HTMLBrowser</code> subclass to use as the topic display component</p>
+
+<p>
+<strong><code><var>combineBooks</var></code></strong> - If <code>true</code>, the help system shows all of the views from the books added to the help system in one tab panel. If <code>false</code>, the help system creates a different tab panel for each book and allows the end user to choose which book is displayed.</p>
+
+<p><strong><code><var>useLabelInfo</var></code></strong> - If <code>true</code>, the help system uses the author-defined label information for display and view merging. If <code>false</code>, the help system uses default labels.</p>
+
+</dd></dl>
+
+</td></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>Help(Class <var>htmlBrowserClass</var>, boolean <var>combineBooks</var>, boolean <var>useLabelInfo</var>, boolean <var>standAloneMode</var>)</code></strong>
+  </dt>
+<dd>
+  <p>Creates an instance of the <code>Help</code> object using the specified <code>HTMLBrowser</code> component for topic display (Note: The ICEBrowser is the only <code>HTMLBrowser</code> subclass currently distributed with OHJ). This constructor contains an extra parameter enabling a &quot;stand-alone&quot; mode for running OHJ, where the <code>Help</code> object will exit the JVM (via System.exit) once all help windows have been closed. The <var>standAloneMode</var> parameter should be set to <code>false</code> if you are launching OHJ from a Java application (otherwise closing help would exit your application!).</p>
+
+<p><strong>Parameters:</strong></p>
+
+<p><strong><code><var>htmlBrowserClass</var></code></strong> - The <code>HTMLBrowser</code> subclass to use as the topic display component</p>
+
+<p><strong><code><var>combineBooks</var></code></strong> - If <code>true</code>, the help system shows all of the views from the books added to the help system in one tab panel. If <code>false</code>, the help system creates a different tab panel for each book and allows the end user to choose which book is displayed.</p>
+
+<p><strong><code><var>useLabelInfo</var></code></strong> - If <code>true</code>, the help system uses the author-defined label information for display and view merging. If <code>false</code>, the help system uses standard default labels.</p>
+
+ <p><strong><code><var>standAloneMode</var></code></strong> - If <code>true</code> the help system exits the JVM when all help windows have been closed. Set this to <code>false</code> if you are launching OHJ from your Java application.</p>
+
+</dd>
+</dl>
+
+</td></tr>
+</table>
+
+
+
+
+<a name="Adding_the_Help_Data"></a>
+<h2>Adding the Help Data</h2>
+<p>After creating a <code>Help</code> object, you must add one or more <code>Book</code> objects to it. A <code>Book</code> object encapsulates a collection, or &quot;book,&quot; of help content. Two implementations of the <code>Book</code> interface are included, to accommodate different control file formats:</p>
+
+<p><strong><code>HelpSet</code></strong>. This <code>Book</code> implementation handles the preferred Oracle Help file formats, as documented in <a href="ohff_toc.html">Oracle Help File Formats</a>. These files include the <a href="ohff_hsfile.html">helpset</a> file, which defines the characteristics of the help system.</p>
+
+<p><code><strong>HelpBook</strong></code>. This <code>Book</code> implementation handles legacy OHJ file formats. The HelpBook class examines a directory, identifies files with known extensions, and adds them to the help system.</p>
+
+<p>The help author should be able to tell you which format is used for the help system.</p>
+
+
+
+<a name="Constructing_a_Helpset"></a>
+<h3>Constructing a <code>HelpSet</code></h3>
+
+<p>The <code>HelpSet()</code> constructors are described below.</p>
+
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+
+<tr><th class="table-header-border-all">HelpSet() Constructors</th></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>HelpSet(URL <var>fileURL</var>)</code></strong>
+  </dt>
+<dd>
+  <p>Constructs a <code>HelpSet</code> object using the helpset file at the specified URL location. Use this constructor when you know the <em>exact location</em> of the helpset file.</p>
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>fileURL</var></code></strong> - A URL specifying the exact location of the helpset file.</p>
+</dd>
+</dl>
+</td></tr>
+
+<tr>
+<td>
+
+<dl>
+<dt><strong><code>HelpSet(Class <var>pathClass</var>, String <var>pathExtension</var>)</code></strong>
+</dt>
+<dd>
+<p>Use this constructor when you know only the path to the helpset file <em>relative</em> to your application implementation.</p>
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>pathClass</var></code></strong> - One of your application classes. The <code>HelpSet</code> object uses the location of this class to determine the location of your helpset file.</p>
+
+<p><strong><code><var>pathExtension</var></code></strong> - The path to the helpset file relative to the location of <code><var>pathClass</var></code>. The value of this parameter is appended to the absolute path to the directory containing the <code><var>pathClass</var></code>. The resulting path should be the path to your helpset file.</p>
+</dd>
+</dl>
+</td></tr>
+</table>
+
+<p>For more information, see the <a href="ohjpg_gs.html#documentation">API documentation</a> for <code>oracle.help.library.helpset.HelpSet</code></p>
+
+
+<a name="Constructing_a_HelpBooks"></a>
+<h3>Constructing a <code>HelpBook</code></h3>
+
+<p>The <code>HelpBook</code> format is directory based. Use its constructors to specify the location of the directory containing the help content (HTML topic files).</p>
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+
+<tr><th class="table-header-border-all">HelpBook() Constructors</th></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>HelpBook(String <var>baseURL</var>, String <var>baseName</var>, String <var>bookTitle)</var></code></strong>
+
+</dt>
+<dd>
+<p>Create a <code>HelpBook</code> with the specified title, loading the data from the directory location specified by <code><var>baseURL</var></code>. The <code>HelpBook</code> object examines the directory to identify known control files (TOC, TOK, HHC, HHK, OHT, and IDX) named with the given <code><var>baseName</var></code>. Use this constructor when you know the <em>exact location</em> of the help content directory.</p>
+
+
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>baseURL</var></code></strong> - A <code>String</code> specifying the exact location of the helpset file in URL format.</p>
+<p><strong><code><var>baseName</var></code></strong> - The base name of all the control files found in the specified directory (for example, if your control files are named userguide.hhc, userguide.hhk, etc., the <code><var>baseName</var></code> is &quot;userguide&quot;).</p>
+<p><strong><code><var>bookTitle</var></code></strong> - The book name that will appear in the book selection pull down menu in multiple book help systems. (This title is often supplied by the help author.)</p>
+</dd></dl>
+</td></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<code><strong>HelpBook(Class <var>baseClass</var>, String <var>dirPathExt</var>, String <var>baseName</var>, String <var>bookTitle</var>)</strong></code></dt>
+
+
+<dd>
+<p>Create a <code>HelpBook</code> with the specified title, loading the data from the directory location specified by <code><var>baseClass</var></code> and <code><var>dirPathExt</var></code>. The HelpBook object examines the directory to identify known control files (TOC, TOK, HHC, HHK, OHT, and IDX) named with the given <code><var>baseName</var></code>. Use this constructor when you know only the path to the help content directory <em>relative</em> to your application implementation.</p>
+
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>baseClass</var></code></strong> - One of your application classes. The HelpBook object uses the location of this class to determine the location of your help content directory.</p>
+
+<p><strong><code><var>dirPathExt</var></code></strong> - The path to the help content directory relative to the location of <code><var>baseClass</var></code>. The value of this parameter is appended to the absolute path to the directory containing the <code><var>baseClass</var></code>. The resulting path should be the path to your help content directory.</p>
+
+<p><strong><code><var>baseName</var></code></strong> - The base name of all the control files found in the specified directory (i.e. if your control files are named discoverer.hhc, discoverer.hhk, etc., the <code><var>baseName</var></code> would be &quot;discoverer&quot;)</p>
+
+<p><strong><code><var>bookTitle</var></code></strong> - The book name that will appear in the book selection pull down menu in multiple book help systems. (This title is often supplied by the help author.)</p>
+</dd>
+</dl>
+</td></tr>
+</table>
+
+
+<p>For more information, see the <a href="ohjpg_gs.html#documentation">API documentation</a> for <code>oracle.help.library.helpbook.HelpBook</code></p>
+
+<a name="Adding_Books"></a>
+<h3>Adding <code>Books</code> to <code>Help</code></h3>
+
+<p>Once you have constructed a <code>Book</code> instance using the <code>HelpBook</code> or <code>HelpSet</code> constructors, you must add the <code>Book</code> to your <code>Help</code> instance. This is accomplished by calling the following method on the <code>Help</code> instance:</p>
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+
+<tr><th class="table-header-border-all">addBook() Method</th></tr>
+
+<tr>
+<td>
+
+<dl>
+<dt>
+<strong><code>addBook(Book <var>book</var>)</code></strong>
+</dt>
+<dd>
+<p>This method adds a <code>Book</code> instance to the help system. Author-defined views contained in the <code>Book</code> are displayed in the navigator window, and topics from the <code>Book</code> are available to display.</p>
+
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>book</var></code></strong> - The <code>Book</code> instance to add to the help system</p>
+</dd></dl>
+        
+</td>
+</tr>
+</table>
+
+<a name="When_to_Create_the_Help_object"></a>
+<h2>When to Create the <code>Help</code> object</h2>
+
+<p>A single instance of the <code>Help</code> object should be created and help data should be added at application startup. You should use this single instance of the <code>Help</code> object throughout the application session. It is not efficient to create unique <code>Help</code> objects each time the user requests help in your application.</p>
+
+
+<a name="Showing_the_Navigator_Window"></a>
+<h2>Showing the Navigator Window</h2>
+
+<p>Instruct your <code>Help</code> instance to show the OHJ navigator window by calling the <code>showNavigatorWindow()</code> method. Some versions of this method take additional parameters to show the navigator window with a specified navigator tab selected (for example, Contents, Index, Search, etc.).</p>
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+
+<tr><th class="table-header-border-all">showNavigatorWindow() Method</th></tr>
+
+<tr>
+<td>
+<dl>
+<dt><strong><code>showNavigatorWindow()</code></strong></dt>
+<dd>
+<p>Shows the navigator window with the first tab of the first book selected.</p></dd>
+</dl>
+
+<dl>
+<dt><strong><code>showNavigatorWindow(Book <var>activeBook</var>)</code></strong></dt>
+<dd><p>Shows the navigator window with the associated set of navigators from the given book displayed.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<p><strong><code><var>activeBook</var></code></strong> - The <code>Book</code> object whose associated set of navigators should be initially displayed when the navigator window is shown.</p>
+</dd>
+</dl>
+
+</td></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>showNavigatorWindow(Navigator <var>activeNavigator</var>)</code></strong>
+</dt>
+<dd><p>Shows the navigator window with a specific navigator tab selected. Use this method if you want to show a specific navigator from a specific book.</p>
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>activeNavigator</var></code></strong> - The navigator to show initially selected</p>
+</dd></dl>
+
+</td></tr>
+</table>
+
+<a name="Showing_a_Topic"></a>
+<h2>Showing a Topic</h2>
+
+<p>Instruct your Help instance to show a specific help topic by calling the <code>showTopic()</code> method and providing the topic ID and the <code>Book</code> instance for that topic. Some versions of this method take additional parameters to specify how the topic should be displayed.</p>
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+
+<tr><th class="table-header-border-all">showTopic() Method</th></tr>
+
+<tr>
+<td>
+<dl>
+<dt><strong><code>showTopic(Book <var>book</var>, String <var>topicID</var>)</code></strong>
+
+</dt>
+<dd>
+<p>Shows the given topic from the given book in a currently existing topic window. If no topic windows currently exist, a new topic window will be created with the default size and position.</p>
+
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>book</var></code></strong> - The <code>Book</code> form which to show the topic.</p>
+<p><strong><code><var>topicID</var></code></strong> - The topic ID for the topic to show (as specified in the map file of the book).</p>
+</dd></dl>
+
+</td></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>showTopic(Book <var>book</var>, String <var>topicID</var>, boolean <var>alwaysCreate</var>)</code></strong>
+
+</dt>
+<dd>
+<p>Shows the given topic from the given book. If <code><var>alwaysCreate</var></code> is <code>true</code>, a new window will always be created. If <code>false</code>, a new window will only be created if no windows currently exist.</p>
+<p><strong>Parameters:</strong></p>
+
+
+<p><strong><code><var>book</var></code></strong> - The <code>Book</code> to show the topic from.</p>
+
+<p><strong><code><var>topicID</var></code></strong> - The topic ID for the topic to show (as specified in the map file of the book).</p>
+
+<p><code><var>alwaysCreate</var></code> - If <code>true</code>, always create a new window. If <code>false</code>, reuse a window if possible</p>
+</dd>
+</dl>
+</td></tr>
+
+<tr>
+<td>
+
+<dl>
+<dt>
+<strong><code>showTopic(Book <var>book</var>, String <var>topicID</var>, boolean <var>alwaysCreate</var>, Point <var>location</var>, Dimension <var>size</var>)</code></strong>
+
+</dt>
+<dd>
+<p>Shows the given topic from the given book. If <var>alwaysCreate</var> is true, a new window will always be created; if it is false, a new window will only be created if no windows currently exist. The topic window will be shown using the given location and size.</p>
+
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>book</var></code></strong> - The <code>Book</code> to show the topic from.</p>
+<p><strong><code><var>topicID</var></code></strong> - The topic ID for the topic to show (as specified in the map file of the book).</p>
+<p><strong><code><var>alwaysCreate</var></code></strong> - If <code>true</code>, always create a new window. If <code>false</code>, reuse a window if possible</p>
+<p><strong><code><var>location</var></code></strong> - Location of the topic window in screen coordinates.</p>
+<p><strong><code><var>size</var></code></strong> - Size of the topic window in pixels.</p>
+</dd>
+</dl>
+</td></tr>
+
+</table>
+
+
+<h3>Catching <code>TopicDisplayExceptions</code></h3>
+
+<p>Exceptions are thrown by the <code>showTopic()</code> method when an error is encountered when trying to display a topic. For example, if you attempt to display a topic ID which does not exist (that is, which is not in the map file), a <code>TopicDisplayException</code> is thrown. By catching the <code>TopicDisplayException</code>, you have the opportunity to take action when an error occurs. In the following example, an author-defined error topic is displayed when <code>TopicDisplayException</code> is thrown.</p>
+
+<p><strong>Example:</strong></p>
+
+<pre><code>
+try
+{
+  myHelp.showTopic(myhelpset, &quot;nonExistingTopic&quot;); 
+}
+catch (TopicDisplayException e)
+{
+  //An error has occurred, try to show an error topic 
+  myHelp.showTopic(myhelpset, &quot;onErrorTopic&quot;); 
+}
+</code></pre>
+
+<a name="Disposing_of_the_Help_object"></a>
+<h2>Disposing of the <code>Help</code> object</h2>
+
+<p>Disposing of the <code>Help</code> object frees OHJ resources. You should dispose of the <code>Help</code> object when you no longer need the help engine. Typically, this would be done at end of the user's application session. Disposing closes all files and frees memory used by the <code>Help</code> object. To dispose of the <code>Help</code> object, call the <code>dispose()</code> method:</p>
+
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+
+<tr><th class="table-header-border-all">dispose() Method</th></tr>
+
+<tr>
+<td>
+
+<dl>
+<dt>
+<code>dispose()</code>
+</dt>
+<dd><p>Dispose of the help system. This method frees up all the resources used by the help system. Applications should call this method when they do not need help anymore. You should not call any methods on the <code>Help</code> object after calling <code>dispose()</code>.</p></dd>
+</dl>
+</td></tr>
+</table>
+
+<p>The <code>dispose()</code> method will eliminate any references to objects held by the OHJ classes, but not other references that you have created <em>from</em> your application to <code>Help</code> objects.</p>
+
+<p>Therefore, after you call <code>dispose()</code> you should eliminate any references to OHJ objects (<code>Help</code> or <code>Book</code> objects) in your application code. This allows the Java garbage collection process to free the OHJ objects.</p>
+
+
+<p class="horizontal-rule">&nbsp;</p> 
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+<a href="ohjpg_gs.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohjpg_csh.html">Next</a>
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+</body>
+</html>

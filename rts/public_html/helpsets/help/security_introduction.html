@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<TITLE>Security Introduction</TITLE>
+<link href="blafdoc.css" rel="stylesheet" type="text/css">
+</HEAD>
+<BODY>
+<table width="760" border="0">
+  <tr>
+    <td height="30" class="heading14bold">What is Access Control List (ACL) ? </td>
+  </tr>
+  <tr>
+    <td>
+      <ul><li>Access permissions on *PublicObjects are managed with AccessControlLists (ACL's). Whenever a user tries to access a *PublicObject, It first checks the associated AccessControlList to verify that the user has been granted the appropriate permissions.<br></li></ul>
+      <ul><li>An AccessControlList is a list of users and groups who have been granted or revoked access permissions to the *PublicObject. Each time a user or group is granted or revoked access permissions, an entry is added to the AccessControlList.<br></li></ul>
+      <ul><li>In most cases, the standard ACL's that come with application should meet your needs, and the remaining cases can be handled by creating a new ACL.<br></li></ul>
+      <ul><li>Application resolves a user's effective access to a *PublicObject by aggregating the AccessControlEntries in the order that they were created in the AccessControlList. 
+              Each AccessControlList is defined independently and applied to one or more *PublicObjects, allowing you to centrally manage common security levels for *PublicObjects. 
+              Any user can create an AccessControlList. When an AccessControlList is created, the user can determine who else can apply the AccessControlList to *PublicObjects and manage the AccessControlList entries. 
+              In this way, users can create personal AccessControlLists that they use to manage access to their information, or share AccessControlLists to manage access to information that they collaborate on with other users. Typically, a *PublicObject has only one AccessControlList. 
+              When a user tries to access the *PublicObject, all AccessControlLists will be used to resolve the user's permissions. While AccessControlLists can be used to grant and revoke standard permissions defined by Application, 
+              including Discover, GetContent, SetAttribute, SetContent, and Delete, Application allows you to define custom permissions.</li></ul>
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><b><u>Note *PublicObject:</u></b>&nbsp;All user, groups, folders and documents are collectively called Public Object.</td>
+  </tr>
+</table>
+</BODY>
+</HTML>

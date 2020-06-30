@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Working Around the Java Modal Window Problem</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for Java Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_csh_cshm.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_deploy.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+</tr>
+</table>
+
+<a name="start"></a>
+<h1>Working Around the Java Modal Window Problem</h1>
+
+<p>A characteristic of how Java handles modal windows causes a problem when trying to display a context-sensitive help topic for a modal window. (A <em>modal</em> window is one that does not allow focus to be shifted away from it. A <em>nonmodal</em> window is one that allows focus to be switched to another window.)</p>
+
+<p>OHJ provides a workaround for this problem, as discussed in the following sections:</p>
+
+<ul>
+<li><a href="#About_the_Java_Modal_Window_Problem">About the Java Modal Window Problem</a></li>
+<li><a href="#Registering_a_Window">Registering a Window</a></li>
+<li><a href="#Unregistering_a_Window">Unregistering a Window</a></li>
+</ul>
+
+<a name="About_the_Java_Modal_Window_Problem"></a>
+<h2>About the Java Modal Window Problem</h2>
+<p>If a user requests help from a nonmodal window, it is possible to switch back and forth between the help window and the window requesting help (as you would expect). However, this is not possible when requesting help from a modal window. In Java, a modal window blocks access to all other windows created by the Java Virtual Machine (except yet another modal window). Thus, if help is requested from a modal window, OHJ must display help in a modal help window. Then, because OHJ is itself shown in a modal window, the user must close the help window to return to the application.</p>
+
+<p>When help is requested, OHJ determines whether the active window is modal. If it is, then it re-parents the normal OHJ topic windows and the OHJ navigator window into a new modal window. That new window appears in the foreground of the user's display, and the user can interact with it; in fact, they must interact with it if only to close the (modal) help window. Given the coarse implementation of modality in Java, this is the only solution that will work for all of the Java Virtual Machines currently supported by OHJ.</p>
+
+<a name="Registering_a_Window"></a>
+<h2>Registering a Window</h2>
+
+
+
+
+
+<p>In order for the OHJ workaround to work, OHJ must be able to track the currently active window. 
+<!-- internal If you are using EWT or the Oracle Look and Feel (OLAF) in JEWT, OHJ can keep track of the active window automatically. If you are not using EWT or OLAF in JEWT, you must -->
+Use the <code>registerClientWindow()</code> method to register each window (<code>Frame</code> or <code>Dialog</code>) you create with the <code>Help</code> object.</p>
+
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+
+<tr><th class="table-header-border-left"><code>registerClientWindow()</code> Method</th></tr>
+
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>registerClientWindow(Window <var>aWindow</var>)</code></strong></dt>
+
+
+<dd>
+<p>Window instances registered with the <code>Help</code> object are tracked. If the active window is a modal dialog and help is requested, the <code>Help</code> object will take special action so that the help windows are not blocked by the active modal dialog.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<p><strong><code><var>aWindow</var></code></strong> - The <code>Window</code> instance to register</p>
+
+</dd>
+</dl>
+       
+</td>
+</tr>
+
+</table>
+<p>For more information, see the <!--<a href="ohjpg_gs.html#documentation"> --> <a href="./javadoc/index.html">API documentation</a> for <code>Help.registerClientWindow()</code></p>
+
+<a name="Unregistering_a_Window"></a>
+<h2>Unregistering a Window</h2>
+
+<p>If you registered your <code>Window</code> objects using <code>Help.registerClientWindow()</code>, you must also unregister them. When you know that a <code>Window</code> will no longer be active, you should unregister the window with the <code>Help</code> object using the <code>unregisterClientWindow()</code> method. It is important to note that failure to unregister <code>Window</code> instances may result in the window not being garbage collected.</p>
+
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+
+<tr><th class="table-header-border-left"><code>unregisterClientWindow()</code> Method</th></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>unregisterClientWindow(Window <var>aWindow</var>)</code></strong></dt>
+<dd>
+<p>Clients should unregister each <code>Window</code> instance they registered with the <code>registerClientWindow()</code> method once the window will no longer be active. Failure to unregister <code>Window</code> instances may result in the window not being garbage collected.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<p><strong><code><var>aWindow</var></code></strong> - The <code>Window</code> instance to unregister</p>
+</dd>
+</dl>
+</td></tr>
+</table>
+
+<p>For more information, see the <!-- internal <a href="ohjpg_gs.html#documentation">--><a href"./javadoc/index.html">API documentation</a> for <code>Help.unregisterClientWindow()</code></p>
+
+
+
+
+<p class="horizontal-rule">&nbsp;</p> 
+
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+
+<a href="ohjpg_csh_cshm.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohjpg_deploy.html">Next</a>
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+</body>
+</html>

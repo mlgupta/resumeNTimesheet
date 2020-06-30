@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Deploying OHW for Multiple Locales</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for the Web Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohwpg_deploy_tomcat.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohg_support.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+</tr>
+</TABLE>
+
+<a name="start"></a>
+<h1>Deploying OHW for Multiple Locales</h1>
+
+<p>The OHW 1.x architecture requires one instance of the OHW servlet per locale.  Thus, in order to
+provide help in multiple languages, it is necessary to have multiple instances of the OHW servlet. Note that this does not mean that you need to set up multiple web applications or enterprise applications.</p>
+
+<p>In the <code>web.xml</code> file for your OHW web application, you can define multiple named instances of the OHW servlet, and each instance can have a different OHW Configuration file that would define the locale of the OHW instance and load the localized helpset(s) for that servlet. Then, you would define a servlet mapping for each instance of the OHW servlet, typically the mappings are language codes like <code>/en/*</code>, <code>/ja/*</code>, <code>/de/*</code>, etc. For example, here is a <code>web.xml</code> file with three instances of the OHW servlet, for English (en), Japanese(ja), and German(de)
+content.</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE web-app PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+     &quot;http://java.sun.com/j2ee/dtds/web-app_2_3.dtd&quot;&gt;
+&lt;web-app&gt;
+  &lt;login-config&gt;
+    &lt;auth-method&gt;BASIC&lt;/auth-method&gt;
+  &lt;/login-config&gt;
+
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;en&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;oracle.help.OHW&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;configFileName&lt;/param-name&gt;
+      &lt;param-value&gt;/helpsets/help_en/ohwconfig.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;en&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/en/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;ja&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;oracle.help.OHW&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;configFileName&lt;/param-name&gt;
+      &lt;param-value&gt;/helpsets/help_ja/ohwconfig.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+  &lt;/servlet&gt;
+
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;ja&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/ja/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;de&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;oracle.help.OHW&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+      &lt;param-name&gt;configFileName&lt;/param-name&gt;
+      &lt;param-value&gt;/helpsets/help_de/ohwconfig.xml&lt;/param-value&gt;
+    &lt;/init-param&gt;
+  &lt;/servlet&gt;
+  
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;de&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/de/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+&lt;/web-app&gt;</code></pre>
+
+<p>Note that each OHW servlet instance is given a name; in the example, the language code is used as the name.  The <code>configFileName</code> inititalization parameter for each servlet points to a different <code>ohwconfig.xml</code> file.  Each servlet has a <code>&lt;servlet-mapping&gt;</code> that maps the servlet
+of the given name ("de") to a url pattern (<code>/de/*</code>).  This sets up a servlet mapping for each set of localized help.  In this example, the following URLs would be valid:</p>
+
+<pre><code>  http://&lt;hostname&gt;:&lt;port&gt;/&lt;web-app-context-path&gt;/en/
+  http://&lt;hostname&gt;:&lt;port&gt;/&lt;web-app-context-path&gt;/ja/
+  http://&lt;hostname&gt;:&lt;port&gt;/&lt;web-app-context-path&gt;/de/</code></pre>
+
+<p>Note that the OHW servlet is not initialized until the first request.  For example, if no user ever accesses
+the URL for the Japanese content, the OHW Servlet instance will never load the Japanese helpsets.
+Therefore, OHW only uses memory on the server for the content that is actually being used.</p>
+
+<h2>If You Are Using UIX</h2>
+
+<p>If you are using OHW with an application built with Oracle UIX technology, register the URL you set up for each locale with the the <code> oracle.cabo.ui.data.help.OracleHelpProvider</code>
+using the <code>registerLocaleSpecificServlet()</code> method. Here is the Javadoc for that method:</p>
+
+  
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0" summary="Javadoc for registerClientWindow() method">
+
+<tr><th class="table-header-border-left"><code>registerLocaleSpecificServlet()</code> Method</th></tr>
+
+
+<tr>
+<td>
+<dl><dt><strong><code>registerLocaleSpecificServlet(Locale <var>locale</var>, String <var>localeSpecificServletLocation</var>)</code></strong></dt><dd>
+<p>Register a different OHW servlet instance for a given locale. When a request comes in from the end user's browser with a specific locale, the <code>OracleHelpProvider</code> will attempt to find a HelpProvider registered for that Locale. If a match for language, country, and variant cannot be found, it checks if a Locale has been registered with matching language and country. If a language and country match cannot be found, it checks if a Locale has been registred for just the language. If no match can be found, it uses the default OHW servlet instance registered upon creation to handle the request.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<p><strong><code><var>locale</var></code></strong>&nbsp;&nbsp;-&nbsp;&nbsp;the locale for which this OHW instance should be used</p>
+<p><strong><code><var>localeSpecificServletLocation</var></code></strong>&nbsp;&nbsp;-&nbsp;&nbsp;the location of the OHW servlet</p>
+
+</dd></dl></td></tr></table>
+
+
+<p>When you use the UIX <code>HelpProvider</code> mechanism to implement context-sensitive help, you databind the destination of your link or button as in the example <code>data:destination=&quot;topic1@ui:helpTopics&quot;</code>.  The <code>OracleHelpProvider</code> is passed the topic ID <code>topic1</code> and returns a URL for displaying that topic.  The <code>OracleHelpProvider</code> examines the browser locale of the HTTP request and uses that to pick the best matching base URL from the set of URL's registered with the <code>registerLocaleSpecificServlet()</code> method.</p>
+
+
+
+
+<p class="horizontal-rule">&nbsp;</p> 
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+<a href="ohwpg_deploy_tomcat.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohg_support.html">Next</a>
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+</body>
+</html>

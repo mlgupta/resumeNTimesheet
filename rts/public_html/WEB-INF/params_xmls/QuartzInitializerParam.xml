@@ -1,0 +1,10 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<Configuration> 
+<CMSDK>
+<quartz-init-file>WEB-INF/quartz.properties</quartz-init-file>
+<smtp-host>mail.dbsentry.com</smtp-host>
+<smtp-userId>mmishra</smtp-userId>
+<smtp-password>dbs9901</smtp-password>
+<authenticate>true</authenticate>
+</CMSDK>
+</Configuration>

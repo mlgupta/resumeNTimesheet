@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Enabling Context-Sensitive Help in Your Application</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for Java Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_add.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_csh_cshm.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+</tr>
+</table>
+
+<a name="start"></a>
+<h1>Enabling Context-Sensitive Help in Your Application</h1>
+
+<p>A &quot;context-sensitive&quot; help topic is one that is associated with a context in a product's user interface and which can be launched from that context. For example, a context-sensitive help system may contain topics that describe the product's menus and dialog boxes. When a user requests help for one of those controls, the appropriate topic for that control is displayed. 
+</p>
+
+<p>Oracle Help for Java provides mechanisms for associating help topics with user interface controls and for launching context-sensitive help when the user presses the <strong>F1</strong> key or selects  <strong>Help</strong> from a right-click context menu. OHJ also provides an API for explicitly displaying the help topic associated with a component.</p>
+
+<p>To provide context-sensitive help for an application, the help system source must include one or more map files and you have to add the appropriate help code to your application code, as described in these sections:</p>
+<ul>
+<li><a href="#Mapping_Topic_IDs_to_Help_Topics">Mapping Topic IDs to Help Topics</a></li>
+<li><a href="#Programming_Your_Application_to_Support_Context_Sensitive_Help">Programming Your Application to Support Context-Sensitive Help</a></li>
+</ul>
+
+
+
+<a name="Mapping_Topic_IDs_to_Help_Topics"></a>
+<h2>Mapping Topic IDs to Help Topics</h2>
+
+<p>A context-sensitive help system must include one or more <em>map files</em> that map topic IDs to help topics. (Projects differ, but this map file is often created by the help author, not the programmer.) OHJ supports two kinds of map files:</p>
+
+<ul>
+<li><p>When an OHJ system is implemented using a <code>HelpBook</code>, the map file must use the &quot;OHT&quot; file format. (<code>HelpBook</code>s and OHT files are legacies from early versions of OHJ and are no longer recommended, but they are still supported by OHJ.) </p></li>
+<li><p>When an OHJ system is implemented using a <code>HelpSet</code>, the map file must use the newer XML file format, which is now the recommended format for Oracle Help systems. For more information about this map file, see <a href="ohff_mapfile.html">Map File</a>.</p></li>
+</ul>
+<p>For information about <code>HelpSets</code> and <code>HelpBooks</code>, see <a href="ohjpg_add.html">Adding OHJ to Your Application</a>.</p>
+
+<p>You may want to define a set of Java constants in your application code that map to topic IDs in the map file. When using OHJ methods that require topic IDs (such as <code>Help.showTopic()</code>), you can use the constant variable names instead of using explicit topic IDs from the map file. This helps you avoid changing code in several places if topic IDs in the map file are changed later. This is particularly useful when help authors are responsible for maintaining map files.</p>
+
+<a name="Programming_Your_Application_to_Support_Context_Sensitive_Help"></a>
+<h2>Programming Your Application to Support Context-Sensitive Help</h2>
+
+<p>The standard Java toolkits (AWT and Swing) do not include built-in mechanisms for associating help topics with components. However, OHJ provides a generic way to implement context-sensitive help in Java applications, using the OHJ <code>CSHManager</code> (Context-Sensitive Help Manager) class. This help manager provides a way to associate help topics with user interface components and to enable <strong>F1</strong> and right-click context-sensitive help. </p>
+
+<p>For instructions on how to use <code>CSHManager</code>, see <a href="ohjpg_csh_cshm.html">Using <code>CSHManager</code> to Implement Context-Sensitive Help</a>.</p>
+
+<!-- <p>You should use <code>CSHManager</code> only for applications that are not using Oracle's EWT or JEWT toolkits. If you are using EWT or JEWT, you should enable context-sensitive help using the built-in <code>HelpProvider</code> mechanism, as described in <a href="ohjpg_csh_oracle">Implementing Context-Sensitive Help Using EWT or JEWT</a></p> -->
+
+
+
+
+
+
+
+
+
+<p class="horizontal-rule">&nbsp;</p> 
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+<a href="ohjpg_add.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohjpg_csh_cshm.html">Next</a>
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+</body>
+</html>

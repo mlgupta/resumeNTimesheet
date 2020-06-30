@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ImageMetadata version="2.0" xmlns="http://xmlns.oracle.com/uix/image">
+<tabBar textAntialias="false" disabled="false" width="287" height="19" direction="ltr" selectedIndex="3">
+<foreground red="0" green="0" blue="0"/>
+<background red="204" green="204" blue="153"/>
+<font>
+<name>Dialog</name>
+<size>12</size>
+<style>plain</style>
+</font>
+<imageMap>
+<area shape="poly" coords="0,18,9,0,74,0,82,8,82,18"/>
+<area shape="poly" coords="78,18,87,0,129,0,137,8,137,18"/>
+<area shape="poly" coords="133,18,142,0,190,0,198,8,198,18"/>
+<area shape="poly" coords="194,18,203,0,279,0,287,8,287,18"/>
+</imageMap>
+<tab>
+<text>Contents</text>
+</tab>
+<tab>
+<text>Index</text>
+</tab>
+<tab>
+<text>Search</text>
+</tab>
+<tab>
+<text>View Topic</text>
+</tab>
+<selectedForeground red="255" green="255" blue="255"/>
+<selectedBackground red="51" green="102" blue="153"/>
+<selectedFont>
+<name>Dialog</name>
+<size>12</size>
+<style>bold</style>
+</selectedFont>
+<disabledForeground red="255" green="255" blue="204"/>
+<disabledBackground red="204" green="204" blue="153"/>
+<disabledFont>
+<name>Dialog</name>
+<size>12</size>
+<style>plain</style>
+</disabledFont>
+</tabBar>
+</ImageMetadata>

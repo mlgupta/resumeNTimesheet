@@ -1,0 +1,96 @@
+<?xml version='1.0' ?>
+<index version="1.0">
+
+<indexitem text="introduction">
+  <indexentry text="Introduction to Drawers" 
+              target="drawers_introduction_html" />
+  <indexentry text="Introduction to Resumes" 
+              target="resume_introduction_html" />
+  <indexentry text="Introduction to Timesheets" 
+              target="timesheet_introduction_html" />
+  <indexentry text="Introduction to My Docs" 
+              target="folder_doc_introduction_html" />
+  <indexentry text="Introduction to User" 
+              target="user_introduction_html" />
+  <indexentry text="Introduction to Scheduler" 
+              target="scheduler_introduction_html" />
+</indexitem>
+
+<indexitem text="create">
+  <indexentry text="Create a User" target="user_new_html" />
+  <indexentry text="Create a new Folder" target="folder_new_html" />
+  <indexentry text="Create a new Resume" target="new_resume_html" />
+  <indexentry text="Create a new Timesheet" target="new_timesheet_html" />
+  <indexentry text="Create a Mail Job" target="mail_new_html" />
+  <indexentry text="Create a Fax Job" target="fax_new_html" />   
+</indexitem>
+
+
+<indexitem text="edit">
+  <indexentry text="Edit a User" target="user_edit_html" />
+  <indexentry text="Edit a Resume" target="edit_resume_html" />
+  <indexentry text="Edit a Timesheet" target="edit_timesheet_html" />
+  <indexentry text="Reschedule a Job (Mail/Fax)" target="job_reschedule_html" />   
+</indexitem>
+
+<indexitem text="delete">   
+  <indexentry text="Delete a User" target="user_delete_html" />
+  <indexentry text="Delete Folder(s)/Document(s)" 
+              target="folder_doc_delete_html"/>
+  <indexentry text="Delete a  Job (Mail/Fax)" target="job_delete_html" />      
+</indexitem>
+
+<indexitem text="search">   
+  <indexentry text="Search a User" target="user_search_html" />
+  <indexentry text="Search  folder/document" target="folder_doc_search_html"/>
+  <indexentry text="Search a  Job (Mail/Fax)" target="job_search_html" />      
+</indexitem>
+
+<indexitem text="user">
+  <indexentry text="Search a User" target="user_search_html" />
+  <indexentry text="Create a User" target="user_new_html" />
+  <indexentry text="Edit a User" target="user_edit_html" />
+  <indexentry text="Delete a User" target="user_delete_html" />       
+</indexitem>
+
+<indexitem text="scheduler">
+  <indexentry text="Search a Job" target="job_search_html" />
+  <indexentry text="Create a Job" target="job_new_html" />
+  <indexentry text="Reschedule a Job" target="job_reschedule_html" />
+  <indexentry text="Delete a Job" target="job_delete_html" />       
+</indexitem>
+
+<indexitem text="Operations on Folder(s)/Document(s)">
+  <indexentry text="Search  Folder(s)/Document(s)" 
+              target="folder_doc_search_html"/>
+  <indexentry text="Create a new Folder" target="folder_new_html" />
+  <indexentry text="Rename Folder(s)/Documents(s)"
+              target="folder_doc_rename_html"/>
+  <indexentry text="Upload document(s)" target="document_upload_html"/>
+  <indexentry text="Download Timesheet CSV" target="download_csv_html"/>        
+  <indexentry text="Generate document links" 
+              target="document_generate_links_html"/>
+  <indexentry text="Cut, Copy, Paste Folder(s)/Document(s)"
+              target="folder_doc_cut_copy_paste_html"/>
+  <indexentry text="Copy, Move Folder(s)/Document(s)"
+              target="folder_doc_copy_move_html"/>
+  <indexentry text="Delete Folder(s)/Document(s)"
+              target="folder_doc_delete_html"/>
+  <indexentry text="Drawer Operations"
+              target="drawer_operations_html"/>
+  <indexentry text="Share Document(s)"
+              target="document_share_html"/>
+  <indexentry text="Check-Out Document(s)" target="document_versioned_html"/>
+  <indexentry text="Check-In Document(s)" target="document_versioned_html"/>
+  <indexentry text="Make Document(s) Versionable"
+              target="document_versioned_html"/>
+  <indexentry text="View version history of Documents"
+              target="document_versioned_html"/>
+</indexitem>
+
+<indexitem text="mail &amp; fax">
+  <indexentry text="Create a Mail Job" target="mail_new_html" />
+  <indexentry text="Create a Fax Job" target="fax_new_html" />   
+</indexitem>
+
+</index>

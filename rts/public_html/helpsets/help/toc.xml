@@ -1,0 +1,62 @@
+<?xml version='1.0' ?>
+<toc version="1.0">
+  <tocitem text="Drawers">
+    <tocitem text="Introduction" target="drawers_introduction_html"/>
+    <tocitem text="Drawer Operations" target="drawer_operations_html"/>
+  </tocitem>
+  <tocitem text="Resumes">
+    <tocitem text="Introduction" target="resume_introduction_html"/>
+    <tocitem text="Add New Resume" target="new_resume_html"/>
+    <tocitem text="Edit an existing Resume" target="edit_resume_html"/>
+  </tocitem>
+  <tocitem text="Timesheets">
+    <tocitem text="Introduction" target="timesheet_introduction_html"/>
+    <tocitem text="Add New Timesheet" target="new_timesheet_html"/>
+    <tocitem text="Edit an existing Timesheet" target="edit_timesheet_html"/>
+    <tocitem text="Download Timesheet CSV " target="download_csv_html"/>
+  </tocitem>
+  <tocitem text="My Docs">
+    <tocitem text="Introduction" target="folder_doc_introduction_html"/>
+    <tocitem text="Upload document(s)" target="document_upload_html"/>
+  </tocitem>
+  <tocitem text="Common Document Operations">
+    <tocitem text="Create a new folder" target="folder_new_html" />
+    <tocitem text="Rename Folder(s)/Documents(s)"
+             target="folder_doc_rename_html"/>
+    <tocitem text="Generate document links" 
+             target="document_generate_links_html"/>
+    <tocitem text="Cut, Copy, Paste Folder(s)/Document(s)"
+             target="folder_doc_cut_copy_paste_html"/>
+    <tocitem text="Copy, Move Folder(s)/Document(s)"
+             target="folder_doc_copy_move_html"/>
+    <tocitem text="Delete Folder(s)/Document(s)"
+             target="folder_doc_delete_html"/>
+    <tocitem text="Share Document(s) " target="document_share_html"/>
+    <tocitem text="Make Document(s) versionable"
+             target="document_versioned_html"/>
+    <tocitem text="View version history of Documents"
+             target="document_versioned_html"/>
+    <tocitem text="Search  folder/document" target="folder_doc_search_html"/>
+  </tocitem>
+  <tocitem text="User">
+    <tocitem text="Introduction" target="user_introduction_html"/>
+    <tocitem text="Search a user" target="user_search_html"/>
+    <tocitem text="Create a new user" target="user_new_html"/>
+    <tocitem text="Edit a user" target="user_edit_html"/>
+    <tocitem text="Delete a user" target="user_delete_html"/>
+    <tocitem text="User Preferences" target="user_preferences_html"/>        
+  </tocitem>
+  <tocitem text="Scheduler">
+    <tocitem text="Introduction" target="scheduler_introduction_html"/>
+    <tocitem text="Start/Stop the scheduler"
+             target="scheduler_start_stop_html"/>
+    <tocitem text="Search a job" target="job_search_html"/>
+    <tocitem text="Create a new job" target="job_new_html"/>
+    <tocitem text="Reschedule a job" target="job_reschedule_html"/>
+    <tocitem text="Delete a job" target="job_delete_html"/>
+  </tocitem>
+  <tocitem text="Mail &amp; Fax">
+    <tocitem text="Submit a new mail job" target="mail_new_html"/>
+    <tocitem text="Submit a new fax job" target="fax_new_html"/>
+  </tocitem>
+</toc>

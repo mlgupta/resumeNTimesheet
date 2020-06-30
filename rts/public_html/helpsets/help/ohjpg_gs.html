@@ -1,0 +1,285 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Getting Started with the OHJDK</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for Java Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_intro.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_add.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+</tr>
+</table>
+
+<a name="start"></a>
+<h1>Getting Started with the OHJDK</h1>
+
+<p>The Oracle Help for Java Developer's Kit (OHJDK) is a set of Java components and an API for developing and displaying HTML-based help content in a Java environment. It includes the Oracle Help for Java (OHJ) engine and additional tools necessary for implementing context-sensitive help in Java applets and applications.</p>
+
+<p>This chapter describes the contents of the OHJDK and tells how to set up for developing OHJ help systems. It contains the following sections:</p>
+<ul>
+<li><a href="#Contents_of_an_OHJDK_Release">Contents of an OHJDK Release</a></li>
+<li><a href="#Setting_the_Java_CLASSPATH_for_OHJDK_Development">Setting the Java CLASSPATH for OHJDK Development</a></li>
+</ul>
+
+<a name="Contents_of_an_OHJDK_Release"></a>
+<h2>Contents of an OHJDK Release</h2>
+
+
+<p>The OHJDK includes the compiled libraries for the OHJ engine as well as libraries for the authoring tools and demonstrations. These libraries are distributed in JAR (Java ARchive) format. The OHJDK also includes documentation (including this document). The files are discussed in the following sections:</p>
+
+
+<ul>
+<li><a href="#OHJ_Engine">OHJ Engine</a></li>
+<li><a href="#Authoring_Tools">Authoring Tools</a></li>
+<!-- <li><a href="#Oracle Toolkit Dependencies">Oracle Toolkit Dependencies</a></li> -->
+<li><a href="#Demonstration_Files">Demonstration Files</a></li>
+<li><a href="#Documentation">Documentation</a></li>
+</ul>
+
+<a name="OHJ_Engine"></a>
+<h3>OHJ Engine</h3>
+
+<p>These files contain binary files for the OHJ engine implementation and its dependencies. <em><strong>You must redistribute these files with your product application.</strong></em></p>
+
+<table class="table-border" width="95%" border="1" cellpadding="6" cellspacing="0" summary="JAR files with binary files for OHJ engine implementation and its dependencies">
+<caption><strong>OHJ Binaries</strong></caption>
+<tr>
+<th class="table-header-border-left" width="34%" scope="col">File</th>
+<th class="table-header-border-right" width="66%" scope="col">Contents</th>
+
+</tr>
+<tr>
+<td><code>help-<var>version_num</var>.jar</code></td>
+<td>The help engine optimized binaries.</td>
+</tr>
+
+<tr>
+<td><code>oracle_ice-<var>version_num</var>.jar</code></td>
+<td>Oracle's customized version of the ICEbrowser from ICEsoft Technologies, Inc. The OHJ engine uses the ICEbrowser for displaying HTML topics.</td>
+</tr>
+</table>
+
+<!-- internal
+<a name="Oracle Toolkit Dependencies"></a>
+<h3>Oracle Toolkit Dependencies</h3>
+
+<p>OHJ release 3.2.x is distributed with Oracle's internal Extended Windowing Toolkit (EWT) graphical toolkit. OHJ release 4.1.x is built using Sun Microsystems Java Foundation Classes (JFC) Swing components and Oracle's EWT for JFC (JEWT) libraries. You should choose the version of OHJ that uses the same graphical toolkit as your application to avoid loading extra classes.</p>
+
+<table class="table-border" width="95%" border="1" cellpadding="6" cellspacing="0" summary="Toolkit dependency files">
+<caption><strong>EWT libraries used with OHJ 3.2.x and the Helpset Authoring Wizard</strong></caption>
+<tr>
+<th class="table-header-border-left" width="34%" scope="col">File</th>
+<th class="table-header-border-right" width="66%" scope="col">Contents</th>
+
+</tr>
+<tr>
+<td><code>ewt-opt-<var>version_num</var>.jar</code></td>
+<td>Oracle EWT optimized binaries.</td>
+</tr>
+
+<tr>
+<td><code>ewt-swingaccess-<var>version_num</var>.jar</code></td>
+<td>Oracle EWT swingaccess binaries (minimal set of Swing classes needed for accessibility).</td>
+</tr>
+
+<tr>
+<td><code>share-opt-<var>version_num</var>.jar</code></td>
+<td>Oracle Bali Share optimized binaries.</td>
+</tr>
+</table>
+
+<br>
+<table class="table-border" width="95%" border="1" cellpadding="6" cellspacing="0" summary="Toolkit dependency files">
+<caption><strong>JEWT and Swing Libraries Used with OHJ 4.1.x</strong></caption>
+<tr>
+<th class="table-header-border-left" width="34%" scope="col">File</th>
+<th class="table-header-border-right" width="66%" scope="col">Contents</th>
+
+</tr>
+<tr>
+<td><code>jewt-opt-<var>version_num</var>.jar</code></td>
+<td>Oracle JEWT optimized binaries.</td>
+</tr>
+
+<tr>
+<td><code>share-opt-<var>version_num</var>.jar</code></td>
+<td>Oracle Bali Share optimized binaries.</td>
+</tr>
+
+<tr>
+<td><code>swingall.jar</code></td>
+<td>Java Foundation Classes (Swing) 1.1.1</td>
+</tr>
+
+
+
+</table>
+
+<p>If you are using OHJ as the help system for a Java application or applet, you will already have many or all of these libraries. Check the release notes for the OHJ release you are using to see if the EWT or JEWT version you already have is compatible with the OHJ release.</p>
+
+-->
+<a name="Authoring_Tools"></a>
+<h3>Authoring Tools</h3>
+
+<p>The following JAR files contain the implementation for the Helpset Authoring Wizard and the Text Search Indexer. <strong><em>These files are not intended for distribution with your product application.</em></strong></p>
+
+<table class="table-border" width="95%" border="1" cellpadding="6" cellspacing="0" summary="JAR files with implementation for Helpset Authoring Wizard and Text Search Indexer">
+<tr>
+<th class="table-header-border-left" width="34%" scope="col">File</th>
+<th class="table-header-border-right" width="66%" scope="col">Contents</th>
+
+</tr>
+<tr>
+<td><code>
+help-wizard-<var>version_num</var>.jar</code></td>
+<td>Helpset Authoring Wizard implementation. Authors can run the Helpset Authoring Wizard using batch files created in the bin directory of their OHJDK installation.</td>
+</tr>
+<tr>
+<td><code>help-indexer-<var>version_num</var>.jar</code></td>
+<td>OHJ Text Search Indexer implementation. Authors can use the <a href="oha_gen_fts.html">Full-Text Search Indexer</a> to process and create Oracle Help search index (.idx) files. </td>
+</tr>
+
+
+</table>
+
+
+
+<a name="Demonstration_Files"></a>
+<h3>Demonstration Files</h3>
+
+<p>The following JAR file contains the demonstration programs distributed with the OHJDK. <strong><em>This file is not intended for distribution with your product application.</em></strong></p>
+
+<table class="table-border" width="95%" border="1" cellpadding="6" cellspacing="0" summary="JAR file containing the demonstration programs distributed with the OHJDK">
+<tr>
+<th class="table-header-border-left" width="34%" scope="col">File</th>
+<th class="table-header-border-right" width="66%" scope="col">Contents</th>
+
+</tr>
+<tr>
+<td><code>
+help-demo-<var>version_num</var>.jar</code></td>
+<td>Demonstration binaries and source code, plus sample documentation in HTML and the Oracle Help control file formats. </td>
+</tr>
+</table>
+
+
+<p>To run the demonstration programs, execute the batch files located in the <code>bin</code> subdirectory of your OHJDK installation. (The OHJ installer for Windows adds shortcuts to the Windows Start Menu.) The sample content used by the demo programs is located in the <code>demodoc</code> subdirectory. </p>
+
+<p>When integrating OHJ with your application, it may be helpful for you to examine the source code for the demonstration programs (located in the <code>help-demo-<var>version_num</var>.jar</code> file (see above). The following two demos will be particularly helpful:</p>
+
+<table class="table-border" width="95%" border="1" cellpadding="6" cellspacing="0" summary="JAR files containing demos">
+<tr>
+<th class="table-header-border-left" width="34%" scope="col">File</th>
+<th class="table-header-border-right" width="66%" scope="col">Contents</th>
+
+</tr>
+<tr>
+
+<td><code>ChoiceDemo.java</code><br>
+(OHJ Features Demo)</td>
+
+<td>
+Sample Java code that illustrates the following features:
+<ul>
+<li>Constructing the <code>Help</code> object</li>
+<li>Adding helpsets (data)</li>
+<li>Displaying the OHJ navigator window</li>
+<li>Displaying multiple helpsets</li>
+</ul>
+</td>
+</tr>
+
+
+<tr>
+
+<td><code>CSHDemo.java</code><br>
+(Context-Sensitive Help Demo)</td>
+
+<td>
+Sample Java code that illustrates the following features:
+<ul>
+<li>Launching the help system from a menu</li>
+<li>Associating help topics with particular application controls</li>
+<li>Enabling the F1 key to launch help</li>
+<li>Implementing right-click pop-up menu help</li>
+</ul>
+</td>
+</tr>
+
+</table>
+
+<a name="Documentation"></a>
+<h3>Documentation</h3>
+
+<p>The following documentation is included with the OHJDK:</p>
+
+<table class="table-border" cellpadding="6" cellspacing="0" border="1" width="95%" summary="Documentation files">
+<tr>
+<th class="table-header-border-left" scope="col">Document</th>
+<th class="table-header-border-middle" scope="col">Content</th>
+<th class="table-header-border-right" scope="col">Location in OHJDK release</th>
+</tr>
+<tr>
+<td>OHJ API Reference Documentation</td>
+<td> Reference documentation for the OHJ Application Programming Interface (API), provided as JavaDoc.</td>
+<td>The <code>doc/javadoc</code> subdirectory of the OHJDK installation. To view the API documentation, open the index.html file in an HTML browser.</td>
+</tr>
+
+<tr>
+<td><em>Oracle Help Guide</em></td>
+<td>This document.</td>
+<td>The <code>doc</code> subdirectory of the OHJDK installation.</td>
+
+</tr>
+</table>
+
+
+<a name="Setting_the_Java_CLASSPATH_for_OHJDK_Development"></a>
+<h2>Setting the Java CLASSPATH for OHJDK Development</h2>
+
+<p>To develop with the OHJDK, you must add the OHJ engine libraries and toolkit dependencies (JAR files listed above) to your environment class path, for example:</p>
+
+<ul>
+  <li>On Windows 2000 or XP, set the CLASSPATH variable in the <strong>Environment 
+    Variables</strong> dialog, accessed from the <strong>Advanced</strong> tab 
+    of the System Properties control panel.</li>
+<li>On Windows NT, set the CLASSPATH variable in the <strong>Environment</strong> tab of the <strong>System Properties</strong> control panel. </li>
+<li>On Windows 95/98, use the <code>SET</code> command in your Autoexec.bat file.</li>
+<li>On UNIX, use the <code>setenv</code> command to set an environment variable for your shell.</li>
+</ul>
+
+<p>Consult the documentation for your Java Virtual Machine (JVM) and operating system to determine how to set the CLASSPATH variable.</p>
+
+
+
+<p class="horizontal-rule">&nbsp;</p> 
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+<a href="ohjpg_intro.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohjpg_add.html">Next</a>
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+</body>
+</html>

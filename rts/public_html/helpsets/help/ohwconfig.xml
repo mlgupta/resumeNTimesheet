@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<helpConfiguration
+  version="2.0"
+  xmlns="http://xmlns.oracle.com/help/web/config">
+
+  <!-- Page branding based on ResourceBundle -->
+  <brandings>
+    <branding text="Samhita Help System" />
+  </brandings>
+
+  <!-- Different locale setups. -->
+  <locales>
+  
+    <!-- English: -->
+    <locale language="en">
+      <books>
+        <helpSet id="help" location="help/help.hs"/>
+        <!--<helpSet id="shake" location="shakespeare/shakespeare.hs"/>-->
+        <!--<helpSet id="blafdoc" location="blafdoc/blafdoc.hs"/>-->
+      </books>
+    </locale>
+    
+  </locales>
+
+  <!-- Navigator aliases - to allow for legacy navigator names. -->
+  <navigatorAliases>
+
+    <!-- Uncomment for Tree Based TOC Navigator -->
+    <alias name="oracle.help.navigator.tocNavigator.TOCNavigator" 
+           value="oracle.help.web.navigator.tocNavigator.TOCTreeNavigator" /> 
+
+  </navigatorAliases>
+
+  <parameters>
+    <combineBooks>false</combineBooks>
+    <useLabelInfo>true</useLabelInfo>
+    
+    <!-- 
+      Number of locales that are kept in memory all the time. 
+      Please see the OHW documentation for more information on
+      this parameter.
+      <cacheSize>3</cacheSize>
+    -->
+  </parameters>
+
+</helpConfiguration>

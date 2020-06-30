@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<styles>
+  <locale name="en">
+    <style name="Standard" value="Standard">
+      <colorscheme name="Ocean" value="Ocean" heading="#ffffff" body="#000000" menu="#000099" element="#000000" />
+      <colorscheme name="Desert" value="Desert" heading="#ffffff" body="#000000" menu="#660000" element="#000000" />
+      <colorscheme name="Forest" value="Forest" heading="#ffffff" body="#000000" menu="#003300" element="#000000" />
+      <colorscheme name="Rose" value="Rose" heading="#ffffff" body="#000000" menu="#990099" element="#000000" />
+      <colorscheme name="Silver" value="Silver" heading="#ffffff" body="#000000" menu="#333333" element="#000000" />
+    </style>
+    <style name="Classic" value="Classic">
+      <colorscheme name="Ocean" value="Ocean" heading="#ffffff" body="#000000" menu="#000099" element="#000000" />
+      <colorscheme name="Desert" value="Desert" heading="#ffffff" body="#000000" menu="#660000" element="#000000" />
+      <colorscheme name="Forest" value="Forest" heading="#ffffff" body="#000000" menu="#003300" element="#000000" />
+      <colorscheme name="Rose" value="Rose" heading="#ffffff" body="#000000" menu="#990099" element="#000000" />
+      <colorscheme name="Silver" value="Silver" heading="#ffffff" body="#000000" menu="#333333" element="#000000" />
+    </style>
+  </locale>
+</styles>

@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en_US">
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Using CSHManager to Implement Context-Sensitive Help</TITLE>
+<link rel="STYLESHEET" type="text/css" href="blafdoc.css">
+
+<!-- **Uncomment** the STYLE element to hide TOC button -->
+<!-- **Comment out** the STYLE element to display TOC button -->
+
+<style type="text/css">
+.hide {display : none}
+</style>
+<script language="JavaScript" type="text/javascript" src="browvers.js"></script>
+</head>
+
+<!-- This version of the Oracle Help Guide was last updated for OHJ rel. 4.2.2 and OHW rel. 1.1.5 -->
+<body>
+<noscript>Script to detect browser version</noscript>
+<a name="top"></a>
+<div class="zz-skip-header"><a href="#start">Skip navigation header</a></div>
+
+<table border="0" width="97%" summary="Document information and navigation controls">
+  <tr>
+    <td class="zz-nav-header-cell" width="97%">Oracle Help for Java Developer's Guide</td>
+    <td class="zz-nav-button-cell"><span class="hide"><a class="zz-nav-button-link" href="ohg_toc.html"><img src="images/toc.gif" width="23" height="24" alt="Table of Contents" border="0"><BR>Contents</A></span></TD>
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_csh.html"><img src="images/leftnav.gif" width="23" height="24" alt="Previous topic" border="0"><BR>Previous</A></TD>
+
+
+    <td class="zz-nav-button-cell"><a class="zz-nav-button-link" href="ohjpg_modal.html"><img src="images/rightnav.gif" width="23" height="24" alt="Next topic" border="0"><BR>Next</A></TD>
+  </tr>
+</TABLE>
+
+<a name="start"></a>
+<h1>Using <code>CSHManager</code> to Implement Context-Sensitive Help</h1>
+
+<p>OHJ's <code>CSHManager</code> class provides a generic way to associate help topics with user interface controls and to launch context-sensitive help when the end user presses the <strong>F1</strong> key or selects  <strong>Help</strong> from a right-click context menu. OHJ also provides an API for explicitly displaying the help topic associated with a component.</p>
+
+
+<p>The following sections provide an introduction to using <code>CSHManager</code>. For more information, see the <a href="ohjpg_gs.html#documentation">API documentation</a> for <code>oracle.help.CSHManager</code>.</p>
+
+<ul>
+
+<li><a href="#Constructing_the_CSHManager">Constructing the <code>CSHManager</code></a></li>
+<li><a href="#Setting_the_Default_Book">Setting the Default <code>Book</code></a></li>
+<li><a href="#Associating_Topic_IDs_with_User_Interface_Components">Associating Topic IDs with User Interface Components</a></li>
+<li><a href="#Explicitly_Showing_Help_for_Components">Explicitly Showing Help for Components</a></li>
+</ul>
+
+
+
+<a name="Constructing_the_CSHManager"></a>
+<H2>Constructing the <code>CSHManager</code></H2>
+
+<p>You should create an instance of the <code>CSHManager</code> class before creating user interface components. The <code>CSHManager</code> constructor is summarized below.</p> 
+
+
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="6" cellspacing="0">
+
+<tr><th class="table-header-border-all">CSHManager() Constructor</th></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>CSHManager(Help <var>help</var>)</code></strong>
+
+</dt>
+<dd>
+<p>Creates a new instance of the <code>CSHManager</code> class. All the subsequent calls to this manager object will use the specified <code>Help</code> object.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<p><strong><code><var>help</var></code></strong> - The <code>Help</code> object to be used for displaying help.</p>
+</dd>
+</dl>
+
+</td>
+</tr>
+</table>
+
+<a name="Setting_the_Default_Book"></a>
+<H2>Setting the Default <code>Book</code></H2>
+
+<p>If you only have one <code>Book</code> of help content, you may want to use the <code>setDefaultBook()</code> method to define it as the default book for context-sensitive help. This allows you to call the <code>addComponent()</code> method (described below) without entering the <code><var>book</var></code> parameter.</p>
+
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="6" cellspacing="0" summary=" ">
+
+<tr><th class="table-header-border-all">setDefaultBook() Method</th></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>setDefaultBook(Book <var>book</var></code>)</strong>
+
+</dt>
+<dd>
+<p>Sets the specified <code>Book</code> as the default <code>Book</code>. This will be as used the default <code>Book</code> for components registered without a specified <code>Book</code>.</p>
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>book</var></code></strong> - The <code>Book</code> to be set.</p>
+</dd>
+
+</dl>
+</td></tr>
+
+</table>
+
+<p>If you have more than one <code>Book</code>, the default <code>Book</code> will only be used for those components for which you have not assigned a specific <code>Book</code>. In a multiple <code>Book</code> help system, you should, in general, assign specific <code>Book</code>s to your components.</p>
+
+<a name="Associating_Topic_IDs_with_User_Interface_Components"></a>
+<H2>Associating Topic IDs with User Interface Components</H2>
+
+<p>Use the <code>addComponent()</code> method to associate topic IDs (as defined in the map file) with Java user interface components. You will have to call one of the versions of this method for each component that requires context-sensitive help.</p>
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+ 
+<tr><th class="table-header-border-all">addComponent() Method</th></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>addComponent(Component <var>component</var>, String <var>topicId</var>)</code></strong>
+
+</dt>
+<dd>
+<p>Registers a component with the help manager.</p>
+
+<p>The default <code>Book</code> is used for looking up the <code><var>topicId</var></code>. If no default <code>Book</code> is registered at the time of calling this method, then the component is not registered with the help manager, and help will not be shown if <code>showHelpForComponent()</code> is later called for this component.</p>
+
+<p>For components registered using this method, <code>CSHManager</code> will <em>not</em> display help in response to an <strong>F1</strong> key press or a right mouse-click event.</p>
+
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>component</var></code></strong> - The component to be added.</p>
+<p><strong><code><var>topicId</var></code></strong> - The topic ID to associate with this component.</p>
+
+</dd>
+</dl>
+
+</td></tr>
+
+<tr>
+<td>
+
+<dl> 
+<dt>
+<strong><code>addComponent(Component <var>component</var>, Book <var>book</var>, String <var>topicId</var>)</code></strong>
+
+</dt>
+<dd>
+<p>Registers a component with the help manager. The provided <var>book</var> is used for looking up the <code><var>topicId</var></code>.</p>
+
+<p>For components registered using this method, <code>CSHManager</code> will <em>not</em> display help in response to an <strong>F1</strong> key press or right mouse-click event.</p>
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>component</var></code></strong> - The component to be added</p>
+<p><strong><code><var>book</var></code></strong> - The <code>Book</code> containing the help topic.</p>
+<p><strong><code><var>topicId</var></code></strong> - The topic ID to associate with this component</p>
+</dd>
+</dl>
+
+</td></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>addComponent(Component <var>component</var>, String <var>topicId</var>, boolean <var>needF1Help</var>, boolean <var>needPopupHelp</var>)</code></strong>
+
+</dt>
+<dd>
+<p>The default <code>Book</code> is used for looking up the <var>topicId</var>. If no default <code>Book</code> is registered at the time of calling this method, the component is not registered with the help manager, and help will not be shown if <code>showHelpForComponent()</code> is later called for this component.</p>
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>component</var></code></strong> - The component to be added.</p>
+<p><strong><code><var>topicId</var></code></strong> - The author-defined topic ID to be associated with this component</p>
+<p><strong><code><var>needF1Help</var></code></strong> - If <code>true</code>, displays help for this component in response to <strong>F1</strong> key press events</p>
+<p><strong><code><var>needPopupHelp</var></code></strong> - If <code>true</code>, displays a <strong>Help</strong>  pop-up menu upon right mouse click and launches context-sensitive help if the <strong>Help</strong> menu item is selected</p>
+</dd>
+
+</dl>
+
+</td></tr>
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>addComponent(Component <var>component</var>, Book <var>book</var>, String <var>topicId</var>, boolean <var>needF1Help</var>, boolean <var>needPopupHelp</var>)</code></strong>
+
+</dt>
+<dd>
+<p>Registers a component with the help manager. The provided <code><var>book</var></code> is used for looking up the <code><var>topicId</var></code>.</p>
+
+<p><strong>Parameters:</strong></p>
+<p><strong><code><var>component</var></code></strong> - The component to be added</p>
+<p><strong><code><var>book</var></code></strong> - The <code>Book</code> containing the help topic.</p>
+<p><strong><code><var>topicId</var></code></strong> - The topic ID to be associated with this component</p>
+<p><strong><code><var>needF1Help</var></code></strong> - If <code>true</code>, displays help for this component in response to <strong>F1</strong> key press events</p>
+<p><strong><code><var>needPopupHelp</var></code></strong> - If <code>true</code>, displays a <strong>Help</strong> pop-up menu upon right mouse click and launches context-sensitive help if the <strong>Help</strong> menu item is selected</p>
+</dd>
+</dl>
+</td></tr>
+</table>
+
+<a name="Explicitly_Showing_Help_for_Components"></a>
+<H2>Explicitly Showing Help for Components</H2>
+
+<p>Call the <code>showHelpForComponent()</code> method on the <code>CSHManager</code> when you explicitly want to display the help topic associated with a component. For example, if you want to launch context-sensitive help when the user presses a <strong>Help</strong> button in a dialog box, you could call this method in the button's event handler.</p>
+
+
+<table class="table-border" width="95%" align="center" border="1" cellpadding="12" cellspacing="0">
+
+<tr><th class="table-header-border-all">showHelpForComponent() Method</th></tr>
+
+
+<tr>
+<td>
+<dl>
+<dt>
+<strong><code>showHelpForComponent(Component <var>component</var>)</code></strong>
+</dt>
+<dd>
+<p>Shows help for the specified <code><var>component</var></code>. If the specified <code><var>component</var></code> was not registered via <code>addComponent()</code>, no help will be shown.</p>
+</dd>
+</dl>
+
+</td></tr>
+</table>
+
+
+
+
+
+<p class="horizontal-rule">&nbsp;</p> 
+
+<div class="zz-nav-footer-menu"><span class="hide"><a href="ohg_toc.html">Contents</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+<a href="ohjpg_csh.html">Previous</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="ohjpg_modal.html">Next</a>
+
+</div>
+
+<p class="zz-legal-notice"><a class="zz-legal-notice-link" href="cpyr.html">Copyright &copy; 1996, 2004, Oracle.</a> All rights reserved.</p>
+
+</body>
+</html>
